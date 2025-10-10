@@ -66,7 +66,7 @@ export function AuthFormSkeleton({ heading = true }) {
 export function WelcomeButtonSkeleton() {
   return (
     <div
-      className="bg-brand-50/10 dark:bg-brand-950/20 flex animate-pulse items-center justify-center self-end rounded-lg px-4 py-2 font-bold shadow-xs transition-colors duration-300 text-shadow-white/30 text-shadow-xs focus:ring-4 focus:outline-none"
+      className="bg-brand-50/10 dark:bg-brand-950/20 flex animate-pulse items-center justify-center self-center rounded-lg px-4 py-2 font-bold shadow-xs transition-colors duration-300 text-shadow-white/30 text-shadow-xs focus:ring-4 focus:outline-none sm:self-start lg:self-end"
       style={{ minWidth: 110, minHeight: 45 }}
     >
       <span className="spinner-mini" />

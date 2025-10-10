@@ -58,7 +58,7 @@ function FormRow({
           id={type + "-"}
           placeholder={placeholder}
           type={type === "password" ? (showPassword ? "text" : type) : type}
-          className="focus:border-brand-950 focus:ring-brand-950/20 w-full rounded-md border border-gray-300 px-2.5 py-1.5 transition-all duration-200 placeholder:text-gray-500 hover:border-gray-400 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-zinc-400 dark:border-gray-500 dark:bg-zinc-600/30 dark:disabled:border-zinc-700 dark:disabled:text-zinc-500"
+          className="focus:border-brand-950 focus:ring-brand-950/20 w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-base transition-all duration-200 placeholder:text-gray-500 hover:border-gray-400 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-zinc-400 dark:border-gray-500 dark:bg-zinc-600/30 dark:disabled:border-zinc-700 dark:disabled:text-zinc-500"
           {...props}
         />
         {type === "password" && (

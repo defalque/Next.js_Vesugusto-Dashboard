@@ -101,7 +101,7 @@ function CredentialsForm({ title, ...props }: FormProps) {
       />
 
       <Button
-        className="mt-10 w-full px-4"
+        className="mt-10 w-full px-4 text-lg"
         disabled={pending}
         aria-label={
           title === "Login"

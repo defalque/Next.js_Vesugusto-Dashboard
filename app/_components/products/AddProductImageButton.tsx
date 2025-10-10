@@ -2,6 +2,7 @@
 
 import { useDialog } from "@/app/_contexts/DialogContext";
 import { ReactNode } from "react";
+import Button from "../ui/Button";
 
 function AddProductImageButton({
   id,
@@ -29,8 +30,9 @@ function AddProductImageButton({
         {children}
       </button>
 
-      <button
-        className="focus block cursor-pointer rounded-full px-2 text-base transition-colors duration-300 hover:opacity-80 md:hidden"
+      <Button
+        className="px-2 md:hidden"
+        // className="focus block cursor-pointer rounded-full px-2 text-base transition-colors duration-300 hover:opacity-80 md:hidden"
         onClick={(e) => {
           e.preventDefault();
           openDialog({
@@ -39,8 +41,8 @@ function AddProductImageButton({
           });
         }}
       >
-        Aggiungi immagine/i
-      </button>
+        Aggiungi immagine/i +
+      </Button>
     </>
   );
 }

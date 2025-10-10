@@ -33,7 +33,7 @@ export default async function Page({ params }: Slug) {
             href: `/dashboard/products/${productId}`,
           },
           {
-            label: `Modifica prodotto "${product.name}"`,
+            label: `Modifica prodotto`,
             href: `/dashboard/products/${productId}/edit`,
             active: true,
           },

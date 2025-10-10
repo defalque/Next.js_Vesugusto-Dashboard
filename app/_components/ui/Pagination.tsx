@@ -3,10 +3,9 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import Button from "./Button";
-import { LIMIT } from "@/constants/const";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-function Pagination({ count }: { count: number }) {
+function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

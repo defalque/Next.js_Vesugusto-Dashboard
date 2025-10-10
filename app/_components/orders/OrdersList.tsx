@@ -63,13 +63,6 @@ function OrdersList({ orders }: { orders: OrdersInfo[] }) {
               </div>
             </td>
 
-            {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
-              {order.name}
-              </td> */}
-            {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
-              {order.email}
-            </td> */}
-
             <td className="px-4 py-4 whitespace-nowrap">
               {formatDate(order.orderDate)}
             </td>

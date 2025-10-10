@@ -27,7 +27,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       </label>
       <input
         id="search"
-        className="peer focus:border-brand-950 focus:ring-brand-950/20 block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm shadow-xs placeholder:text-gray-400 focus:ring-2 focus:outline-none dark:border-zinc-700 dark:placeholder:text-zinc-600"
+        className="peer focus:border-brand-950 focus:ring-brand-950/20 block w-full rounded-md border border-gray-200 py-3 pl-10 shadow-xs placeholder:text-gray-400 focus:ring-2 focus:outline-none sm:py-2 dark:border-zinc-700 dark:placeholder:text-zinc-600"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);

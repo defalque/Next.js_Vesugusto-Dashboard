@@ -22,7 +22,7 @@ function SortBy() {
   );
 
   return (
-    <div className="w-40">
+    <div className="w-max">
       <label htmlFor="ordina" className="sr-only">
         Ordina
       </label>
@@ -36,7 +36,7 @@ function SortBy() {
           const value = e.target.value;
           router.push(pathname + "?" + createQueryString("sort", value));
         }}
-        className="focus-visible:outline-brand-950 outline-brand-dark-100 block w-full rounded border border-gray-200 px-1 py-2 text-sm shadow focus-visible:outline-2 dark:border-zinc-700"
+        className="focus-visible:outline-brand-950 outline-brand-dark-100 block rounded border border-gray-200 px-1 py-3 text-sm shadow focus-visible:outline-2 dark:border-zinc-700"
       >
         <option value="default">Ordina</option>
         <option value="price-asc">Prezzo: dal più basso</option>

@@ -64,7 +64,7 @@ export default async function Layout({
         }}
       />
 
-      <main className="h-full overflow-y-auto border-l border-gray-200 bg-white px-(--page-padding-x) py-5 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:pt-16.5 xl:pb-8 dark:border-none dark:bg-zinc-900/80 dark:backdrop-blur-md">
+      <main className="h-full overflow-y-auto border-l border-gray-200 bg-white px-(--page-padding-x) pt-5 pb-14 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:pt-16.5 xl:pb-30 dark:border-none dark:bg-zinc-900/80 dark:backdrop-blur-md">
         {children}
       </main>
     </div>

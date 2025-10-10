@@ -19,7 +19,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body
+        className={`${inter.className} bg-light mx-auto max-w-[95rem] antialiased dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-800`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

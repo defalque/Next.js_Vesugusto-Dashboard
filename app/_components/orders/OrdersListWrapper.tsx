@@ -1,5 +1,5 @@
 import { getOrders } from "@/app/_lib/apiOrders";
-import { LIMIT } from "@/constants/const";
+import { ORDERS_LIMIT } from "@/constants/const";
 import ItemsListFallback from "../ui/items-table/ItemsListFallback";
 import OrdersListClient from "./OrdersListClient";
 
@@ -13,7 +13,7 @@ async function OrdersListWrapper({
     query: string;
   };
 }) {
-  const orders = await getOrders(LIMIT, filters);
+  const orders = await getOrders(ORDERS_LIMIT, filters);
 
   if (!Array.isArray(orders) || orders.length === 0) {
     return <ItemsListFallback items={orders} variation="ordine" />;

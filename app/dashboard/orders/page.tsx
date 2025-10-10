@@ -9,6 +9,7 @@ import { OrdersListSkeleton } from "@/app/_components/ui/Skeletons";
 import SortBy from "@/app/_components/ui/SortBy";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
 import { getTotalOrders } from "@/app/_lib/apiOrders";
+import { ORDERS_LIMIT } from "@/constants/const";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -66,8 +67,6 @@ export default async function Page({
                 <tr>
                   <ItemsTableHeadingCell>ID</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Cliente</ItemsTableHeadingCell>
-                  {/* <ItemsTableHeadingCell>Nome</ItemsTableHeadingCell> */}
-                  {/* <ItemsTableHeadingCell>Email</ItemsTableHeadingCell> */}
                   <ItemsTableHeadingCell>Data</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Status</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Totale</ItemsTableHeadingCell>
@@ -82,7 +81,7 @@ export default async function Page({
               <tfoot className="bg-gray-50 text-sm dark:bg-zinc-800">
                 <tr>
                   <td colSpan={7}>
-                    <Pagination count={count ?? 0} />
+                    <Pagination count={count ?? 0} LIMIT={ORDERS_LIMIT} />
                   </td>
                 </tr>
               </tfoot>

@@ -379,7 +379,7 @@ export async function updateProduct(id: string, data: UpdateProductFormInputs) {
     name: data.name.slice(0, 1000),
     regularPrice: data.regularPrice,
     discount: data.discount || 0,
-    quantity: data.quantity,
+    quantity: Number(data.quantity),
     type: data.type,
     ingredients: data.ingredients,
     description: data.description,
@@ -393,6 +393,8 @@ export async function updateProduct(id: string, data: UpdateProductFormInputs) {
     regularPrice: Math.round(productData.regularPrice * 100),
     discount: Math.round(productData.discount * 100),
   };
+
+  console.log(extractedData);
 
   // Valida i dati del prodotto
   const validatedFields = updateProductSchema.safeParse(extractedData);

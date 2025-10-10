@@ -11,6 +11,7 @@ import { getTotalProducts } from "@/app/_lib/apiProducts";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
 import CustomDialogWrapper from "@/app/_components/ui/dialog/CustomDialogWrapper";
 import ProductsListWrapper from "@/app/_components/products/ProductsListWrapper";
+import { LIMIT } from "@/constants/const";
 
 export const metadata = {
   title: "Prodotti",
@@ -47,9 +48,9 @@ export default async function Page({
         </Button>
       </div>
 
-      <div className="_items-end mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:gap-5">
+      <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:gap-5">
         <Search placeholder="Cerca prodotto..." />
-        <div className="flex flex-wrap items-center justify-end gap-4 self-end">
+        <div className="_items-center flex flex-wrap justify-end gap-4 self-end">
           <Filter
             filterField="type"
             options={[
@@ -87,7 +88,7 @@ export default async function Page({
               <tfoot className="bg-gray-50 text-sm dark:bg-zinc-800">
                 <tr>
                   <td colSpan={6}>
-                    <Pagination count={count ?? 0} />
+                    <Pagination count={count ?? 0} LIMIT={LIMIT} />
                   </td>
                 </tr>
               </tfoot>

@@ -1,0 +1,114 @@
+/*
+A typical login/signup flow in a web application involves the following steps:
+
+1. **User Interface**:
+   - Provide forms for users to enter their credentials (e.g., email and password) for login or signup.
+   - Show appropriate headings and messages for each form (e.g., "Login to your account" or "Register on [AppName]").
+
+2. **Form Submission**:
+   - On form submission, send the entered credentials to the server via a secure HTTP request (usually POST).
+   - For signup, collect additional information if needed (e.g., username, confirm password).
+
+3. **Server-side Handling**:
+   - For **login**:
+     - Validate the credentials.
+     - If valid, create a session or generate a token (e.g., JWT) and return it to the client.
+     - If invalid, return an error message.
+   - For **signup**:
+     - Validate the input (e.g., check if the email is already registered, password strength).
+     - Create a new user record in the database.
+     - Optionally, send a verification email.
+     - Log the user in automatically or prompt them to log in.
+
+4. **Client-side Handling**:
+   - On successful login/signup, store the session/token securely (e.g., in an HTTP-only cookie).
+   - Redirect the user to a protected/dashboard page.
+   - On error, display appropriate feedback to the user.
+
+5. **Protected Routes**:
+   - Ensure that certain pages (e.g., dashboard) are accessible only to authenticated users.
+   - Redirect unauthenticated users to the login page.
+
+6. **Logout**:
+   - Provide a way for users to log out, which clears the session/token and redirects to the login page.
+
+This flow ensures secure authentication and a smooth user experience.
+*/
+
+- LOGGED IN USER 
+{
+  user: {
+    id: 'f25c7e16-23aa-452f-a309-500d55959803',
+    aud: 'authenticated',
+    role: 'authenticated',
+    email: 'wesoxo8638@dekpal.com',
+    email_confirmed_at: '2025-08-01T11:55:17.019834Z',
+    phone: '',
+    confirmation_sent_at: '2025-08-01T11:51:06.632097Z',
+    confirmed_at: '2025-08-01T11:55:17.019834Z',
+    last_sign_in_at: '2025-08-01T11:55:35.965860485Z',
+    app_metadata: { provider: 'email', providers: [Array] },
+    user_metadata: {
+      avatar: '',
+      email: 'wesoxo8638@dekpal.com',
+      email_verified: true,
+      fullName: '',
+      phone_verified: false,
+      sub: 'f25c7e16-23aa-452f-a309-500d55959803'
+    },
+    identities: [ [Object] ],
+    created_at: '2025-08-01T11:51:06.62272Z',
+    updated_at: '2025-08-01T11:55:35.968196Z',
+    is_anonymous: false
+  },
+  session: {
+    access_token: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IjlqM1N4Umc4TXF0dXgxRDAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL21sZHVlb2R6Z2dxcXdqdmt5YWx0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJmMjVjN2UxNi0yM2FhLTQ1MmYtYTMwOS01MDBkNTU5NTk4MDMiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0MDUyOTM1LCJpYXQiOjE3NTQwNDkzMzUsImVtYWlsIjoid2Vzb3hvODYzOEBkZWtwYWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXIiOiIiLCJlbWFpbCI6Indlc294bzg2MzhAZGVrcGFsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmdWxsTmFtZSI6IiIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiZjI1YzdlMTYtMjNhYS00NTJmLWEzMDktNTAwZDU1OTU5ODAzIn0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3NTQwNDkzMzV9XSwic2Vzc2lvbl9pZCI6IjA1MzNlNmQ2LTE0M2UtNDI2Ny04YmE0LTJhYzEzZmU0Y2Y2NSIsImlzX2Fub255bW91cyI6ZmFsc2V9.pLU5cHs0NyPIyj8PH5lb-txA6i5Tog8PaF5OTReNyyA',
+    token_type: 'bearer',
+    expires_in: 3600,
+    expires_at: 1754052935,
+    refresh_token: '744sbvh6dvvd',
+    user: {
+      id: 'f25c7e16-23aa-452f-a309-500d55959803',
+      aud: 'authenticated',
+      role: 'authenticated',
+      email: 'wesoxo8638@dekpal.com',
+      email_confirmed_at: '2025-08-01T11:55:17.019834Z',
+      phone: '',
+      confirmation_sent_at: '2025-08-01T11:51:06.632097Z',
+      confirmed_at: '2025-08-01T11:55:17.019834Z',
+      last_sign_in_at: '2025-08-01T11:55:35.965860485Z',
+      app_metadata: [Object],
+      user_metadata: [Object],
+      identities: [Array],
+      created_at: '2025-08-01T11:51:06.62272Z',
+      updated_at: '2025-08-01T11:55:35.968196Z',
+      is_anonymous: false
+    }
+  }
+}
+
+- SIGNED UP USER
+{
+  user: {
+    id: '5af18be6-c712-4abe-ab8a-f6065683759d',
+    aud: 'authenticated',
+    role: 'authenticated',
+    email: 'hixoke4945@efpaper.com',
+    phone: '',
+    confirmation_sent_at: '2025-08-01T11:57:31.223932345Z',
+    app_metadata: { provider: 'email', providers: [Array] },
+    user_metadata: {
+      avatar: '',
+      email: 'hixoke4945@efpaper.com',
+      email_verified: false,
+      fullName: '',
+      phone_verified: false,
+      sub: '5af18be6-c712-4abe-ab8a-f6065683759d'
+    },
+    identities: [ [Object] ],
+    created_at: '2025-08-01T11:57:31.21522Z',
+    updated_at: '2025-08-01T11:57:32.112236Z',
+    is_anonymous: false
+  },
+  session: null
+}

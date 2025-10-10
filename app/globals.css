@@ -1,26 +1,264 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --spacing-sidebar: 15rem;
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-pieChart: 86.25rem;
+  --breakpoint-pieChartPage: 91.8125rem;
+
+  --color-light: var(--color-gray-50);
+  --color-dark: var(--color-zinc-900);
+
+  --color-brand-50: #ffffff;
+  --color-brand-100: #ffeeee;
+  --color-brand-200: #fedcdc;
+  --color-brand-300: #fecbcb;
+  --color-brand-400: #fdbaba;
+  --color-brand-500: #fda9a9;
+  --color-brand-600: #fc9797;
+  --color-brand-700: #fc8686;
+  --color-brand-800: #fb7575;
+  --color-brand-900: #fb6363;
+  --color-brand-950: #fa5252;
+
+  --color-brand-dark-100: #e14a4a;
+  --color-brand-dark-200: #c84242;
+  --color-brand-dark-300: #af3939;
+  --color-brand-dark-400: #963131;
+  --color-brand-dark-500: #7d2929;
+  --color-brand-dark-600: #642121;
+  --color-brand-dark-700: #4b1919;
+  --color-brand-dark-800: #321010;
+  --color-brand-dark-900: #190808;
+  --color-brand-dark-950: #000000;
+
+  --color-grey-0: #ffffff;
+  --color-grey-700: #374151;
+
+  /* @media (prefers-color-scheme: dark) {
+    :root {
+      --color-grey-0: #1f2937;
+      --color-grey-700: #f4f4f5;
+    }
+  } */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer components {
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .padding-sidebar {
+    padding-inline: calc(var(--spacing) * 2.5) /* 0.625rem = 10px */;
+    padding-block: calc(var(--spacing) * 7) /* 1.75rem = 28px */;
+  }
+
+  .text-sidebar {
+    color: color-mix(
+      in oklab,
+      var(--color-gray-800) /* oklch(27.8% 0.033 256.848) = #1e2939 */ 55%,
+      transparent
+    );
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .text-sidebar {
+      color: color-mix(
+        in oklab,
+        var(--color-gray-50) /* oklch(98.5% 0.002 247.839) = #f9fafb */ 60%,
+        transparent
+      );
+    }
+  }
+
+  .spinner {
+    margin: 4.8rem auto;
+
+    width: 6.4rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(farthest-side, var(--color-brand-950) 94%, #0000) top/10px
+        10px no-repeat,
+      conic-gradient(#0000 30%, var(--color-brand-950));
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      #0000 calc(100% - 10px),
+      #000 0
+    );
+    mask: radial-gradient(
+      farthest-side,
+      #0000 calc(100% - 10px),
+      #000 0
+    ); /* standard fallback */
+    animation: rotate 1.5s infinite linear;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .spinner {
+      margin: 4.8rem auto;
+
+      width: 6.4rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(farthest-side, #495057 94%, #0000) top/10px 10px
+          no-repeat,
+        conic-gradient(#0000 30%, #495057);
+      -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 10px),
+        #000 0
+      );
+      mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 10px),
+        #000 0
+      ); /* standard fallback */
+      animation: rotate 1.5s infinite linear;
+    }
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 18px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--color-brand-100);
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+  @media (max-width: 30rem) {
+    .spinner-mini {
+      width: 16px;
+      border-width: 1.5px;
+    }
+  }
+
+  .focus {
+    outline-color: var(--color-brand-dark-100); /* base outline color */
+
+    /* Only on keyboard focus */
+    &:focus-visible {
+      outline-color: var(--color-brand-950);
+      outline-width: 2px;
+      outline-style: solid;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/** Custom scrollbar styling for dark mode */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    background: #18181b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 8px;
+    border: 2px solid #18181b;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #18181b;
+  }
+
+  * {
+    scrollbar-width: inherit;
+    scrollbar-color: #27272a #18181b;
+  }
 }
+
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    background: #f4f4f5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e4e4e7;
+    border-radius: 8px;
+    border: 2px solid #f4f4f5;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4d4d8;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #f4f4f5;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: inherit;
+    scrollbar-color: #e4e4e7 #f4f4f5;
+  }
+}
+
+@layer base {
+  :root {
+    --toast-bg: var(--color-light);
+    --toast-text: var(--color-dark);
+    --toast-border: #e5e7eb; /* light: gray-200 */
+
+    --tick: var(--color-brand-950);
+
+    --barTick: var(--color-brand-950);
+    --delivered: var(--color-red-700);
+    --tooltip-text: var(--color-dark);
+    --tooltip-bg: var(--color-gray-50);
+    --tooltip-border: 1px solid var(--color-gray-300);
+    --bar-chart: var(--color-brand-950);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --toast-bg: var(--color-dark);
+      --toast-text: var(--color-light);
+      --toast-border: #3f3f46; /* dark: zinc-700 */
+
+      --tick: var(--color-brand-dark-100);
+      --barTick: var(--color-brand-dark-200);
+      --delivered: var(--color-red-300);
+      --tooltip-text: var(--color-light);
+      --tooltip-bg: var(--color-zinc-800);
+      --tooltip-border: 1px solid var(--color-zinc-700);
+      --bar-chart: var(--color-brand-dark-100);
+    }
+  }
+}
+
+/* 
+Breakpoint prefix
+Minimum width
+CSS
+sm
+40rem (640px)
+@media (width >= 40rem) { … }
+
+md
+48rem (768px)
+@media (width >= 48rem) { … }
+
+lg
+64rem (1024px)
+@media (width >= 64rem) { … }
+
+xl
+80rem (1280px)
+@media (width >= 80rem) { … }
+
+2xl
+96rem (1536px)
+@media (width >= 96rem) { … }
+
+*/

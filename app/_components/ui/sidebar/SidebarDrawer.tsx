@@ -22,7 +22,7 @@ export default function SidebarDrawer({
   const { isOpen, setIsOpen } = useSidebarDrawer();
 
   return (
-    <div className="bg-light sticky top-0 z-50 flex items-start border-b border-gray-200 px-1 py-1 md:h-screen md:border-r md:py-5 xl:hidden dark:border-zinc-700/40 dark:bg-zinc-800/40">
+    <div className="md:bg-light sticky top-0 z-50 flex items-start border-b border-gray-200 bg-white px-1 py-1 md:h-screen md:border-r md:py-5 xl:hidden dark:border-zinc-700/40 dark:bg-zinc-900 md:dark:bg-zinc-800/40">
       <button
         aria-label="Apri sidebar menu"
         onClick={() => {
@@ -53,7 +53,7 @@ export default function SidebarDrawer({
           >
             <div className="padding-sidebar flex h-full w-full max-w-md grow flex-col overflow-y-auto rounded-[16px] border border-gray-300 bg-gray-100 text-neutral-500/90 dark:border-zinc-700/40 dark:bg-zinc-800 dark:text-gray-300/80">
               <Drawer.Title className="mb-2 text-center">
-                <Logo />
+                <Logo py="py-10" />
               </Drawer.Title>
 
               <nav aria-label="Navigazione principale">

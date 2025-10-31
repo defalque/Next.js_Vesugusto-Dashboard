@@ -1,49 +1,30 @@
-import { Suspense } from "react";
-import WelcomeButton from "./_components/ui/WelcomeButton";
-import { WelcomeButtonSkeleton } from "./_components/ui/Skeletons";
-import Image from "next/image";
-import heroDesktop from "@/public/hero-desktop.png";
-import heroMobile from "@/public/hero-mobile.png";
+import Link from "next/link";
+
+import { notoSerif } from "./_lib/fonts";
+
+import Logo from "./_components/ui/Logo";
 
 export default function Page() {
   return (
-    <main className="grid min-h-screen grid-cols-1 grid-rows-[1fr_2fr] bg-radial from-white to-gray-50 lg:grid-cols-[1.5fr_3fr] lg:grid-rows-1 dark:from-zinc-700 dark:to-zinc-900">
-      <div className="mask-radial flex flex-col gap-8 px-5 pt-20 pb-5 sm:px-15 lg:py-40">
-        <div className="dark:text-brand-50 space-y-5 text-center leading-relaxed text-zinc-900 sm:text-left">
-          <p className="text-3xl font-bold text-shadow-xs sm:text-5xl dark:text-shadow-lg">
-            Benvenuto su Vesugusto!
-          </p>
-          <p className="text-lg text-shadow-2xs dark:text-shadow-sm">
-            La tua demo dashboard preferita.
-          </p>
+    <main className="grid min-h-screen place-content-center">
+      <div className="flex flex-col gap-12">
+        <div className="flex items-center gap-4 self-center">
+          <Logo size="5xl" />
+          <span className="before:bg-brand-950 relative inline-block before:absolute before:-inset-2 before:block before:-skew-y-3 before:dark:bg-white">
+            <span
+              className={`${notoSerif.className} xs:text-4xl relative text-3xl text-white text-shadow-2xs md:text-5xl dark:text-gray-950`}
+            >
+              Dashboard
+            </span>
+          </span>
         </div>
 
-        <Suspense fallback={<WelcomeButtonSkeleton />}>
-          <WelcomeButton />
-        </Suspense>
-      </div>
-
-      <div className="flex w-full items-center justify-center px-5 sm:px-10 lg:bg-gray-100 lg:dark:bg-linear-to-br lg:dark:from-zinc-600 lg:dark:to-zinc-800">
-        <Image
-          src={heroDesktop}
-          alt="Screen della dashboard di Vesugusto su desktop."
-          width={1000}
-          height={760}
-          quality={80}
-          className="hidden sm:block"
-          priority
-          placeholder="blur"
-        />
-        <Image
-          src={heroMobile}
-          alt="Screen della dashboard di Vesugusto su mobile."
-          width={500}
-          height={560}
-          quality={80}
-          className="block sm:hidden"
-          priority
-          placeholder="blur"
-        />
+        <Link
+          href="/dashboard"
+          className="bg-brand-950 hover:bg-brand-900 active:bg-brand-900 self-center rounded-md px-4 py-1 text-base font-semibold text-white shadow-sm transition-all duration-300 text-shadow-2xs active:scale-97 dark:bg-white dark:text-black dark:text-shadow-none dark:hover:bg-white/80 dark:active:bg-gray-100"
+        >
+          Accedi
+        </Link>
       </div>
     </main>
   );

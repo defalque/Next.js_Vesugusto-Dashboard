@@ -71,8 +71,10 @@ export const ORDER_SORTBY_OPTIONS: SortOption[] = [
 
 //----------------------------------------------------------
 
-export type AuthFormTitle = {
+export type CredentialsFormProps = {
   title: "Login" | "Registrazione";
+  isActive: boolean;
+  onChangeForm: () => void;
 };
 
 // products page

@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 type Breadcrumb = {

@@ -1,5 +1,5 @@
-import AuthForm from "@/app/_components/credentials/AuthForm";
+import LazyAuthForms from "@/app/_components/credentials/LazyAuthForms";
 
 export default function Page() {
-  return <AuthForm title="Login" />;
+  return <LazyAuthForms />;
 }

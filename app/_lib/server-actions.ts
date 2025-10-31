@@ -27,19 +27,22 @@ export async function login(
 
   if (!validatedFields.success) {
     const errorMessage =
-      validatedFields.error.message || "Dati di accesso non validi. Riprova.";
+      validatedFields.error.message ||
+      "Dati di accesso non validi. Riprova più tardi.";
     return {
       ...initialState,
       error: errorMessage,
     };
   }
 
-  const { data: user, error } = await supabase.auth.signInWithPassword(
+  // const { data: user, error } = await supabase.auth.signInWithPassword(
+  const { error } = await supabase.auth.signInWithPassword(
     validatedFields.data,
   );
 
   if (error) {
-    const errorMessage = error.message || "Errore durante l'accesso. Riprova.";
+    const errorMessage =
+      error.message || "Errore durante l'accesso. Riprova più tardi.";
     return {
       ...initialState,
       error: errorMessage,

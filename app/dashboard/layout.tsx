@@ -37,18 +37,18 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="text-dark grid grid-cols-1 grid-rows-[auto_1fr] text-sm md:grid-cols-[auto_1fr] md:grid-rows-[1fr] md:gap-y-4 xl:grid-cols-[var(--spacing-sidebar)_1fr] dark:bg-gradient-to-br dark:text-gray-100">
-      <div className="bg-white dark:bg-zinc-900/80 dark:backdrop-blur-md">
-        <Sidebar links={links} />
+    <div className="text-dark bg-style grid grid-cols-1 grid-rows-[auto_1fr] text-sm md:grid-cols-[auto_1fr] md:grid-rows-[1fr] md:gap-y-4 xl:grid-cols-[var(--spacing-sidebar)_1fr] dark:text-gray-100">
+      {/* <div className="_bg-white _dark:bg-zinc-900/80 dark:backdrop-blur-md"> */}
+      <Sidebar links={links} />
 
-        <SidebarDrawerContextProvider>
-          <SidebarDrawer links={links}>
-            <UserAvatar />
-          </SidebarDrawer>
-        </SidebarDrawerContextProvider>
-      </div>
+      <SidebarDrawerContextProvider>
+        <SidebarDrawer links={links}>
+          <UserAvatar />
+        </SidebarDrawer>
+      </SidebarDrawerContextProvider>
+      {/* </div> */}
 
-      <main className="h-full overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-5 pb-5 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:py-16.5 dark:bg-zinc-900/80 dark:backdrop-blur-md">
+      <main className="min-h-full overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-5 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:py-16.5 dark:bg-zinc-900/80 dark:backdrop-blur-md">
         <Toaster
           position="top-center"
           gutter={12}

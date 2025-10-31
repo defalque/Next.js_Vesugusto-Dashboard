@@ -17,68 +17,126 @@ export function UserAvatarSkeleton() {
   );
 }
 
-export function AuthFormSkeleton({ heading = true }) {
+export function LoginFormSkeleton({ isAuthForm }: { isAuthForm?: true }) {
   return (
-    <div className="w-full animate-pulse gap-3 px-5 pt-8 pb-15 sm:w-110 sm:px-10">
-      {/* Heading */}
-      {heading && (
-        <div
-          className={`relative mx-auto mb-6 h-6 w-2/3 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-        />
+    <div
+      className={`bg-box box-style ${isAuthForm && "border"} _animate-pulse w-full gap-3 rounded-md sm:w-110`}
+    >
+      {isAuthForm && (
+        <div className="box-style border-b p-3 text-center text-2xl/9 font-bold tracking-tight">
+          Accedi alla dashboard
+        </div>
       )}
-
-      {/* Email field */}
-      <div className="mb-4 space-y-1">
-        <div
-          className={`relative h-4 w-1/3 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-        />
-        <div
-          className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-        />
-      </div>
-
-      {/* Password field */}
-      <div className="mb-4 space-y-1">
-        <div className="flex justify-between">
+      <div className="dark:text-light _mt-5 flex w-full flex-col gap-3.5 px-5 pt-5 text-sm text-neutral-700 sm:px-10">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <div
+              className={`relative h-4 w-14 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+            <div
+              className={`relative h-4 w-34 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+          </div>
           <div
-            className={`relative h-4 w-1/3 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-          />
-          <div
-            className={`relative h-4 w-1/4 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            className={`relative h-6.5 w-6.5 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
           />
         </div>
-        <div
-          className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-        />
+
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <div
+              className={`relative h-4 w-20 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+            <div
+              className={`relative h-4 w-34 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+          </div>
+          <div
+            className={`relative h-6.5 w-6.5 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+        </div>
       </div>
 
-      {/* Button */}
-      <div
-        className={`relative mt-10 h-10 w-full overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-      />
+      <div className="space-y-3 px-5 py-5 sm:px-10">
+        {/* Email field */}
+        <div className="mb-4 space-y-2">
+          <div
+            className={`relative h-4 w-1/5 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+          <div
+            className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+        </div>
 
-      {/* Link */}
-      <div
-        className={`relative mx-auto mt-4 h-4 w-2/3 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
-      />
+        {/* Password field */}
+        <div className="mb-4 space-y-2">
+          <div className="flex justify-between">
+            <div
+              className={`relative h-4 w-1/4 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+            <div
+              className={`relative h-4 w-1/2 self-end overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+          </div>
+          <div
+            className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+        </div>
+
+        {/* Button */}
+        <div
+          className={`relative mt-10 h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+        />
+
+        {/* Link */}
+        <div
+          className={`relative mx-auto mt-4 h-4 w-34 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+        />
+      </div>
     </div>
   );
 }
 
-export function WelcomeButtonSkeleton() {
+export function SignUpFormSkeleton() {
   return (
-    <div
-      className="bg-brand-50/10 dark:bg-brand-950/20 flex animate-pulse items-center justify-center self-center rounded-lg px-4 py-2 font-bold shadow-xs transition-colors duration-300 text-shadow-white/30 text-shadow-xs focus:ring-4 focus:outline-none sm:self-start lg:self-end"
-      style={{ minWidth: 110, minHeight: 45 }}
-    >
-      <span className="spinner-mini" />
+    <div className="bg-box box-style w-full animate-pulse gap-3 rounded-md border sm:w-110">
+      {/* Email field */}
+      <div className="space-y-3 px-5 py-5 sm:px-10">
+        <div className="mb-4 space-y-2">
+          <div
+            className={`relative h-5 w-1/5 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+          <div
+            className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+        </div>
+
+        {/* Password field */}
+        <div className="mb-4 space-y-2">
+          <div className="flex justify-between">
+            <div
+              className={`relative h-5 w-1/4 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+            <div
+              className={`relative h-4 w-1/2 self-end overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+            />
+          </div>
+          <div
+            className={`relative h-9 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+          />
+        </div>
+
+        {/* Button */}
+        <div
+          className={`relative mt-10 h-10 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+        />
+
+        {/* Link */}
+        <div
+          className={`relative mx-auto mt-4 h-4 w-34 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${shimmer}`}
+        />
+      </div>
     </div>
-    // <div
-    //   className="bg-brand-50/10 dark:bg-brand-950/20 flex animate-pulse items-center justify-center self-end rounded-lg px-4 py-2 font-bold shadow-xs transition-colors duration-300 text-shadow-white/30 text-shadow-xs focus:ring-4 focus:outline-none"
-    //   style={{ minWidth: 110, minHeight: 45 }}
-    // >
-    //   <span className="border-brand-400 dark:border-brand-dark-300 inline-block h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
-    // </div>
   );
 }
 

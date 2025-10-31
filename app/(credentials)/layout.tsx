@@ -6,9 +6,9 @@ type layoutProps = {
 
 function layout({ children }: layoutProps) {
   return (
-    <div className="text-dark bg-light flex min-h-screen items-center justify-center py-4 dark:bg-linear-30 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-700 dark:text-gray-100">
+    <main className="text-dark flex min-h-screen items-center justify-center p-4 dark:text-gray-100">
       {children}
-    </div>
+    </main>
   );
 }
 

@@ -9,7 +9,7 @@ async function WelcomeButton() {
   return (
     <Button
       href={user ? "/dashboard" : "/login"}
-      className="self-center px-4 py-1 text-lg sm:self-start lg:self-end"
+      className="self-center px-4 py-1 text-lg"
     >
       {user ? <span>Vai al tuo account</span> : <span>Accedi</span>}
     </Button>

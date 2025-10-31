@@ -48,20 +48,19 @@ export default async function Layout({
         </SidebarDrawerContextProvider>
       </div>
 
-      <Toaster
-        position="top-center"
-        gutter={12}
-        toastOptions={{
-          success: {
-            duration: 5000,
-          },
-          error: {
-            duration: 5000,
-          },
-        }}
-      />
-
-      <main className="_overflow-y-auto _overflow-visible h-full border-gray-200 bg-white px-(--page-padding-x) pt-5 pb-5 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:py-16.5 dark:bg-zinc-900/80 dark:backdrop-blur-md">
+      <main className="h-full overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-5 pb-5 [--page-padding-x:--spacing(3)] sm:px-4 xl:px-10 xl:py-16.5 dark:bg-zinc-900/80 dark:backdrop-blur-md">
+        <Toaster
+          position="top-center"
+          gutter={12}
+          toastOptions={{
+            success: {
+              duration: 5000,
+            },
+            error: {
+              duration: 5000,
+            },
+          }}
+        />
         {children}
       </main>
     </div>

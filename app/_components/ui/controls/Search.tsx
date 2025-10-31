@@ -21,13 +21,13 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div className="relative flex flex-1">
+    <div className="_flex-1 relative flex grow">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
       <input
         id="search"
-        className="w-full min-w-sm rounded-md border border-gray-300 py-3 pl-10 focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none lg:h-full dark:border-zinc-700 dark:placeholder:text-zinc-600 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
+        className="w-full rounded-md border border-gray-300 py-3 pl-10 focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none lg:h-full dark:border-zinc-700 dark:placeholder:text-zinc-600 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);

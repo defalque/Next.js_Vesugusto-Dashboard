@@ -28,7 +28,7 @@ export default function SidebarDrawer({
         onClick={() => {
           setIsOpen(true);
         }}
-        className="focus sticky top-5 cursor-pointer rounded-md p-1 text-sm hover:bg-gray-200/60 dark:hover:bg-white/5"
+        className="focus cursor-pointer rounded-md p-1 text-sm hover:bg-gray-200/60 dark:hover:bg-white/5"
       >
         <Bars3Icon
           aria-hidden
@@ -39,6 +39,9 @@ export default function SidebarDrawer({
       <Drawer.Root open={isOpen} onOpenChange={setIsOpen} direction="left">
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-250 bg-black/20 xl:hidden" />
+          <Drawer.Description className="sr-only">
+            Sidebar menu
+          </Drawer.Description>
           <Drawer.Content
             className="fixed top-2 bottom-2 left-2 z-250 flex w-[var(--spacing-sidebar)] outline-none xl:hidden"
             // The gap between the edge of the screen and the drawer is 8px in this case.

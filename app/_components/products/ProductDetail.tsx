@@ -4,7 +4,7 @@ import useMeasure from "react-use-measure";
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-import { animate, AnimatePresence, LazyMotion } from "motion/react";
+import { AnimatePresence, LazyMotion } from "motion/react";
 import * as m from "motion/react-m";
 import { useState } from "react";
 const loadFeatures = () =>
@@ -17,7 +17,7 @@ function ProductDetail({
   productAttribute: string;
   label: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [ref, bounds] = useMeasure();
 
   // const iconVariants = {
@@ -45,7 +45,11 @@ function ProductDetail({
             />
           </m.span>
         </m.button>
-        <m.div animate={{ height: bounds.height }} className="overflow-hidden">
+        <m.div
+          initial={{ height: bounds.height }}
+          animate={{ height: bounds.height }}
+          className="overflow-hidden"
+        >
           <div ref={ref} className="relative">
             <AnimatePresence mode="popLayout" initial={false}>
               {isOpen && (

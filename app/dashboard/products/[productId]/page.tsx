@@ -25,7 +25,7 @@ export default async function Page({ params }: Slug) {
   }
 
   return (
-    <div>
+    <>
       <Breadcrumbs
         breadcrumbs={[
           {
@@ -44,6 +44,6 @@ export default async function Page({ params }: Slug) {
         <ProductImage product={product}></ProductImage>
         <ProductDetails product={product}></ProductDetails>
       </div>
-    </div>
+    </>
   );
 }

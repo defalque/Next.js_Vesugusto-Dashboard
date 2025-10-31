@@ -6,7 +6,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 
-import SidebarDrawerContextProvider from "../_contexts/DrawerContext";
+import SidebarDrawerContextProvider from "../_contexts/SidebarDrawerContext";
 import Sidebar from "../_components/ui/sidebar/Sidebar";
 import SidebarDrawer from "../_components/ui/sidebar/SidebarDrawer";
 import UserAvatar from "../_components/ui/sidebar/UserAvatar";

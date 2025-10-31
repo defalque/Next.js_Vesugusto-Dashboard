@@ -9,7 +9,7 @@ import Logo from "../Logo";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import NavLinks from "./NavLinks";
 import { NavLink } from "@/app/_lib/definitions";
-import { useSidebarDrawer } from "@/app/_contexts/DrawerContext";
+import { useSidebarDrawer } from "@/app/_contexts/SidebarDrawerContext";
 import SidebarFooter from "./SidebarFooter";
 
 export default function SidebarDrawer({

@@ -1,11 +1,11 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
 import { formatCurrency } from "@/app/_lib/utils";
 
-// import { animate, motion, useMotionValue } from "motion/react";
-import { LazyMotion, useMotionValue, animate } from "motion/react";
+import { LazyMotion, useSpring, useTransform } from "motion/react";
 import * as m from "motion/react-m";
 const loadFeatures = () =>
   import("../../_lib/features").then((res) => res.default);
@@ -13,47 +13,39 @@ const loadFeatures = () =>
 type StatProps = {
   children: ReactNode;
   title: string;
-  value: number | string;
-  isCurrency?: boolean;
+  value: number;
+  position?: string;
 };
 
-function AnimatedStat({ title, value, isCurrency, children }: StatProps) {
-  const count = useMotionValue(0);
+function AnimatedStat({ title, value, position, children }: StatProps) {
+  const countValue = useSpring(0, {
+    stiffness: 185,
+    damping: 25,
+  });
 
-  const [displayValue, setDisplayValue] = useState<string | number>(value);
+  const countDisplay = useTransform(countValue, (value) =>
+    formatCurrency(value),
+  );
 
   useEffect(() => {
-    if (typeof value === "number") {
-      const controls = animate(count, isCurrency ? value / 100 : value, {
-        duration: 1.5,
-        onUpdate(latest) {
-          if (isCurrency) {
-            setDisplayValue(formatCurrency(latest * 100)); // Moltiplichi per 100 perché l'hai diviso sopra
-          } else {
-            setDisplayValue(Math.round(latest));
-          }
-        },
-      });
-
-      return () => controls.stop();
-    } else {
-      setDisplayValue(value);
-    }
-  }, [value, isCurrency, count]);
+    countValue.set(value);
+  }, [value, countValue]);
 
   return (
-    <div className="border-grey-100 grid grow-1 grid-cols-[4.2rem_auto] grid-rows-[auto_auto] gap-x-5 gap-y-1 rounded-md bg-gray-50/65 p-4 lg:grid-cols-[auto_auto] dark:bg-zinc-800/40">
-      {children}
-      <h5 className="text-grey-500 self-baseline text-xs font-medium tracking-wide uppercase md:font-semibold">
-        {title}
-      </h5>
+    <LazyMotion features={loadFeatures}>
+      <div
+        className={`dark:text-light grid grow-1 grid-cols-[4.2rem_auto] grid-rows-[auto_auto] gap-x-2 gap-y-1 rounded-md border border-gray-200 bg-gray-50/30 p-3 text-neutral-700 md:p-4 lg:grid-cols-[auto_auto] dark:border-zinc-700/40 dark:bg-zinc-800/40 ${position}`}
+      >
+        {children}
+        <h5 className="self-baseline text-xs font-medium tracking-wide uppercase md:font-semibold">
+          {title}
+        </h5>
 
-      <LazyMotion features={loadFeatures}>
         <m.pre className="self-baseline text-3xl leading-none font-medium">
-          {displayValue}
+          {countDisplay}
         </m.pre>
-      </LazyMotion>
-    </div>
+      </div>
+    </LazyMotion>
   );
 }
 

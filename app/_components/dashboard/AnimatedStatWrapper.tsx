@@ -1,33 +1,29 @@
 "use client";
 
-// import { BanknotesIcon } from "@heroicons/react/24/outline";
-// import AnimatedStat from "./AnimatedStat";
-
 import dynamic from "next/dynamic";
 import { StatSkeleton } from "../ui/Skeletons";
 const AnimatedStat = dynamic(() => import("./AnimatedStat"), {
   ssr: false,
-  loading: () => <StatSkeleton />,
+  loading: () => (
+    <StatSkeleton
+      position="row-start-1 col-span-full md:col-span-1"
+      label="Ricavi"
+    />
+  ),
 });
 import { ReactNode } from "react";
 
 type StatProps = {
   children: ReactNode;
   title: string;
-  value: number | string;
-  isCurrency?: boolean;
+  value: number;
+  position: string;
 };
 
-function AnimatedStatWrapper({
-  title,
-  value,
-  isCurrency,
-  children,
-}: StatProps) {
+function AnimatedStatWrapper({ title, value, position, children }: StatProps) {
   return (
-    <AnimatedStat title={title} value={value} isCurrency={isCurrency}>
-      <div className="bg-brand-100 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-        {/* <BanknotesIcon className="text-brand-950 size-8 md:size-10" /> */}
+    <AnimatedStat title={title} value={value} position={position}>
+      <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
         {children}
       </div>
     </AnimatedStat>

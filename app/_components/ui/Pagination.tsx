@@ -39,7 +39,7 @@ function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
   }
 
   return (
-    <div className="flex w-full items-center justify-between p-3">
+    <div className="flex w-full items-center justify-between px-4 py-3">
       {pageCount > 1 && (
         <p className="text-sm">
           {(currentPage - 1) * LIMIT + 1 ===
@@ -75,13 +75,13 @@ function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
           {currentPage !== 1 && (
             <Button isPaginationButton onClick={prevPage} className="space-x-1">
               <ChevronLeftIcon className="size-5" />
-              <span className="pr-1.5">Precedente</span>
+              <span className="pr-1.5">Indietro</span>
             </Button>
           )}
 
           {currentPage !== pageCount && (
             <Button isPaginationButton onClick={nextPage} className="space-x-1">
-              <span className="pl-1.5">Successivo</span>
+              <span className="pl-1.5">Continua</span>
               <ChevronRightIcon className="size-5" />
             </Button>
           )}

@@ -1,16 +1,11 @@
 import OrdersListWrapper from "@/app/_components/orders/OrdersListWrapper";
 import CustomDialogWrapper from "@/app/_components/ui/dialog/CustomDialogWrapper";
-import Filter from "@/app/_components/ui/Filter";
 import ItemsTableHeadingCell from "@/app/_components/ui/items-table/ItemsTableHeadingCell";
-import PageTitle from "@/app/_components/ui/PageTitle";
-import Pagination from "@/app/_components/ui/Pagination";
-import Search from "@/app/_components/ui/Search";
 import { OrdersListSkeleton } from "@/app/_components/ui/Skeletons";
-import SortBy from "@/app/_components/ui/SortBy";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
-import { getTotalOrders } from "@/app/_lib/apiOrders";
-import { ORDERS_LIMIT } from "@/constants/const";
+import { ORDER_SORTBY_OPTIONS, STATUS_OPTIONS } from "@/app/_lib/definitions";
 import { Suspense } from "react";
+import LazyControls from "@/app/_components/ui/controls/LazyControls";
 
 export const metadata = {
   title: "Ordini",
@@ -27,49 +22,43 @@ export default async function Page({
   }>;
 }) {
   const params = await searchParams;
+
   const filters = {
     status: params?.status || "all",
-    sort: params?.sort || "default",
+    sort: params?.sort || "most-recent",
     query: params?.query || "",
     page: params?.page || "1",
   };
   const filtersKey = `${filters.status}-${filters.sort}-${filters.query}-${filters.page}`;
 
-  const count = await getTotalOrders(filters);
-
   return (
     <section>
-      <div className="mb-8">
-        <PageTitle>Ordini</PageTitle>
+      <div className="mb-6 flex flex-wrap gap-3 lg:mb-8 lg:gap-5">
+        <LazyControls
+          placeholder="Cerca ordine..."
+          filterField="status"
+          filterOptions={STATUS_OPTIONS}
+          sortByField="sort"
+          sortByOptions={ORDER_SORTBY_OPTIONS}
+        />
       </div>
 
-      <div className="mb-6 flex flex-col gap-2 lg:mb-8 lg:flex-row lg:gap-5">
-        <Search placeholder="Cerca ordine..." />
-        <div className="inline-flex flex-col items-end gap-2 self-end sm:flex-row sm:items-center sm:gap-4">
-          <Filter
-            filterField="status"
-            options={[
-              { value: "all", label: "Tutto" },
-              { value: "delivered", label: "Consegnato" },
-              { value: "unconfirmed", label: "In attesa" },
-              { value: "ready", label: "Pronto" },
-            ]}
-          />
-          <SortBy />
-        </div>
-      </div>
-
-      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md md:-mx-0">
+      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:-mx-0 md:border dark:border-zinc-700/40">
         <div className="grow px-(--page-padding-x) md:px-0">
           <DialogContextProvider>
             <table className="min-w-full">
-              <thead className="bg-gray-50 text-xs sm:text-sm dark:bg-zinc-800">
+              <thead className="border-b border-gray-200 bg-gray-50/30 text-xs sm:text-sm dark:border-zinc-700/40 dark:bg-zinc-800/40">
                 <tr>
                   <ItemsTableHeadingCell>ID</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Cliente</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Data</ItemsTableHeadingCell>
-                  <ItemsTableHeadingCell>Status</ItemsTableHeadingCell>
+                  <ItemsTableHeadingCell className="text-center">
+                    Status
+                  </ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Totale</ItemsTableHeadingCell>
+                  <ItemsTableHeadingCell className="text-center">
+                    Opzioni
+                  </ItemsTableHeadingCell>
                   <th />
                 </tr>
               </thead>
@@ -77,14 +66,6 @@ export default async function Page({
               <Suspense fallback={<OrdersListSkeleton />} key={filtersKey}>
                 <OrdersListWrapper filters={filters} />
               </Suspense>
-
-              <tfoot className="bg-gray-50 text-sm dark:bg-zinc-800">
-                <tr>
-                  <td colSpan={7}>
-                    <Pagination count={count ?? 0} LIMIT={ORDERS_LIMIT} />
-                  </td>
-                </tr>
-              </tfoot>
             </table>
             <CustomDialogWrapper />
           </DialogContextProvider>

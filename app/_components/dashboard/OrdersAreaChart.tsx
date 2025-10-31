@@ -7,13 +7,13 @@ import { it } from "date-fns/locale";
 
 import {
   XAxis,
-  YAxis,
   Tooltip,
   ResponsiveContainer,
   BarChart,
   Bar,
-  LabelList,
-  Legend,
+  CartesianGrid,
+  TooltipContentProps,
+  // Legend,
 } from "recharts";
 
 type Data = {
@@ -26,98 +26,119 @@ type Data = {
 function OrdersAreaChart({ data }: { data: Data[] }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+      <BarChart
+        data={data}
+        margin={{ top: 30, right: 20, left: 20, bottom: 30 }}
+      >
+        <CartesianGrid vertical={false} stroke={colors.cartesian} />
+
         <XAxis
           dataKey="month"
-          tick={{ fill: colors.bar, fontWeight: "bold" }} // Colore del testo (tick)
-          tickLine={{ stroke: colors.bar }} // Linea del tick
-          axisLine={{ stroke: colors.bar }} // Linea dell'asse
-        />
-
-        <YAxis
-          allowDecimals={false}
-          tick={{ fill: colors.bar, fontWeight: "bold", fontSize: "0.8rem" }} // Colore del testo (tick)
-          tickLine={{ stroke: colors.bar }} // Linea del tick
-          axisLine={{ stroke: colors.bar }} // Linea dell'asse
+          tick={{ fill: colors.data, fontWeight: "400", fontSize: "13px" }}
+          tickLine={false}
+          axisLine={false}
         />
 
         <Tooltip
-          cursor={{ fill: "transparent" }}
-          contentStyle={{
-            backgroundColor: colors.tooltipBackground,
-            border: colors.tooltipBorder,
-            borderRadius: "8px",
-            fontSize: "14px",
-            padding: "10px",
-          }}
-          labelStyle={{
-            color: colors.tooltipText,
-            marginBottom: "8px",
-            fontWeight: "bold",
-          }}
-          itemStyle={{ color: colors.tooltipText }}
-          labelFormatter={(label, payload) => {
-            const dateObj = payload?.[0]?.payload?.fullDate;
-            const formatted = dateObj
-              ? format(dateObj, "MMMM yyyy", { locale: it })
-              : label;
-            return `Ordini ${capitalize(formatted)}`;
-          }}
+          content={CustomTooltip}
+          cursor={{ fill: colors.tooltipHover }}
         />
-
-        {/* <defs>
-          <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
-            <stop
-              offset="1%"
-              stopColor={colors.barChartColor}
-              stopOpacity={0.8}
-            />
-            <stop
-              offset="100%"
-              stopColor={colors.barChartColor}
-              stopOpacity={0}
-            />
-          </linearGradient>
-        </defs> */}
-        {/* <defs>
-          <linearGradient id="delivered" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="1%" stopColor={colors.delivered} stopOpacity={0.8} />
-            <stop offset="100%" stopColor={colors.delivered} stopOpacity={0} />
-          </linearGradient>
-        </defs> */}
 
         <Bar
           dataKey="statusCounts.delivered"
           name="Consegnati"
           fill={colors.delivered}
-          radius={[4, 4, 0, 0]} // angoli arrotondati in alto
-          // activeBar={{ stroke: "#ee9873ba", strokeWidth: 1 }}
-        >
-          <LabelList
-            dataKey="statusCounts.delivered"
-            position="top"
-            fill={colors.delivered}
-            fontWeight="bold"
-          />
-        </Bar>
+          radius={[4, 4, 4, 4]}
+        />
+
         <Bar
           dataKey="orderCount"
           name="Totale"
           fill={colors.bar}
-          radius={[4, 4, 0, 0]} // angoli arrotondati in alto
-          // activeBar={{ stroke: "#e24840", strokeWidth: 1 }}
-        >
-          <LabelList
-            dataKey="orderCount"
-            position="top"
-            fill={colors.text}
-            fontWeight="bold"
-          />
-        </Bar>
-        <Legend verticalAlign="top" />
+          radius={[4, 4, 4, 4]}
+        />
+
+        {/* <Legend verticalAlign="bottom" content={CustomLegend} /> */}
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
 export default OrdersAreaChart;
+
+// interface CustomLegendProps {
+//   payload?: {
+//     value: string;
+//     color: string;
+//     type?: string;
+//     id?: string;
+//   }[];
+// }
+
+// const CustomLegend = ({ payload }: CustomLegendProps) => {
+//   if (!payload) return null;
+
+//   return (
+//     <div className="mt-4 flex justify-center gap-4">
+//       {payload.map((entry, index) => (
+//         <div
+//           key={`item-${index}`}
+//           className="flex items-center gap-1 text-xs text-neutral-800 dark:text-white"
+//         >
+//           <span
+//             className="inline-block aspect-square size-2.5 rounded-xs"
+//             style={{
+//               backgroundColor: entry.color,
+//             }}
+//           />
+//           {entry.value}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipContentProps<string | number, string>) => {
+  if (active && payload && payload.length) {
+    const dateObj = payload?.[0]?.payload?.fullDate;
+    const formattedDate = dateObj
+      ? capitalize(format(dateObj, "MMMM yyyy", { locale: it }))
+      : label;
+
+    return (
+      <div
+        className="rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 dark:border-gray-200 dark:bg-white"
+        style={{
+          boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+        }}
+      >
+        <p className="mb-1 text-xs text-white dark:text-neutral-800">
+          {formattedDate}
+        </p>
+
+        {payload.map((entry, index) => (
+          <div key={`item-${index}`} className="flex items-center gap-2">
+            <div
+              className="size-2 rounded-xs"
+              style={{
+                backgroundColor: entry.color,
+              }}
+            />
+            <span className="text-xs text-neutral-300 dark:text-neutral-600">
+              {entry.name}
+            </span>
+            <pre className="ml-auto text-sm text-white dark:text-neutral-800">
+              {entry.value}
+            </pre>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
+};

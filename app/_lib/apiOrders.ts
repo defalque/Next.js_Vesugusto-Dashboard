@@ -1,8 +1,17 @@
 import { createClient } from "@/utils/supabase/server";
 
 import { OrdersInfo } from "./definitions";
-import { subMonths, format, startOfDay, endOfDay } from "date-fns";
+import { subMonths, format, startOfDay } from "date-fns";
 
+// export async function getOrders(
+//   limit: number,
+//   filters: {
+//     page: string | number;
+//     status: string;
+//     sort: string;
+//     query: string;
+//   },
+// ): Promise<OrdersInfo[]> {
 export async function getOrders(
   limit: number,
   filters: {
@@ -11,7 +20,7 @@ export async function getOrders(
     sort: string;
     query: string;
   },
-): Promise<OrdersInfo[]> {
+) {
   const supabase = await createClient();
 
   const from = (Number(filters.page) - 1) * limit;
@@ -38,15 +47,19 @@ export async function getOrders(
     query = query.order("totalCost", { ascending: true });
   } else if (filters.sort === "price-desc") {
     query = query.order("totalCost", { ascending: false });
-  } else {
+  } else if (filters.sort === "most-recent") {
+    query = query.order("created_at", { ascending: false });
+  } else if (filters.sort === "less-recent") {
     query = query.order("created_at", { ascending: true });
+  } else {
+    query = query.order("created_at", { ascending: false });
   }
 
   const { data: orders, error } = await query;
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error("Non è stato possibile caricare gli ordini: ", error);
+    return { orders: orders, error: true };
   }
 
   const paginatedOrders = orders.map((order) => {
@@ -64,7 +77,7 @@ export async function getOrders(
     };
   });
 
-  return paginatedOrders;
+  return { orders: paginatedOrders, error: false };
 }
 
 export async function getTotalOrders(filters: {
@@ -95,15 +108,20 @@ export async function getTotalOrders(filters: {
     query = query.order("totalCost", { ascending: true });
   } else if (filters.sort === "price-desc") {
     query = query.order("totalCost", { ascending: false });
-  } else {
+  } else if (filters.sort === "most-recent") {
+    query = query.order("created_at", { ascending: false });
+  } else if (filters.sort === "less-recent") {
     query = query.order("created_at", { ascending: true });
+  } else {
+    query = query.order("created_at", { ascending: false });
   }
 
   const { data: orders, error } = await query;
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error("Non è stato possibile caricare gli ordini: ", error);
+    return { count: orders, error: true };
+    // throw new Error("Non è stato possibile caricare gli ordini");
   }
 
   const allOrders = orders.map((order) => {
@@ -121,7 +139,7 @@ export async function getTotalOrders(filters: {
     };
   });
 
-  return allOrders.length ?? 0;
+  return { count: allOrders.length ?? 0, error: false };
 }
 
 export async function getOrder(id: string): Promise<OrdersInfo> {
@@ -177,21 +195,6 @@ export async function getOrderId(id: string) {
   return data;
 }
 
-export async function getChartOrders() {
-  const supabase = await createClient();
-
-  const { data: orders, error } = await supabase
-    .from("orders")
-    .select("id, orderDate");
-
-  if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
-  }
-
-  return orders;
-}
-
 export async function getLastYearOrders() {
   const supabase = await createClient();
 
@@ -211,8 +214,11 @@ export async function getLastYearOrders() {
     .lte("orderDate", toDate);
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error(
+      "Non è stato possibile caricare gli ordini dell'ultimo anno: ",
+      error,
+    );
+    return null;
   }
 
   return orders;
@@ -228,55 +234,36 @@ export async function getStatsOrders() {
   } = await supabase.from("orders").select("totalCost", { count: "exact" });
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error("Non è stato possibile caricare gli ordini: ", error);
+    return null;
   }
 
   return { orders, count };
 }
 
-export async function getLatestOrders() {
+export async function getOrdersActivity() {
   const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("orders")
     .select("id, userId(image), name, email, orderDate, status, totalCost")
     .order("created_at", { ascending: false })
-    .limit(5);
+    .neq("status", "delivered");
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error(
+      "Non è stato possibile recuperare gli ordini da gestire: ",
+      error,
+    );
+    return null;
   }
 
   const fixedOrders = data.map((order) => ({
     ...order,
-    userId: Array.isArray(order.userId) ? order.userId[0] : order.userId, // <-- aggiungi questa normalizzazione
+    userId: Array.isArray(order.userId) ? order.userId[0] : order.userId,
   }));
 
   return fixedOrders;
-}
-
-export async function getTodayOrders() {
-  const supabase = await createClient();
-
-  //consider using startOfToday
-  const start = startOfDay(new Date()).toISOString();
-  const end = endOfDay(new Date()).toISOString();
-
-  const { data, error } = await supabase
-    .from("orders")
-    .select("*")
-    .gte("orderDate", start) // >= inizio giorno
-    .lte("orderDate", end) // <= fine giorno
-    .order("orderDate", { ascending: false });
-
-  if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini di oggi.");
-  }
-
-  return data;
 }
 
 export async function getTopCustomer() {
@@ -285,10 +272,11 @@ export async function getTopCustomer() {
   const { data, error } = await supabase.rpc("get_top_customer");
 
   if (error) {
-    console.error("Error fetching top customer:", error);
-    throw new Error(
-      "Non è stato possibile caricare il cliente con più ordini effettuati.",
+    console.error(
+      "Non è stato possibile caricare il cliente con più ordini effettuati:",
+      error,
     );
+    return null;
   }
 
   return data;

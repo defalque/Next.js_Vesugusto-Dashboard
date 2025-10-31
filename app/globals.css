@@ -214,10 +214,18 @@
 
     --barTick: var(--color-brand-950);
     --delivered: var(--color-red-700);
-    --tooltip-text: var(--color-dark);
-    --tooltip-bg: var(--color-gray-50);
-    --tooltip-border: 1px solid var(--color-gray-300);
+    /* --tooltip-text: var(--color-dark); */
+    /* --tooltip-bg: var(--color-gray-50);
+    --tooltip-border: 1px solid var(--color-gray-300); */
     --bar-chart: var(--color-brand-950);
+
+    --data: var(--color-zinc-700);
+    --cartesian: color-mix(in srgb, var(--color-gray-200), transparent 50%);
+    --tooltip-bg: var(--color-zinc-800);
+    --tooltip-border: 1px solid var(--color-zinc-400);
+    --tooltip-text: var(--color-white);
+    --tooltip-hover: var(--color-white);
+    --text: var(--color-neutral-700);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -228,12 +236,38 @@
 
       --tick: var(--color-brand-dark-100);
       --barTick: var(--color-brand-dark-200);
-      --delivered: var(--color-red-300);
+      --delivered: var(--color-brand-700);
       --tooltip-text: var(--color-light);
-      --tooltip-bg: var(--color-zinc-800);
-      --tooltip-border: 1px solid var(--color-zinc-700);
+      /* --tooltip-bg: var(--color-zinc-800);
+      --tooltip-border: 1px solid var(--color-zinc-700); */
       --bar-chart: var(--color-brand-dark-100);
+
+      --data: var(--color-zinc-200);
+      --cartesian: var(--color-zinc-800);
+      --tooltip-bg: var(--color-white);
+      --tooltip-border: 1px solid var(--color-gray-400);
+      --tooltip-text: var(--color-black);
+      --tooltip-hover: var(--color-zinc-900);
+      --text: var(--color-light);
     }
+  }
+}
+
+@utility touch-hitbox {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-height: 44px;
+    min-width: 44px;
+    z-index: 9999;
   }
 }
 

@@ -1,10 +1,5 @@
 import { Product } from "@/app/_lib/definitions";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  PlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import MiniImageButton from "./MiniImageButton";
 import ImageBox from "./ImageBox";
 import IconButton from "./IconButton";
@@ -17,15 +12,15 @@ import SafeImage from "../ui/SafeImage";
 
 function ProductImage({ product }: { product: Product }) {
   return (
-    <div className="flex flex-col-reverse items-center gap-x-5 gap-y-2 md:flex-row md:items-start">
+    <div className="flex flex-col-reverse items-center gap-y-2 lg:flex-row lg:items-start lg:gap-x-5">
       <SelectedImageContextProvider
         key={product.image.length}
         images={product.image}
       >
         <DialogContextProvider>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-y-4 lg:sticky lg:top-5">
             {product.image.length > 0 && (
-              <div className="hidden flex-col items-center gap-4 lg:flex">
+              <div className="hidden w-full flex-col items-center gap-4 lg:flex">
                 {product.image.map((img, index) => (
                   <MiniImageButton key={index + 1} index={index}>
                     <SafeImage
@@ -44,14 +39,15 @@ function ProductImage({ product }: { product: Product }) {
               </div>
             )}
             <AddProductImageButton id={product.id}>
-              <PlusIcon
+              {/* <PlusIcon
                 aria-hidden="true"
                 className="size-5.5 text-zinc-600 dark:text-white"
-              />
+              /> */}
+              Aggiungi
             </AddProductImageButton>
           </div>
 
-          <div className="relative aspect-2/3 w-full text-center">
+          <div className="relative flex aspect-2/3 h-auto w-full text-center lg:sticky lg:top-5">
             {product.image.length === 0 && (
               <span>Nessuna immagine presente.</span>
             )}
@@ -73,10 +69,11 @@ function ProductImage({ product }: { product: Product }) {
               ))}
             {product.image.length > 0 && (
               <CancelProductImageButton name={product.name}>
-                <XMarkIcon
+                {/* <XMarkIcon
                   aria-hidden="true"
                   className="size-5.5 text-zinc-600 dark:text-white"
-                />
+                /> */}
+                Elimina
               </CancelProductImageButton>
             )}
 

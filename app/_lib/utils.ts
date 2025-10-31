@@ -108,7 +108,7 @@ export function prepareOrdersChartData(
 
   const monthlyData = monthsArray.map((date) => {
     const key = format(date, "yyyy-MM");
-    const monthAbbrev = format(date, "MMM", { locale: it });
+    const monthAbbrev = format(date, "MMMM", { locale: it });
     const capitalizedMonth =
       monthAbbrev.charAt(0).toUpperCase() + monthAbbrev.slice(1);
 

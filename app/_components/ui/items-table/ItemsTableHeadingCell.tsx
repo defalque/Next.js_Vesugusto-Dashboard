@@ -14,7 +14,7 @@ function ItemsTableHeadingCell({
     <th
       scope="col"
       {...props}
-      className={`px-4 py-3 font-medium tracking-wider uppercase ${className ? className : "text-left"}`}
+      className={`dark:text-light px-4 py-3 text-sm font-semibold tracking-wider text-neutral-700 uppercase ${className ? className : "text-left"}`}
     >
       {children}
     </th>

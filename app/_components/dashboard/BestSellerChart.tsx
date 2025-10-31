@@ -7,10 +7,13 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  // PieLabelRenderProps,
+  TooltipContentProps,
+  LegendPayload,
+  Sector,
 } from "recharts";
-import { colors } from "@/constants/const";
-import { useRouter } from "next/navigation";
+
+import Link from "next/link";
+import { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 const COLORS = [
   "var(--color-rose-500)",
@@ -27,142 +30,116 @@ type Data = {
 };
 
 function BestSellersChart({ data }: { data: Data[] }) {
-  const router = useRouter();
-
-  // const renderValueLabel = ({
-  //   cx,
-  //   cy,
-  //   midAngle,
-  //   innerRadius,
-  //   outerRadius,
-  //   value,
-  // }: PieLabelRenderProps) => {
-  //   const RADIAN = Math.PI / 180;
-
-  //   // Safely resolve innerRadius - handle string, number, and function types
-  //   let iRadius: number;
-  //   if (typeof innerRadius === "function") {
-  //     iRadius = 0; // fallback to 0 since we can't call without proper context
-  //   } else if (typeof innerRadius === "string") {
-  //     // Handle percentage strings - assume viewport context of ~400px
-  //     if (innerRadius.includes("%")) {
-  //       const percentage = parseFloat(innerRadius.replace("%", ""));
-  //       iRadius = (percentage / 100) * 200; // Assume 200px as base radius for percentage calculation
-  //     } else {
-  //       iRadius = parseFloat(innerRadius) || 0;
-  //     }
-  //   } else {
-  //     iRadius = Number(innerRadius) || 0;
-  //   }
-
-  //   // Safely resolve outerRadius - handle string, number, and function types
-  //   let oRadius: number;
-  //   if (typeof outerRadius === "function") {
-  //     oRadius = 200; // fallback to reasonable default
-  //   } else if (typeof outerRadius === "string") {
-  //     // Handle percentage strings - assume viewport context of ~400px
-  //     if (outerRadius.includes("%")) {
-  //       const percentage = parseFloat(outerRadius.replace("%", ""));
-  //       oRadius = (percentage / 100) * 200; // Assume 200px as base radius for percentage calculation
-  //     } else {
-  //       oRadius = parseFloat(outerRadius) || 200;
-  //     }
-  //   } else {
-  //     oRadius = Number(outerRadius) || 200;
-  //   }
-
-  //   // Calculate radius for label positioning
-  //   const radius = iRadius + (oRadius - iRadius) * 0.6; // Position labels closer to outer edge
-
-  //   // Safely resolve cx and cy - handle string, number types
-  //   const centerX = typeof cx === "string" ? parseFloat(cx) || 0 : (cx ?? 0);
-  //   const centerY = typeof cy === "string" ? parseFloat(cy) || 0 : (cy ?? 0);
-
-  //   const x = centerX + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
-  //   const y = centerY + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
-
-  //   return (
-  //     <text
-  //       x={x}
-  //       y={y}
-  //       fill="#fff"
-  //       textAnchor="middle"
-  //       dominantBaseline="central"
-  //       fontSize={14}
-  //       fontWeight="bold"
-  //       style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.7)" }} // Add shadow for better readability
-  //     >
-  //       {value}
-  //     </text>
-  //   );
-  // };
-
   return (
-    <div className="h-full w-full">
+    <div className="h-full">
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
+        <PieChart margin={{ top: 16, right: 16, bottom: 16, left: 16 }}>
           <Pie
+            activeShape={renderActiveShape}
             data={data}
             cx="50%"
             cy="50%"
             innerRadius="45%"
             outerRadius="80%"
-            // label={renderValueLabel}
             labelLine={false}
             dataKey="value"
-            // paddingAngle={3}
-            legendType="circle"
-            onClick={(entry) => {
-              if (entry?.id) {
-                router.push(`/dashboard/products/${entry.id}`);
-              }
-            }}
-            style={{ cursor: "pointer" }}
+            paddingAngle={0}
           >
             {data.map((_, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
+                tabIndex={-1}
               />
             ))}
           </Pie>
-          <Tooltip
-            cursor={{ fill: "transparent" }}
-            contentStyle={{
-              backgroundColor: colors.tooltipBackground,
-              border: colors.tooltipBorder,
-              borderRadius: "8px",
-              fontWeight: "bold",
-              fontSize: "14px",
-            }}
-            labelStyle={{ color: colors.tooltipText, fontWeight: "bold" }}
-            itemStyle={{ color: colors.tooltipText }}
-          />
 
-          <Legend
-            content={({ payload }) => (
-              <div>
-                <ul className="flex flex-wrap justify-center gap-2">
-                  {payload?.map((entry, index) => (
-                    <li
-                      key={`item-${index}`}
-                      className="flex items-center gap-1 rounded-md border border-gray-200 bg-white p-1 dark:border-none dark:bg-zinc-700/50"
-                    >
-                      <span
-                        className="inline-block h-3 w-3 rounded-full"
-                        style={{ backgroundColor: entry.color }}
-                      />
-                      <span className="text-xs">{entry.value}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          />
+          <Tooltip content={CustomTooltip} />
+
+          <Legend content={CustomLegend} />
         </PieChart>
       </ResponsiveContainer>
     </div>
   );
 }
+
+const CustomTooltip = ({
+  active,
+  payload,
+}: TooltipContentProps<string | number, string>) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="rounded border border-zinc-500 bg-zinc-800 p-2.5 text-xs font-medium text-white dark:border-gray-400 dark:bg-white dark:text-black">
+        Presente in <strong>{payload[0].value}</strong> ordini
+      </div>
+    );
+  }
+
+  return null;
+};
+
+interface CustomLegendProps {
+  payload?: readonly LegendPayload[];
+}
+
+const CustomLegend = ({ payload }: CustomLegendProps) => {
+  if (!payload) return null;
+
+  return (
+    <ul className="mt-1 flex flex-wrap justify-center gap-2">
+      {payload?.map((entry) => {
+        const dataItem = entry.payload as Data;
+
+        return (
+          <li key={`item-${dataItem.id}`}>
+            <Link
+              href={`/dashboard/products/${dataItem.id}`}
+              className="dark:text-light focus flex items-center gap-2 rounded-md border border-gray-300 bg-white px-2 py-1 font-medium text-neutral-700 transition-colors duration-200 hover:bg-gray-100/70 dark:border-zinc-700 dark:bg-zinc-900/60 dark:hover:bg-zinc-800/70"
+            >
+              <span
+                className="inline-block h-3 w-3 rounded-xs"
+                style={{ backgroundColor: entry.color }}
+              />
+              <span className="text-sm">{dataItem.name}</span>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const renderActiveShape = ({
+  cx,
+  cy,
+  innerRadius,
+  outerRadius,
+  startAngle,
+  endAngle,
+  fill,
+}: PieSectorDataItem) => {
+  return (
+    <g>
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={(outerRadius ?? 0) + 6}
+        outerRadius={(outerRadius ?? 0) + 10}
+        fill={fill}
+      />
+    </g>
+  );
+};
 
 export default BestSellersChart;

@@ -8,7 +8,7 @@ function DeleteProductButton({ id, name }: { id: number; name: string }) {
 
   return (
     <Button
-      className="px-4"
+      className="basis-1/2 px-4 py-2 text-center text-base"
       onClick={(e) => {
         e.preventDefault();
         openDialog({

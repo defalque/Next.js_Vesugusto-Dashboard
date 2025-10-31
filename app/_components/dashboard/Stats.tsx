@@ -1,14 +1,15 @@
 import {
   BanknotesIcon,
-  BriefcaseIcon,
-  TrophyIcon,
-  UserCircleIcon,
+  StarIcon,
+  Square3Stack3DIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 
+import AnimatedStatWrapper from "./AnimatedStatWrapper";
 import Stat from "./Stat";
+
 import { getStatsOrders, getTopCustomer } from "@/app/_lib/apiOrders";
 import { getTotalEcommerceUsers } from "@/app/_lib/apiEcommerceUsers";
-import AnimatedStatWrapper from "./AnimatedStatWrapper";
 
 async function Stats() {
   const ordersData = getStatsOrders();
@@ -22,45 +23,79 @@ async function Stats() {
   ]);
 
   const orders =
-    ordersResult.status === "fulfilled" ? ordersResult.value.orders : [];
-  const count =
-    ordersResult.status === "fulfilled" ? ordersResult.value.count : 0;
-  const users = usersResult.status === "fulfilled" ? usersResult.value : 0;
-  const customer =
-    customerResult.status === "fulfilled" ? customerResult.value : [];
-  const { customer_name, customer_email } = customer[0] ?? {};
+    ordersResult.status === "fulfilled" && ordersResult.value
+      ? ordersResult.value.orders
+      : [];
+  const revenues =
+    orders && orders.reduce((sum, val) => sum + val.totalCost, 0);
 
-  const revenues = orders.reduce((sum, val) => sum + val.totalCost, 0);
+  const count =
+    ordersResult.status === "fulfilled" && ordersResult.value
+      ? ordersResult.value.count
+      : "Errore";
+
+  const users =
+    usersResult.status === "fulfilled" && usersResult.value
+      ? usersResult.value
+      : "Errore";
+
+  const customer =
+    customerResult.status === "fulfilled" && customerResult.value
+      ? customerResult.value
+      : [];
+  const { customer_name, customer_email } = customer[0] ?? {
+    customer_name: "Errore",
+    customer_email: "Errore nel recupero dati",
+  };
 
   return (
-    <div className="text-dark dark:text-light flex flex-col justify-between gap-3 lg:flex-row">
-      <Stat title="N. Ordini" value={count ?? 0}>
-        <div className="bg-brand-100 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <BriefcaseIcon className="text-brand-950 size-8 md:size-10" />
+    <div className="text-dark dark:text-light grid grid-cols-2 grid-rows-3 justify-between gap-3 md:grid-rows-2 lg:flex lg:flex-row lg:flex-wrap">
+      <Stat title="Ordini" value={count} position="row-start-2 md:row-start-1">
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <Square3Stack3DIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
         </div>
       </Stat>
 
-      <AnimatedStatWrapper title="Guadagni" value={revenues} isCurrency={true}>
-        <BanknotesIcon className="text-brand-950 size-8 md:size-10" />
-      </AnimatedStatWrapper>
+      {revenues ? (
+        <AnimatedStatWrapper
+          title="Ricavi"
+          value={revenues}
+          position="row-start-1 col-span-full md:col-span-1"
+        >
+          <BanknotesIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+        </AnimatedStatWrapper>
+      ) : (
+        <Stat
+          title="Ricavi"
+          value="Errore"
+          position="row-start-1 col-span-full md:col-span-1"
+        >
+          <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+            <BanknotesIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+          </div>
+        </Stat>
+      )}
 
-      <Stat title="N. Clienti" value={users ?? 0}>
-        <div className="bg-brand-100 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <UserCircleIcon className="text-brand-950 size-8 md:size-10" />
+      <Stat title="Clienti" value={users ?? 0} position="row-start-2">
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <UserGroupIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
         </div>
       </Stat>
 
       <Stat
         title="Cliente top"
         value={
-          <span className="inline-flex flex-col gap-0.5 font-semibold">
-            <span className="text-base">{customer_name}</span>
-            <span className="text-xs">{customer_email}</span>
+          <span className="flex flex-col gap-0.5">
+            <span className="text-base font-semibold">{customer_name}</span>
+            <span className="text-xs text-neutral-500 dark:text-neutral-400">
+              {customer_email}
+            </span>
           </span>
         }
+        position="row-start-3 col-span-full md:row-start-2 md:col-span-1"
       >
-        <div className="bg-brand-100 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <TrophyIcon className="text-brand-950 size-6 md:size-8" />
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <StarIcon className="dark:text-brand-950 text-light size-6 md:size-8" />
         </div>
       </Stat>
     </div>

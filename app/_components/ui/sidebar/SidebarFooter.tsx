@@ -1,4 +1,5 @@
 "use client";
+
 import { ReactNode, Suspense } from "react";
 import { UserAvatarSkeleton } from "../Skeletons";
 import Link from "next/link";
@@ -24,7 +25,7 @@ function SidebarFooter({
       <Suspense fallback={<UserAvatarSkeleton />}>
         <Link
           href="/dashboard/account"
-          className="dark:hover:text-brand-50 hover:text-brand-950 focus-visible:outline-brand-950 outline-brand-dark-100 rounded p-0.5 transition-colors duration-300 focus-visible:outline-2"
+          className="dark:hover:text-brand-50 hover:text-brand-950 focus-visible:outline-brand-950 outline-brand-dark-100 w-full rounded p-0.5 transition-colors duration-300 focus-visible:outline-2"
           onNavigate={onClose}
         >
           {children}

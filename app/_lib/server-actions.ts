@@ -626,8 +626,10 @@ export async function confirmOrder(id: string, status: string) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
-    throw new Error("Order could not be updated");
+    console.error("Non è stato possibile confermare l'ordine", error);
+    throw new Error(
+      "Errore imprevisto durante la conferma. Riprova più tardi.",
+    );
   }
 
   revalidatePath("/dashboard/orders");

@@ -1,10 +1,14 @@
 import { createClient as createServerClient } from "@/utils/supabase/server";
-import { Product } from "./definitions";
+// import { Product } from "./definitions";
 
+// export async function getProducts(
+//   limit: number,
+//   filters: { page: string | number; type: string; sort: string; query: string },
+// ): Promise<Product[]> {
 export async function getProducts(
   limit: number,
   filters: { page: string | number; type: string; sort: string; query: string },
-): Promise<Product[]> {
+) {
   const supabase = await createServerClient();
 
   const from = (Number(filters.page) - 1) * limit;
@@ -24,14 +28,25 @@ export async function getProducts(
     query = query.order("regularPrice", { ascending: true });
   } else if (filters.sort === "price-desc") {
     query = query.order("regularPrice", { ascending: false });
-  } else if (filters.sort === "default") {
+  } else if (filters.sort === "most-recent") {
+    query = query.order("created_at", { ascending: false });
+  } else if (filters.sort === "less-recent") {
+    query = query.order("created_at", { ascending: true });
+  } else if (filters.sort === "max-stock") {
+    query = query.order("quantity", { ascending: false });
+  } else if (filters.sort === "min-stock") {
+    query = query.order("quantity", { ascending: true });
+  } else {
     query = query.order("created_at", { ascending: false });
   }
 
   const { data, error } = await query;
-  if (error) throw error;
+  if (error) {
+    console.error("Non è stato possibile caricare i prodotti: ", error);
+    return { products: data, error: true };
+  }
 
-  return data ?? [];
+  return { products: data ?? [], error: false };
 }
 
 export async function getTotalProducts(filters: {
@@ -57,14 +72,27 @@ export async function getTotalProducts(filters: {
     query = query.order("regularPrice", { ascending: true });
   } else if (filters.sort === "price-desc") {
     query = query.order("regularPrice", { ascending: false });
-  } else {
+  } else if (filters.sort === "most-recent") {
+    query = query.order("created_at", { ascending: false });
+  } else if (filters.sort === "less-recent") {
     query = query.order("created_at", { ascending: true });
+  } else if (filters.sort === "max-stock") {
+    query = query.order("quantity", { ascending: false });
+  } else if (filters.sort === "min-stock") {
+    query = query.order("quantity", { ascending: true });
+  } else {
+    query = query.order("created_at", { ascending: false });
   }
 
   const { count, error } = await query;
-  if (error) throw error;
 
-  return count ?? 0;
+  if (error) {
+    console.error("Non è stato possibile caricare i prodotti: ", error);
+    return { count: count, error: true };
+    // notFound();
+  }
+
+  return { count: count ?? 0, error: false };
 }
 
 export async function getAllProducts() {
@@ -124,8 +152,11 @@ export async function getBestSeller() {
   const { data, error } = await supabase.rpc("get_top_3_best_sellers");
 
   if (error) {
-    console.error("Error fetching best sellers:", error);
-    throw new Error("Non è stato possibile caricare i prodotti più venduti.");
+    console.error(
+      "Non è stato possibile recuperare i prodotti più venduti: ",
+      error,
+    );
+    return null;
   }
 
   return data;

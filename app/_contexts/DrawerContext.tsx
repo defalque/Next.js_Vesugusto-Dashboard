@@ -3,31 +3,34 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type State = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DrawerContext = createContext<State | null>(null);
+const SidebarDrawerContext = createContext<State | null>(null);
 
-export default function DrawerContextProvider({
+export default function SidebarDrawerContextProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const value = { open, setOpen };
+  const value = { isOpen, setIsOpen };
+
   return (
-    <DrawerContext.Provider value={value}>{children}</DrawerContext.Provider>
+    <SidebarDrawerContext.Provider value={value}>
+      {children}
+    </SidebarDrawerContext.Provider>
   );
 }
 
-export function useDrawer() {
-  const context = useContext(DrawerContext);
+export function useSidebarDrawer() {
+  const context = useContext(SidebarDrawerContext);
 
   if (!context) {
     throw new Error(
-      "useDrawer deve essere usato all'interno del suo provider!",
+      "useSidebarDrawer deve essere usato all'interno del suo provider!",
     );
   }
 

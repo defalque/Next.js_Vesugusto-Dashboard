@@ -6,7 +6,7 @@ import UserAvatar from "./UserAvatar";
 
 function Sidebar({ links }: { links: NavLink[] }) {
   return (
-    <aside className="text-sidebar padding-sidebar sticky top-0 row-span-full row-start-1 hidden h-screen items-center space-y-1 overflow-y-auto xl:flex xl:flex-col">
+    <aside className="text-sidebar padding-sidebar sticky top-0 row-span-full row-start-1 hidden h-screen items-center space-y-1 overflow-y-auto border-r border-gray-200 bg-gray-50/30 xl:flex xl:flex-col dark:border-zinc-700/40 dark:bg-zinc-800/40">
       <Logo />
 
       <nav aria-label="Navigazione principale" className="self-stretch">

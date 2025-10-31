@@ -4,112 +4,105 @@ import { Data } from "@/app/_lib/definitions";
 import { capitalize } from "@/app/_lib/utils";
 import { colors } from "@/constants/const";
 import { format } from "date-fns";
-import { it } from "date-fns/locale"; // Import locale italiano
+import { it } from "date-fns/locale";
 
 import {
   AreaChart,
   Area,
   XAxis,
-  YAxis,
   Tooltip,
   ResponsiveContainer,
-  // LabelList,
+  CartesianGrid,
+  TooltipContentProps,
 } from "recharts";
 
 function RevenueChart({ data }: { data: Data[] }) {
+  console.log(data);
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
         data={data}
-        margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+        margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
       >
         <defs>
           <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
             <stop
-              offset="1%"
+              offset="10%"
               stopColor={colors.barChartColor}
-              stopOpacity={0.8}
+              stopOpacity={1}
             />
             <stop
               offset="100%"
               stopColor={colors.barChartColor}
-              stopOpacity={0}
+              stopOpacity={0.3}
             />
           </linearGradient>
         </defs>
 
+        <CartesianGrid vertical={false} stroke={colors.cartesian} />
+
         <XAxis
-          // padding={{ left: 40, right: 40 }}
           dataKey="month"
-          tick={{ fill: colors.bar, fontWeight: "bold" }} // Colore del testo (tick)
-          tickLine={{ stroke: colors.bar }} // Linea del tick
-          axisLine={{ stroke: colors.bar }} // Linea dell'asse
+          padding={{ left: 30, right: 30 }}
+          tick={{ fill: colors.data, fontWeight: "400", fontSize: "12px" }}
+          tickLine={false}
+          axisLine={false}
         />
 
-        <YAxis
-          allowDecimals={false}
-          tick={{ fill: colors.bar, fontWeight: "bold", fontSize: "0.8rem" }} // Colore del testo (tick)
-          tickLine={{ stroke: colors.bar }} // Linea del tick
-          axisLine={{ stroke: colors.bar }} // Linea dell'asse
-          unit="€"
-        />
-
-        <Tooltip
-          contentStyle={{
-            backgroundColor: colors.tooltipBackground,
-            border: colors.tooltipBorder,
-
-            borderRadius: "8px",
-            // fontWeight: "bold",
-            fontSize: "14px",
-          }}
-          labelStyle={{ color: colors.tooltipText, fontWeight: "bold" }}
-          itemStyle={{ color: colors.tooltipText }}
-          labelFormatter={(label, payload) => {
-            const dateObj = payload?.[0]?.payload?.fullDate;
-            const formatted = dateObj
-              ? format(dateObj, "MMMM yyyy", { locale: it })
-              : label;
-            return `Guadagni ${capitalize(formatted)}`;
-          }}
-        />
+        <Tooltip content={CustomTooltip} />
 
         <Area
-          type="monotone"
+          type="bump"
           dataKey={"orderCount"}
           stroke={colors.barChartColor}
-          strokeWidth={1}
+          strokeWidth={0}
           fillOpacity={1}
           name="Totale guadagni"
           fill="url(#area)"
           unit="€"
-        >
-          {/* <LabelList
-            dataKey="orderCount"
-            position="top"
-            fill={colors.text}
-            fontWeight="bold"
-            content={(props) => {
-              const { x, y, value } = props;
-              return (
-                <text
-                  x={Number(x) + 9}
-                  y={y}
-                  dy={-15}
-                  fontSize={16}
-                  fill={colors.text}
-                  fontWeight="bold"
-                  textAnchor="middle"
-                >
-                  {value}€
-                </text>
-              );
-            }}
-          /> */}
-        </Area>
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
 }
 
 export default RevenueChart;
+
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipContentProps<string | number, string>) => {
+  if (active && payload && payload.length) {
+    const dateObj = payload?.[0]?.payload?.fullDate;
+    const formattedDate = dateObj
+      ? capitalize(format(dateObj, "MMMM yyyy", { locale: it }))
+      : label;
+
+    return (
+      <div
+        className="rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 dark:border-gray-200 dark:bg-white"
+        style={{
+          boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+        }}
+      >
+        <p className="mb-1 text-xs text-white dark:text-neutral-800">
+          {formattedDate}
+        </p>
+
+        {payload.map((entry, index) => (
+          <div key={`item-${index}`} className="flex items-center gap-2">
+            <span className="text-xs text-neutral-300 dark:text-neutral-600">
+              Totale
+            </span>
+            <pre className="ml-auto text-sm text-white dark:text-neutral-800">
+              {entry.value.toFixed(2)} €
+            </pre>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
+};

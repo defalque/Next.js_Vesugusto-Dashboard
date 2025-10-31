@@ -19,7 +19,7 @@ function CancelProductImageButton({
       <button
         title="Cancella immagine"
         aria-label="Cancella immagine"
-        className="focus cursor-pointer rounded-full bg-gray-200/95 p-1 transition-colors duration-300 hover:bg-gray-100 dark:bg-zinc-700/95 dark:hover:bg-zinc-600"
+        className="focus dark:text-light cursor-pointer rounded-md border-gray-200 bg-gray-50/30 px-2 py-1.5 font-medium text-neutral-700 transition-colors duration-300 hover:bg-gray-100/80 dark:border-zinc-700/40 dark:bg-zinc-900/60 dark:hover:bg-zinc-800/80"
         onClick={(e) => {
           e.preventDefault();
           openDialog({

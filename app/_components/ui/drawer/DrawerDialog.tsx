@@ -21,10 +21,10 @@ function DrawerDialog({
   children: ReactNode;
 }) {
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10 xl:hidden">
+    <Dialog open={open} onClose={setOpen} className="relative z-200 xl:hidden">
       <DialogBackdrop
         transition
-        className="fixed inset-0 backdrop-blur-xs transition-opacity duration-500 ease-in-out data-closed:opacity-0 dark:bg-zinc-800/70"
+        className="_backdrop-blur-xs _transition-opacity _duration-500 _ease-in-out _data-closed:opacity-0 fixed inset-0 dark:bg-black/5"
       />
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -37,7 +37,7 @@ function DrawerDialog({
               <div className={`relative h-full ${className}`}>{children}</div>
 
               <TransitionChild>
-                <div className="_xs:right-1/3 _-ml-8 _pr-2 _sm:-ml-10 _sm:pr-4 absolute top-0 -right-10 flex pt-4 duration-500 ease-in-out data-closed:opacity-0">
+                <div className="absolute top-0 -right-10 flex pt-4 duration-500 ease-in-out data-closed:opacity-0">
                   <button
                     type="button"
                     onClick={() => setOpen(false)}

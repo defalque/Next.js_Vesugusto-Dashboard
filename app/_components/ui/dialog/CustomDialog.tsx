@@ -1,16 +1,19 @@
 "use client";
 
-import { useDialog } from "@/app/_contexts/DialogContext";
 import {
   addProductImages,
   confirmOrder,
   deleteProduct,
   deleteProductImage,
 } from "@/app/_lib/server-actions";
-import { toastStyle } from "@/constants/const";
+
+import { useDialog } from "@/app/_contexts/DialogContext";
 import { Dialog, DialogBackdrop } from "@headlessui/react";
-import toast from "react-hot-toast";
 import CustomPanel from "./CustomPanel";
+
+import { toastStyle } from "@/constants/const";
+import toast from "react-hot-toast";
+
 import FileInput from "../FileInput";
 
 export default function CustomDialog() {
@@ -22,8 +25,8 @@ export default function CustomDialog() {
       confirmOrder(String(itemId), "delivered"),
       {
         loading: "Modifica in corso...",
-        success: "Ordine confermato con successo!",
-        error: (err) => `Errore: ${err.message}`,
+        success: "Spedizione confermato con successo!",
+        error: (err) => `${err.message}`,
       },
       {
         style: toastStyle,
@@ -38,7 +41,7 @@ export default function CustomDialog() {
       {
         loading: "Modifica in corso...",
         success: "Ordine confermato con successo!",
-        error: (err) => `Errore: ${err.message}`,
+        error: (err) => `${err.message}`,
       },
       {
         style: toastStyle,
@@ -108,7 +111,7 @@ export default function CustomDialog() {
       <Dialog
         open={isOpen}
         role={type === "delete" || type === "cancel" ? "alertdialog" : "dialog"}
-        className="relative z-50 focus:outline-none"
+        className="relative z-100 focus:outline-none"
         onClose={closeDialog}
       >
         <DialogBackdrop className="fixed inset-0 bg-white/40 backdrop-blur-xs dark:bg-black/40" />

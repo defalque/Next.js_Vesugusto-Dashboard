@@ -8,8 +8,8 @@ export async function getTotalEcommerceUsers() {
     .select("id", { count: "exact" });
 
   if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare gli ordini.");
+    console.error("Non è stato possibile caricare gli ordini: ", error);
+    return null;
   }
 
   return count;

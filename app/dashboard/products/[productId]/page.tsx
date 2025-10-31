@@ -40,11 +40,9 @@ export default async function Page({ params }: Slug) {
         ]}
       />
 
-      <div className="flex w-full items-center justify-center">
-        <div className="grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 md:gap-y-0">
-          <ProductImage product={product}></ProductImage>
-          <ProductDetails product={product}></ProductDetails>
-        </div>
+      <div className="grid grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
+        <ProductImage product={product}></ProductImage>
+        <ProductDetails product={product}></ProductDetails>
       </div>
     </div>
   );

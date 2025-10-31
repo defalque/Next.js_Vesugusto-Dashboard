@@ -37,26 +37,28 @@ function CustomPanel({
         transition
         as={hasForm ? "form" : "div"}
         onSubmit={hasForm ? handleSubmit : undefined}
-        className="w-full max-w-xl min-w-sm rounded-xl border border-gray-300 bg-white p-6 text-zinc-900 shadow-xs backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0 dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-white"
+        className="w-full max-w-xl min-w-sm rounded-xl border border-gray-200 bg-white p-6 text-zinc-900 shadow-xs backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0 dark:border-zinc-700/40 dark:bg-zinc-800/50 dark:text-white"
       >
         <DialogTitle
           as="h3"
-          className="_break-all text-base/7 font-medium hyphens-auto dark:text-white"
+          className="dark:text-light text-base/7 font-medium hyphens-auto text-neutral-700"
         >
           {title}
         </DialogTitle>
 
         {subTitle && (
-          <Description className="mb-2 text-xs/6 text-zinc-700 dark:text-white/50">
+          <Description className="mb-2 text-xs/6 text-neutral-500 dark:text-neutral-400">
             {subTitle}
           </Description>
         )}
 
-        <p className="mt-2 text-sm/6 dark:text-white/70">{description}</p>
+        <p className="mt-2 text-sm/6 text-neutral-500 dark:text-neutral-400">
+          {description}
+        </p>
 
         {formRow && <div className="my-10 text-sm">{formRow}</div>}
 
-        <div className="_gap-x-0 _sm:gap-x-2 _flex-wrap mt-4 ml-auto flex flex-wrap-reverse justify-end gap-x-2 gap-y-2">
+        <div className="mt-4 ml-auto flex flex-wrap-reverse justify-end gap-x-2 gap-y-2">
           <button
             onClick={onClose}
             className="focus-visible:ring-brand-950 inline-flex cursor-pointer items-center justify-center rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-4 dark:bg-zinc-800/10 dark:text-gray-200 dark:hover:bg-zinc-700"
@@ -65,7 +67,7 @@ function CustomPanel({
           </button>
 
           <Button
-            className="data-hover:bg-brand-600 data-open:bg-brand-700 dark:data-open:bg-brand-950/25 inset-shadow-brand-50/60 bg-brand-950 dark:bg-brand-950/25 dark:border-brand-dark-300 dark:data-hover:bg-brand-950/40 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold inset-shadow-sm transition-colors duration-200 focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border dark:inset-shadow-none"
+            className="data-hover:bg-brand-900 data-open:bg-brand-700 dark:data-open:bg-brand-950/25 inset-shadow-brand-50/60 dark:border-brand-dark-100 dark:data-hover:bg-brand-950/60 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 bg-brand-950 hover:bg-brand-900 dark:bg-brand-950/40 dark:hover:bg-brand-950/50 border-brand-dark-100 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold transition-colors duration-200 text-shadow-2xs focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border"
             {...(!hasForm && { onClick: () => actionFn() })}
             type={formRow ? "submit" : "button"}
           >

@@ -52,7 +52,7 @@ export default function Drawer({
         onClick={() => {
           setOpen(true);
         }}
-        className="focus cursor-pointer rounded-md px-1.5 text-sm hover:bg-gray-950/10 dark:hover:bg-white/5"
+        className="focus sticky top-5 cursor-pointer rounded-md p-1 text-sm hover:bg-gray-950/10 dark:hover:bg-white/5"
       >
         <Bars3Icon
           aria-hidden="true"
@@ -61,7 +61,7 @@ export default function Drawer({
       </button>
 
       <DrawerDialog
-        className="text-sidebar padding-sidebar bg-light flex flex-col items-center space-y-1 text-sm dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-800"
+        className="text-sidebar padding-sidebar flex flex-col items-center space-y-1 border-r border-gray-200 bg-gray-50/30 text-sm dark:border-zinc-700/40 dark:bg-zinc-800"
         open={open}
         setOpen={setOpen}
       >

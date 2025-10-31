@@ -1,3 +1,5 @@
+import { LIMIT, ORDERS_LIMIT } from "@/constants/const";
+
 // Loading animation
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full rounded before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-zinc-500/15 dark:before:via-black/30 before:to-transparent";
@@ -82,6 +84,26 @@ export function WelcomeButtonSkeleton() {
 
 // -------------------------------------------------------------
 // PRODUCT
+
+export function ControlsSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative flex h-11.5 w-1/3 flex-1 cursor-not-allowed overflow-hidden rounded-md border border-gray-200 bg-gray-200 dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-700`}
+      />
+      <div
+        className={`${shimmer} relative hidden h-11.5 w-52 cursor-not-allowed overflow-hidden rounded-md border border-gray-200 bg-gray-200 lg:flex dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-700`}
+      />
+      <div
+        className={`${shimmer} relative hidden h-11.5 w-52 cursor-not-allowed overflow-hidden rounded-md border border-gray-200 bg-gray-200 lg:flex dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-700`}
+      />
+      <div
+        className={`${shimmer} relative flex h-11.5 w-14.5 cursor-not-allowed overflow-hidden rounded-md border border-gray-200 bg-gray-200 lg:hidden dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-700`}
+      />
+    </>
+  );
+}
+
 function ProductSkeleton({ value }: { value: number }) {
   return (
     <tr
@@ -89,50 +111,56 @@ function ProductSkeleton({ value }: { value: number }) {
       className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
     >
       {/* Product Name */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-4.5 whitespace-nowrap">
+        <div className="h-4 w-22 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Regular Price */}
-      <td className="px-4 py-4 whitespace-nowrap">
+      <td className="px-4 py-4.5 whitespace-nowrap">
         <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Discount */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-4.5 whitespace-nowrap">
+        <div className="h-4 w-10 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Type */}
-      <td className="px-4 py-4 whitespace-nowrap capitalize">
-        <div className="h-4 w-16 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-4.5 whitespace-nowrap capitalize">
+        <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Quantity */}
-      <td className="px-4 py-4 text-center whitespace-nowrap">
+      <td className="px-4 py-4.5 text-center whitespace-nowrap">
         <div className="mx-auto h-4 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Dropdown */}
-      <td className="px-4 py-4 text-center whitespace-nowrap">
-        <div className="mx-auto h-7 w-7 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-4.5 text-center whitespace-nowrap">
+        <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
     </tr>
   );
 }
 
-export function ProductsListSkeleton() {
+export function ProductsListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative h-full divide-y divide-zinc-700/10 overflow-hidden text-gray-800/70 dark:divide-zinc-700/40 dark:text-gray-50/80`}
+      className={`${shimmer} relative h-full divide-y divide-zinc-700/10 overflow-hidden bg-gray-50/30 text-gray-800/70 dark:divide-zinc-700/40 dark:bg-zinc-800/40 dark:text-gray-50/80`}
     >
-      <ProductSkeleton value={1} />
-      <ProductSkeleton value={2} />
-      <ProductSkeleton value={3} />
-      <ProductSkeleton value={4} />
-      <ProductSkeleton value={5} />
-      <ProductSkeleton value={6} />
+      {Array.from({ length: LIMIT }, (_, i) => (
+        <ProductSkeleton key={i} value={i + 1} />
+      ))}
     </tbody>
+  );
+}
+
+export function ProductsListSkeleton() {
+  return (
+    <>
+      <ProductsListBodySkeleton />
+      <FooterSkeleton colSpan={6} />
+    </>
   );
 }
 
@@ -210,6 +238,26 @@ export function ProductPageSkeleton() {
   );
 }
 
+function FooterSkeleton({ colSpan }: { colSpan: number }) {
+  return (
+    <tfoot
+      className={`${shimmer} relative cursor-not-allowed overflow-hidden bg-gray-50/30 dark:animate-pulse dark:bg-zinc-800/40`}
+    >
+      <tr>
+        <td colSpan={colSpan} className="p-4">
+          <div className="flex w-full items-center justify-between">
+            <div className="h-5 w-38 rounded bg-gray-200 dark:bg-zinc-700" />
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
+              <div className="h-10 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  );
+}
+
 // -------------------------------------------------------------
 // ORDER
 function OrderSkeleton({ value }: { value: number }) {
@@ -219,57 +267,64 @@ function OrderSkeleton({ value }: { value: number }) {
       className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
     >
       {/* Order ID */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-5 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3 whitespace-nowrap">
+        <div className="h-6 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Customer Name */}
-      <td className="px-4 py-4 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-zinc-700"></div>
           <div className="space-y-1 truncate">
             <div className="h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700"></div>
-            <div className="h-4 w-46 rounded bg-gray-200 dark:bg-zinc-700"></div>
+            <div className="h-4 w-52 rounded bg-gray-200 dark:bg-zinc-700"></div>
           </div>
         </div>
       </td>
 
       {/* Order Date */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-5 w-20 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3 whitespace-nowrap">
+        <div className="h-5 w-22 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Status */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-5 w-24 rounded-full bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3 text-center whitespace-nowrap">
+        <div
+          className={`${value % 2 === 0 ? "w-18" : "w-26"} mx-auto h-4 rounded bg-gray-200 dark:bg-zinc-700`}
+        ></div>
       </td>
 
       {/* Total */}
-      <td className="px-4 py-4 whitespace-nowrap">
-        <div className="h-5 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3 whitespace-nowrap">
+        <div className="h-5 w-14 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Dropdown menu */}
-      <td className="px-4 py-4 text-center whitespace-nowrap">
-        <div className="mx-auto h-6 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3 text-center whitespace-nowrap">
+        <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
     </tr>
   );
 }
 
-export function OrdersListSkeleton() {
-  // <tbody className="divide-y divide-zinc-700/10 text-sm text-gray-800/70 dark:divide-zinc-700/40 dark:text-gray-50/80">
+export function OrdersListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative divide-y divide-zinc-700/10 overflow-hidden text-sm text-gray-800/70 dark:divide-zinc-700/40 dark:text-gray-50/80`}
+      className={`${shimmer} relative cursor-not-allowed divide-y divide-zinc-700/10 overflow-hidden bg-gray-50/30 text-sm text-gray-800/70 dark:divide-zinc-700/40 dark:bg-zinc-800/40 dark:text-gray-50/80`}
     >
-      <OrderSkeleton value={1} />
-      <OrderSkeleton value={2} />
-      <OrderSkeleton value={3} />
-      <OrderSkeleton value={4} />
-      <OrderSkeleton value={5} />
-      <OrderSkeleton value={6} />
+      {Array.from({ length: ORDERS_LIMIT }, (_, i) => (
+        <OrderSkeleton key={i} value={i + 1} />
+      ))}
     </tbody>
+  );
+}
+
+export function OrdersListSkeleton() {
+  return (
+    <>
+      <OrdersListBodySkeleton />
+      <FooterSkeleton colSpan={7} />
+    </>
   );
 }
 
@@ -510,101 +565,108 @@ export function AccountPasswordFormSkeleton() {
 
 // -------------------------------------------------------------
 // DASHBOARD
-export function StatSkeleton() {
-  return (
-    <div
-      className={`${shimmer} relative grid w-full grow animate-none grid-cols-[4.2rem_1fr] grid-rows-[auto_auto] gap-x-5 gap-y-1 overflow-hidden rounded-md bg-gray-50/65 p-4 lg:w-60 lg:grid-cols-[auto_auto] dark:animate-pulse dark:bg-zinc-800/40`}
-    >
-      {/* Circle placeholder for icon */}
-      <div className="row-span-full flex aspect-square size-15 items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800/90">
-        <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-zinc-700" />
-      </div>
-      {/* Title skeeleton */}
-      <h5 className="h-4 w-24 self-end rounded bg-gray-200 dark:bg-zinc-700" />
-      {/* Value skeleton */}
-      <p className="h-10 w-20 rounded bg-gray-200 dark:bg-zinc-700" />
-    </div>
-  );
-}
-
 export function StatsSkeleton() {
   return (
     <div className="col-span-full">
-      <div className="text-dark dark:text-light flex flex-col justify-between gap-3 lg:flex-row">
-        <StatSkeleton />
-        <StatSkeleton />
-        <StatSkeleton />
-        <StatSkeleton />
+      <div className="dark:text-light grid grid-cols-2 grid-rows-3 justify-between gap-3 text-neutral-700 md:grid-rows-2 lg:flex lg:flex-row">
+        <StatSkeleton position="row-start-2 md:row-start-1" label="Ordini" />
+        <StatSkeleton
+          position="row-start-1 col-span-full md:col-span-1"
+          label="Ricavi"
+        />
+        <StatSkeleton label="Clienti" />
+        <StatSkeleton
+          position="row-start-3 col-span-full md:row-start-2 md:col-span-1"
+          label="Cliente top"
+        />
       </div>
     </div>
   );
 }
 
-export function LatestOrdersSkeleton() {
+export function StatSkeleton({
+  position,
+  label,
+}: {
+  position?: string;
+  label: string;
+}) {
   return (
     <div
-      className={`col-span-full flex flex-col rounded-md bg-gray-50/65 px-(--box-padding) py-3 [--box-padding:--spacing(2)] lg:col-span-1 dark:bg-zinc-800/40`}
+      className={`${shimmer} relative grid h-26 w-full grow animate-none grid-cols-[4.2rem_1fr] grid-rows-[auto_auto] gap-x-2 gap-y-1 overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 p-3 md:p-4 lg:w-60 dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-800/40 ${position}`}
     >
-      <h2 className="dark:text-light text-dark mb-3 rounded px-2 text-xl font-semibold">
-        Ultimi ordini
-      </h2>
-      <ul
-        className={`${shimmer} relative flex animate-none flex-col overflow-hidden rounded bg-gray-50/65 dark:animate-pulse dark:bg-zinc-800/40`}
-      >
+      <div className="row-span-full flex aspect-square size-15 items-center justify-center rounded-full bg-gray-200 dark:bg-zinc-700">
+        <div className="h-10 w-10 rounded-full bg-gray-50 dark:bg-zinc-900/80" />
+      </div>
+
+      <h5 className="self-baseline text-xs font-medium tracking-wide uppercase md:font-semibold">
+        {label}
+      </h5>
+      <p className="h-10 w-20 self-baseline rounded bg-gray-200 text-3xl dark:bg-zinc-700" />
+    </div>
+  );
+}
+
+export function OrdersActivitySkeleton() {
+  return (
+    <div
+      className={`relative col-span-full flex cursor-not-allowed flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 [--box-padding:--spacing(4)] lg:col-span-1 lg:overflow-clip dark:border-zinc-700/40 dark:bg-zinc-800/40 ${shimmer}`}
+    >
+      <div className="space-y-1 border-b border-gray-200 p-(--box-padding) dark:border-zinc-700/40">
+        <h2 className="dark:text-light rounded text-xl font-semibold text-neutral-700">
+          Attività ordini
+        </h2>
+        <p className="text-neutral-500 dark:text-neutral-400">
+          Gestisci gli ordini in attesa di conferma e preparali per la consegna.
+        </p>
+      </div>
+
+      <OrdersActivityBodySkeleton />
+    </div>
+  );
+}
+
+export function OrdersActivityBodySkeleton() {
+  return (
+    <div
+      className={`h-105 grow animate-none cursor-not-allowed bg-gray-50/65 p-(--box-padding) lg:h-100 dark:animate-pulse dark:bg-zinc-800/40`}
+    >
+      <div className="flex items-center justify-between pb-(--box-padding)">
+        <div className="h-8 w-2/3 rounded-md bg-gray-200 lg:h-6 dark:bg-zinc-700" />
+        <div className="h-8 w-18 rounded-md bg-gray-200 lg:h-6 lg:w-16 dark:bg-zinc-700"></div>
+      </div>
+
+      <ul className={`flex h-76 flex-col rounded`}>
         {[...Array(5)].map((_, i) => (
           <li
             key={i}
-            className="grid w-full grid-cols-[3rem_auto_7.5rem_6rem_5.5rem] items-center justify-between gap-4 p-3"
+            className="grid grid-cols-[14rem_7.5rem_6rem_auto] items-center justify-between gap-4 px-0.5 py-3"
           >
-            {/*Link */}
-            <div className="h-4 w-14 rounded bg-gray-200 dark:bg-zinc-700" />
-
             {/* Name + Email */}
             <div className="flex items-center gap-3">
-              <div className="h-7 w-7 rounded-full bg-gray-200 dark:bg-zinc-700" />
+              <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-zinc-700" />
               <div className="space-y-1">
-                <div className="h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
+                <div className="h-4.5 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
                 <div className="h-3 w-40 rounded bg-gray-200 dark:bg-zinc-700" />
               </div>
             </div>
-
             {/* Total Cost */}
-            <div className="mx-auto h-4 w-16 rounded bg-gray-200 dark:bg-zinc-700" />
-
+            <div className="mx-auto h-5 w-14 rounded bg-gray-200 dark:bg-zinc-700" />
             {/* Status Tag */}
-            <div className="mx-auto h-6 w-20 rounded-full bg-gray-200 dark:bg-zinc-700" />
+            <div className="mx-auto h-5 w-20 rounded bg-gray-200 dark:bg-zinc-700" />
             {/* Action Button */}
-            <div className="h-6 w-14 rounded bg-gray-200 dark:bg-zinc-700" />
+            <div className="h-6 w-8 rounded bg-gray-200 dark:bg-zinc-700" />
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
 
-export function BestSellersChartSkeleton() {
-  return (
-    <div
-      className={`${shimmer} relative flex h-full w-full animate-none flex-col items-center justify-center gap-6 overflow-hidden dark:animate-pulse`}
-    >
-      {/* Simulated Pie Chart */}
-      <div className="pieChart:h-45 pieChart:w-45 relative mb-2 h-40 w-40 rounded-full bg-gray-200 md:h-60 md:w-60 lg:h-40 lg:w-40 dark:bg-zinc-700">
-        <div className="absolute inset-8 rounded-full bg-gray-50 dark:bg-zinc-900/70" />
+      <div className="flex items-center justify-between">
+        <div className="h-5 w-30 rounded bg-gray-200 lg:h-4 dark:bg-zinc-700" />
+        <div className="flex space-x-3 lg:space-x-2">
+          <div className="h-8 w-14 rounded bg-gray-200 lg:h-6 lg:w-12 dark:bg-zinc-700" />
+          <div className="h-8 w-14 rounded bg-gray-200 lg:h-6 lg:w-12 dark:bg-zinc-700" />
+        </div>
       </div>
-
-      {/* Simulated Legend */}
-
-      <ul className="flex flex-wrap justify-center gap-2">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <li
-            key={index}
-            className="flex items-center gap-1 rounded-md border border-gray-200 bg-white p-1 dark:border-none dark:bg-zinc-700/50"
-          >
-            <span className="inline-block h-3 w-3 rounded-full bg-gray-200 dark:bg-zinc-700" />
-            <span className="inline-block h-4 w-17 rounded-full bg-gray-200 dark:bg-zinc-700"></span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -612,13 +674,43 @@ export function BestSellersChartSkeleton() {
 export function BestSellersSkeleton() {
   return (
     <div
-      className={`col-span-full row-span-1 row-start-2 flex flex-col rounded-md bg-gray-50/65 px-(--box-padding) py-3 [--box-padding:--spacing(2)] lg:col-start-2 dark:bg-zinc-800/40`}
+      className={`${shimmer} relative col-span-full row-span-1 row-start-2 flex cursor-not-allowed flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 [--box-padding:--spacing(4)] lg:col-start-2 dark:border-zinc-700/40 dark:bg-zinc-800/40`}
     >
-      <h2 className="dark:text-light text-dark mb-3 rounded px-2 text-xl font-semibold">
-        Top 5 Best Sellers
-      </h2>
+      <div className="space-y-1 border-b border-gray-200 p-(--box-padding) dark:border-zinc-700/40">
+        <h2 className="dark:text-light rounded text-xl font-semibold text-neutral-700">
+          Prodotti più venduti
+        </h2>
+        <p className="text-neutral-500 dark:text-neutral-400">
+          Visualizza i prodotti che hanno riscosso più successo tra i nostri
+          clienti.
+        </p>
+      </div>
 
       <BestSellersChartSkeleton />
+    </div>
+  );
+}
+
+export function BestSellersChartSkeleton() {
+  return (
+    <div
+      className={`flex h-full w-full animate-none cursor-not-allowed flex-col items-center justify-center gap-6 p-(--box-padding) dark:animate-pulse`}
+    >
+      <div className="pieChart:h-55 pieChart:w-55 _dark:border-zinc-600 relative mb-2 h-30 w-30 rounded-full border border-gray-300 bg-gray-200 sm:h-40 sm:w-40 md:h-60 md:w-60 lg:h-40 lg:w-40 dark:border-none dark:bg-zinc-700">
+        <div className="absolute inset-8 rounded-full border border-gray-300 bg-gray-100 sm:inset-10 dark:border-none dark:bg-zinc-900/90" />
+      </div>
+
+      <ul className="flex flex-wrap justify-center gap-2">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <li
+            key={index}
+            className="flex items-center gap-1 rounded-md border border-gray-200 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-900/60"
+          >
+            <span className="inline-block h-4 w-4 rounded bg-gray-200 dark:bg-zinc-700" />
+            <span className="inline-block h-4 w-17 rounded bg-gray-200 dark:bg-zinc-700"></span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -629,6 +721,68 @@ export function AreaChartSkeleton() {
       <div
         className={`${shimmer} relative h-[15.625rem] w-full animate-none overflow-hidden rounded-md bg-gray-50/65 dark:animate-pulse dark:bg-zinc-800/40`}
       />
+    </div>
+  );
+}
+
+export function ChartsSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative col-span-full cursor-not-allowed overflow-hidden rounded-md border border-gray-200 bg-gray-50/30 dark:border-zinc-700/40 dark:bg-zinc-800/40`}
+    >
+      <div className="flex flex-col border-b border-gray-200 sm:flex-row dark:border-zinc-700/40">
+        <div className="basis-2/3 border-gray-200 p-5 sm:border-r dark:border-zinc-700/40">
+          <div className="relative h-full overflow-hidden">
+            <div className="space-y-1">
+              <p className="text-sm font-semibold text-neutral-700 md:text-base dark:text-white">
+                Area Chart - Andamento dei ricavi
+              </p>
+              <p className="text-xs text-neutral-500 md:text-sm dark:text-neutral-400">
+                Mostra i ricavi complessivi dalla vendita dei prodotti
+                dell&apos;e-commerce negli ultimi 12 mesi, evidenziando i
+                periodi di crescita e calo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex basis-1/3 divide-x divide-gray-200 border-t border-t-gray-200 text-xl sm:border-none dark:divide-zinc-700/40 dark:border-t-zinc-700/40">
+          <div className="relative z-10 grid h-full w-1/2 place-content-center bg-gray-300/10 text-base font-semibold text-neutral-700 sm:py-0 md:text-lg lg:text-xl dark:bg-zinc-900/50 dark:text-white">
+            Ricavi
+          </div>
+          <div className="relative z-10 grid h-full w-1/2 place-content-center text-base font-semibold text-neutral-700 sm:py-0 md:text-lg lg:text-xl dark:text-white">
+            Ordini
+          </div>
+        </div>
+      </div>
+
+      <RevenueChartSkeleton />
+    </div>
+  );
+}
+
+export function OrdersAreaChartSkeleton() {
+  return (
+    <div className="flex h-75 w-full animate-pulse items-center justify-between gap-1.5 p-5">
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((_, i) => (
+        <div key={i} className="flex w-1/12 gap-1">
+          <div className="mt-auto h-30 w-1/2 rounded bg-gray-200 dark:bg-zinc-700" />
+          <div className="mt-auto h-50 w-1/2 rounded bg-gray-300/80 dark:bg-zinc-700/70" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function RevenueChartSkeleton() {
+  return (
+    <div className="relative h-75 w-full animate-pulse overflow-hidden rounded-md">
+      <div
+        className="absolute inset-6 bg-gray-200 bg-gradient-to-t to-transparent p-5 dark:bg-zinc-700"
+        style={{
+          clipPath: `path("M0,100 C100,250 350,100  600,200 C850,300 1100,100 1400,250 L1400,400 L0,500 Z")`,
+        }}
+      ></div>
     </div>
   );
 }
@@ -645,7 +799,7 @@ export function DashboardSkeleton() {
       <div className="grid grid-cols-1 grid-rows-[auto_22rem_auto_1fr] gap-x-8 gap-y-12 md:grid-cols-[1fr_1fr] md:grid-rows-[auto_28rem_auto_1fr] lg:grid-cols-[1fr_1fr] lg:grid-rows-[auto_auto_1fr]">
         <StatsSkeleton />
         <BestSellersSkeleton />
-        <LatestOrdersSkeleton />
+        <OrdersActivitySkeleton />
         <AreaChartSkeleton />
         <AreaChartSkeleton />
       </div>

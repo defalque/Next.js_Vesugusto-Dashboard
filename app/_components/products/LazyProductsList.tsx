@@ -3,14 +3,14 @@
 import { Product } from "@/app/_lib/definitions";
 
 import dynamic from "next/dynamic";
-import { ProductsListSkeleton } from "../ui/Skeletons";
+import { ProductsListBodySkeleton } from "../ui/Skeletons";
 const ProductsList = dynamic(() => import("./ProductsList"), {
   ssr: false,
-  loading: () => <ProductsListSkeleton />,
+  loading: () => <ProductsListBodySkeleton />,
 });
 
-function ProductsListClient({ products }: { products: Product[] }) {
+function LazyProductsList({ products }: { products: Product[] }) {
   return <ProductsList products={products} />;
 }
 
-export default ProductsListClient;
+export default LazyProductsList;

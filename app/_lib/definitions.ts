@@ -1,5 +1,76 @@
 import { ReactNode } from "react";
 
+type ProductFilters = {
+  value: "all" | "food" | "drink";
+  label: "Tutto" | "Food" | "Drink";
+};
+
+type OrderFilters = {
+  value: "all" | "delivered" | "unconfirmed" | "ready" | "drink";
+  label: "Tutto" | "Consegnato" | "In attesa" | "Pronto";
+};
+
+export type FilterOption = ProductFilters | OrderFilters;
+
+type ProductSort = {
+  label:
+    | "Data: più recente"
+    | "Data: meno recente"
+    | "Prezzo: dal più basso"
+    | "Prezzo: dal più alto"
+    | "Stock: minimo"
+    | "Stock: massimo";
+  value:
+    | "most-recent"
+    | "less-recent"
+    | "price-asc"
+    | "price-desc"
+    | "min-stock"
+    | "max-stock";
+};
+
+type OrderSort = {
+  label:
+    | "Data: più recente"
+    | "Data: meno recente"
+    | "Prezzo: dal più basso"
+    | "Prezzo: dal più alto";
+  value: "most-recent" | "less-recent" | "price-asc" | "price-desc";
+};
+
+export type SortOption = OrderSort | ProductSort;
+
+export const TYPE_OPTIONS: FilterOption[] = [
+  { value: "all", label: "Tutto" },
+  { value: "drink", label: "Drink" },
+  { value: "food", label: "Food" },
+];
+
+export const STATUS_OPTIONS: FilterOption[] = [
+  { value: "all", label: "Tutto" },
+  { value: "delivered", label: "Consegnato" },
+  { value: "unconfirmed", label: "In attesa" },
+  { value: "ready", label: "Pronto" },
+];
+
+export const PRODUCT_SORTBY_OPTIONS: SortOption[] = [
+  { label: "Data: più recente", value: "most-recent" },
+  { label: "Data: meno recente", value: "less-recent" },
+  { label: "Prezzo: dal più basso", value: "price-asc" },
+  { label: "Prezzo: dal più alto", value: "price-desc" },
+  { label: "Stock: minimo", value: "min-stock" },
+  { label: "Stock: massimo", value: "max-stock" },
+];
+
+export const ORDER_SORTBY_OPTIONS: SortOption[] = [
+  { label: "Data: più recente", value: "most-recent" },
+  { label: "Data: meno recente", value: "less-recent" },
+  { label: "Prezzo: dal più basso", value: "price-asc" },
+  { label: "Prezzo: dal più alto", value: "price-desc" },
+];
+
+//----------------------------------------------------------
+
 export type AuthFormTitle = {
   title: "Login" | "Registrazione";
 };

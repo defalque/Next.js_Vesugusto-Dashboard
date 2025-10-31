@@ -51,7 +51,7 @@ export default function SidebarDrawer({
               } as React.CSSProperties
             }
           >
-            <div className="padding-sidebar flex h-full w-full max-w-md grow flex-col overflow-y-auto rounded-[16px] border border-gray-300 bg-gray-100 text-neutral-500/90 dark:border-zinc-700/40 dark:bg-zinc-800 dark:text-gray-300/80">
+            <div className="padding-sidebar bg-style box-style flex h-full w-full max-w-md grow flex-col overflow-y-auto rounded-[16px] border text-neutral-500/90 dark:text-gray-300/80">
               <Drawer.Title className="mb-2 text-center">
                 <Logo py="py-10" />
               </Drawer.Title>

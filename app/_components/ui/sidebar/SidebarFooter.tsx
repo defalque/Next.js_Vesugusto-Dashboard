@@ -18,8 +18,8 @@ function SidebarFooter({
     <div
       className={`mt-auto inline-flex items-center justify-between gap-5 self-stretch rounded px-2.5 py-1 ${
         pathname === "/dashboard/account"
-          ? "text-brand-950 dark:text-light bg-white dark:bg-zinc-800"
-          : "hover:text-brand-950 dark:hover:text-light"
+          ? "text-brand-950 dark:text-light bg-white dark:bg-black/15"
+          : "hover:text-brand-950 dark:hover:text-light hover:bg-white/80 dark:hover:bg-black/15"
       }`}
     >
       <Suspense fallback={<UserAvatarSkeleton />}>

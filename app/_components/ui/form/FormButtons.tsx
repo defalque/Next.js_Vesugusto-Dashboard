@@ -21,7 +21,7 @@ function FormButtons({
   return (
     <div className="mt-8 flex justify-end gap-2">
       <button
-        className="inline-flex cursor-pointer items-center justify-center rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-transparent dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
+        className="inline-flex cursor-pointer items-center justify-center rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-transparent disabled:hover:bg-transparent dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
         type="button"
         disabled={isSubmitting || !isFormChanged}
         onClick={onClick}

@@ -513,8 +513,8 @@ function FormRow({
   className?: string;
 }) {
   return (
-    <div className="flex flex-col gap-1">
-      <div className="h-5 w-20 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700"></div>
+    <div className="flex flex-col gap-2">
+      <div className="h-4 w-20 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700"></div>
       <div
         className={`animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700 ${className}`}
         style={{ width, height }}
@@ -576,10 +576,12 @@ export function UpdateProductFormSkeleton({ title = true }) {
 export function AccountInfoFormSkeleton() {
   return (
     <div
-      className={`${shimmer} relative flex h-full flex-col gap-8 overflow-hidden bg-gray-50 px-3 py-4 sm:p-8 dark:bg-zinc-800/60`}
+      className={`${shimmer} bg-box box-style dark:text-light relative flex flex-col gap-3 overflow-hidden rounded border text-neutral-700`}
     >
-      <h1 className="h-7 w-45 animate-pulse rounded bg-gray-200 dark:bg-zinc-700" />
-      <form className="flex animate-pulse flex-col gap-5 md:gap-3">
+      <h5 className="box-style border-b p-3 text-xl font-semibold">
+        Modifica le tue informazioni
+      </h5>
+      <form className="flex animate-pulse flex-col gap-5 p-3 md:gap-3">
         <div className="space-y-5">
           <FormRow height="2rem" />
           <FormRow height="2rem" />
@@ -589,7 +591,7 @@ export function AccountInfoFormSkeleton() {
         <div className="mt-3 flex flex-col justify-baseline gap-3 md:flex-row">
           <div className="h-4 w-56 rounded bg-gray-200 dark:bg-zinc-700" />
           <div className="flex items-center gap-2">
-            <div className="h-12 w-24 rounded bg-gray-200 dark:bg-zinc-700" />
+            <div className="h-10 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
             <div className="h-4 w-24 rounded-md bg-gray-200 dark:bg-zinc-700" />
           </div>
         </div>
@@ -604,12 +606,10 @@ export function AccountInfoFormSkeleton() {
 export function AccountPasswordFormSkeleton() {
   return (
     <div
-      className={`${shimmer} relative flex h-full flex-col gap-8 overflow-hidden bg-gray-50 px-3 py-4 sm:p-8 dark:bg-zinc-800/60`}
+      className={`${shimmer} relative -mt-3 flex h-full flex-col gap-8 overflow-hidden bg-gray-50 p-3 dark:bg-zinc-800/60`}
     >
-      <h1 className="h-7 w-45 animate-pulse rounded bg-gray-200 dark:bg-zinc-700" />
       <form className="flex animate-pulse flex-col gap-5 md:gap-3">
         <div className="space-y-5">
-          <FormRow height="2rem" />
           <FormRow height="2rem" />
           <FormRow height="2rem" />
         </div>
@@ -690,8 +690,8 @@ export function OrdersActivityBodySkeleton() {
       className={`h-105 grow animate-none cursor-not-allowed bg-gray-50/65 p-(--box-padding) lg:h-100 dark:animate-pulse dark:bg-zinc-800/40`}
     >
       <div className="flex items-center justify-between pb-(--box-padding)">
-        <div className="h-8 w-2/3 rounded-md bg-gray-200 lg:h-6 dark:bg-zinc-700" />
-        <div className="h-8 w-18 rounded-md bg-gray-200 lg:h-6 lg:w-16 dark:bg-zinc-700"></div>
+        <div className="h-10 w-2/3 rounded-md bg-gray-200 lg:h-8 dark:bg-zinc-700" />
+        <div className="h-10 w-18 rounded-md bg-gray-200 lg:h-8 lg:w-18 dark:bg-zinc-700"></div>
       </div>
 
       <ul className={`flex h-76 flex-col rounded`}>

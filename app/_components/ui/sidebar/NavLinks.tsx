@@ -28,7 +28,7 @@ function NavLinks({
               className={`focus-visible:outline-brand-950 outline-brand-dark-100 relative z-100 flex items-center justify-start space-x-5 rounded font-semibold transition-colors duration-300 focus-visible:outline-2 ${
                 pathname === link.href
                   ? "text-brand-950 dark:text-light _text-neutral-700"
-                  : "hover:text-brand-950 dark:hover:text-light _hover:text-neutral-700"
+                  : "hover:text-brand-950 dark:hover:text-light _hover:text-neutral-700 hover:bg-white/80 dark:hover:bg-black/15"
               }`}
               aria-current={pathname === link.href ? "page" : undefined}
               onNavigate={() => {
@@ -44,7 +44,7 @@ function NavLinks({
               {pathname === link.href && (
                 <m.div
                   layoutId="link"
-                  className="absolute -z-100 h-full w-full rounded border border-gray-100 bg-white/80 dark:border-none dark:bg-black/15"
+                  className="absolute -z-100 h-full w-full rounded bg-white/80 dark:bg-black/15"
                 />
               )}
             </Link>

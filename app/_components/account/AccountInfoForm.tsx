@@ -78,13 +78,14 @@ function AccountInfoForm({
   }
 
   return (
-    <form className="flex flex-col gap-5 md:gap-3" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-5 p-3 md:gap-3" onSubmit={handleSubmit}>
       <FormRow
         type="text"
         id="email"
         label="Email"
         value={userInfo.email}
         disabled
+        nonInteractive
       />
 
       <FormRow

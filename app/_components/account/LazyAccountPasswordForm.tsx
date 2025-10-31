@@ -7,8 +7,8 @@ const AccountPasswordForm = dynamic(() => import("./AccountPasswordForm"), {
   loading: () => <AccountPasswordFormSkeleton />,
 });
 
-function AccountPasswordFormClient() {
+function LazyAccountPasswordForm() {
   return <AccountPasswordForm />;
 }
 
-export default AccountPasswordFormClient;
+export default LazyAccountPasswordForm;

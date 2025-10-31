@@ -51,8 +51,8 @@ async function Stats() {
   return (
     <div className="text-dark dark:text-light grid grid-cols-2 grid-rows-3 justify-between gap-3 md:grid-rows-2 lg:flex lg:flex-row lg:flex-wrap">
       <Stat title="Ordini" value={count} position="row-start-2 md:row-start-1">
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <Square3Stack3DIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <Square3Stack3DIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
         </div>
       </Stat>
 
@@ -62,7 +62,7 @@ async function Stats() {
           value={revenues}
           position="row-start-1 col-span-full md:col-span-1"
         >
-          <BanknotesIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+          <BanknotesIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
         </AnimatedStatWrapper>
       ) : (
         <Stat
@@ -70,15 +70,15 @@ async function Stats() {
           value="Errore"
           position="row-start-1 col-span-full md:col-span-1"
         >
-          <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-            <BanknotesIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+          <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+            <BanknotesIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
           </div>
         </Stat>
       )}
 
       <Stat title="Clienti" value={users ?? 0} position="row-start-2">
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <UserGroupIcon className="dark:text-brand-950 text-light size-8 md:size-10" />
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <UserGroupIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
         </div>
       </Stat>
 
@@ -94,8 +94,8 @@ async function Stats() {
         }
         position="row-start-3 col-span-full md:row-start-2 md:col-span-1"
       >
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <StarIcon className="dark:text-brand-950 text-light size-6 md:size-8" />
+        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+          <StarIcon className="dark:text-brand-950 text-light size-10 sm:size-8 md:size-10" />
         </div>
       </Stat>
     </div>

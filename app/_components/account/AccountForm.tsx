@@ -8,8 +8,8 @@ function AccountForm({
   title: string;
 }) {
   return (
-    <div className="flex flex-col gap-8 rounded bg-gray-50 px-3 py-4 sm:p-8 dark:bg-zinc-800/60">
-      <h1 className="text-xl md:text-2xl">{title}</h1>
+    <div className="bg-box box-style dark:text-light flex flex-col gap-3 rounded border text-neutral-700">
+      <h5 className="box-style border-b p-3 text-xl font-semibold">{title}</h5>
       {children}
     </div>
   );

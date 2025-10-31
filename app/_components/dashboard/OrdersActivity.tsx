@@ -71,7 +71,7 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
           <div className="flex items-center justify-between pb-(--box-padding)">
             <input
               type="text"
-              className="w-2/3 rounded-md border border-gray-300 bg-white px-3 py-2 focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
+              className="w-2/3 rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder:text-sm focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
               placeholder="Filtra ordini per email..."
               value={filterInput}
               onChange={(e) => setFilterInput(e.target.value)}
@@ -80,7 +80,7 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
             <button
               disabled={displayedOrders.length === 0}
               onClick={() => setFilterDate((prev) => !prev)}
-              className="focus dark:text-light flex cursor-pointer items-center gap-1.5 rounded-md border border-gray-300 bg-white px-2 py-2 font-medium text-neutral-700 transition-colors duration-200 hover:bg-gray-100/70 disabled:cursor-not-allowed disabled:hover:bg-white lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:hover:bg-zinc-800/70 dark:disabled:hover:bg-zinc-900/60"
+              className="focus dark:text-light flex cursor-pointer items-center gap-1.5 self-stretch rounded-md border border-gray-300 bg-white px-2 py-2 font-medium text-neutral-700 transition-colors duration-200 hover:bg-gray-100/70 disabled:cursor-not-allowed disabled:hover:bg-white lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:hover:bg-zinc-800/70 dark:disabled:hover:bg-zinc-900/60"
             >
               Ordina
               {filterDate ? (

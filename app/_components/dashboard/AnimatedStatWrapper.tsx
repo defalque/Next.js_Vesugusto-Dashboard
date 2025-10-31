@@ -23,7 +23,7 @@ type StatProps = {
 function AnimatedStatWrapper({ title, value, position, children }: StatProps) {
   return (
     <AnimatedStat title={title} value={value} position={position}>
-      <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-950/20 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
+      <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
         {children}
       </div>
     </AnimatedStat>

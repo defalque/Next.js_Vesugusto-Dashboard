@@ -15,7 +15,7 @@ function CancelProductImageButton({
   const { selectedImage } = useSelectedImage();
 
   return (
-    <div className="absolute top-2 right-2 h-fit w-fit rounded-full">
+    <div className="bg-style box-style absolute top-2 right-2 h-fit w-fit rounded-md border">
       <button
         title="Cancella immagine"
         aria-label="Cancella immagine"

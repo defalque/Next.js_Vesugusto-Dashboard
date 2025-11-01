@@ -233,14 +233,15 @@ function SkeletonPageBlock({ className }: { className: string }) {
 export function ProductDataSkeleton() {
   return (
     <div className="flex w-full items-center justify-center">
-      <div className="grid w-full max-w-full grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 md:gap-y-0">
+      <div className="grid w-full max-w-full grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
         {/* Left: Image Skeleton */}
         <div className="flex w-full items-start gap-x-5">
           {/* Thumbnails */}
           <div className="hidden flex-col items-center gap-4 lg:flex">
             {[...Array(2)].map((_, i) => (
-              <SkeletonPageBlock key={i} className="relative h-24 w-16" />
+              <SkeletonPageBlock key={i} className="relative h-28 w-18" />
             ))}
+            <SkeletonPageBlock className="relative h-7 w-18" />
           </div>
 
           {/* Main Image */}
@@ -250,21 +251,18 @@ export function ProductDataSkeleton() {
         </div>
 
         {/* Right: Details Skeleton */}
-        <div className="flex w-full flex-col gap-8 md:ml-3">
+        <div className="flex w-full flex-col gap-8 lg:ml-3">
           {/* Badges & Actions */}
-          <div className="flex flex-wrap items-center gap-5">
-            <SkeletonPageBlock className="h-6 w-32 rounded-full" />
-            <div className="ml-auto inline-flex gap-3">
-              <SkeletonPageBlock className="h-8 w-20" />
-              <SkeletonPageBlock className="h-8 w-20" />
-            </div>
+          <div className="flex items-center gap-5">
+            <SkeletonPageBlock className="h-10 basis-1/2" />
+            <SkeletonPageBlock className="h-10 basis-1/2" />
           </div>
 
           {/* Price, Discount, Stock */}
-          <div className="flex gap-5">
-            <SkeletonPageBlock className="h-16 w-24 rounded" />
-            <SkeletonPageBlock className="h-16 w-24 rounded" />
-            <SkeletonPageBlock className="ml-auto h-16 w-24 rounded" />
+          <div className="flex flex-row gap-5 md:flex-col lg:flex-row">
+            <SkeletonPageBlock className="h-18 basis-1/3 rounded md:w-full lg:basis-1/3" />
+            <SkeletonPageBlock className="h-18 basis-2/3 rounded md:w-full lg:basis-2/3" />
+            <SkeletonPageBlock className="h-18 basis-1/3 rounded md:w-full lg:basis-1/3" />
           </div>
 
           {/* Product Description Blocks */}
@@ -272,9 +270,9 @@ export function ProductDataSkeleton() {
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className="flex flex-col gap-2 rounded bg-gray-100 px-3 py-3 dark:bg-zinc-800/40"
+                className="box-style flex flex-col gap-2 rounded border bg-gray-100 px-3 py-3 dark:bg-zinc-800/40"
               >
-                <SkeletonPageBlock className="h-5 w-32" />
+                <SkeletonPageBlock className="mb-2 h-5 w-30" />
                 <SkeletonPageBlock className="h-4 w-full" />
                 <SkeletonPageBlock className="h-4 w-[85%]" />
                 <SkeletonPageBlock className="h-4 w-[70%]" />
@@ -405,50 +403,57 @@ function SkeletonBlock({ className = "" }: { className?: string }) {
 
 export function OrderDetailsSkeleton() {
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="flex w-full cursor-not-allowed flex-col gap-8">
       {/* Order Info */}
-      <div className="flex w-fit flex-col gap-1 rounded-xl border border-gray-200 p-3 dark:border-zinc-800">
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Dati ordine
-        </h2>
+      <div
+        className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border border-gray-200 lg:max-w-2xl dark:border-zinc-800`}
+      >
+        <div className="box-style flex justify-between border-b p-3">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Dati ordine
+          </h2>
+          {/* Status Tag */}
+          <div
+            className={`${shimmer} relative h-6 w-24 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+          />
+        </div>
 
-        <div className="flex flex-wrap items-center gap-3 sm:flex-row sm:gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:flex-row sm:gap-8">
           {[...Array(2)].map((_, idx) => (
             <div
               key={idx}
-              className={`${shimmer} relative inline-flex w-fit items-center gap-2 overflow-hidden rounded bg-gray-50 px-2 py-1 dark:bg-zinc-800/40`}
+              className={`${shimmer} box-style relative inline-flex w-fit items-center gap-2 overflow-hidden rounded border bg-gray-50 px-2 py-1 dark:bg-zinc-800/40`}
             >
               <div className="h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-600" />
               <SkeletonBlock className="h-4 w-24" />
-              <SkeletonBlock className="h-4 w-16" />
+              <SkeletonBlock className="h-8 w-25" />
             </div>
           ))}
-          {/* Status Tag */}
-          <div
-            className={`${shimmer} relative h-6 w-24 animate-none overflow-hidden rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
-          />
+
           {/* Action Button */}
           <div
-            className={`${shimmer} rounded- relative h-6 w-18 animate-none overflow-hidden bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+            className={`${shimmer} rounded- relative h-8 w-24 animate-none overflow-hidden bg-gray-200 sm:w-18 dark:animate-pulse dark:bg-zinc-700`}
           />
         </div>
       </div>
 
       {/* Customer Info */}
-      <div className="flex w-fit flex-col gap-1 rounded-xl border border-gray-200 p-3 dark:border-zinc-800">
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div
+        className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border lg:max-w-2xl`}
+      >
+        <h2 className="box-style mb-3 border-b p-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
           Dati cliente
         </h2>
-        <div className="flex flex-col gap-2 text-sm">
-          <div className="inline-flex items-center gap-2">
+        <div className="flex flex-wrap gap-2 p-3 text-sm">
+          <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
             <div
-              className={`${shimmer} relative h-8 w-8 animate-none overflow-hidden rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+              className={`h-8 w-8 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
             />
             <SkeletonBlock className="h-4 w-40" />
           </div>
-          <div className="inline-flex items-center gap-2">
+          <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
             <div
-              className={`${shimmer} relative h-5 w-5 animate-none overflow-hidden rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+              className={`h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
             />
             <SkeletonBlock className="h-4 w-40" />
           </div>
@@ -456,19 +461,19 @@ export function OrderDetailsSkeleton() {
       </div>
 
       {/* Product Table */}
-      <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Prodotti ordinati
+      <div className="flex w-full flex-col">
+        <h2 className="box-style bg-box rounded-t-xl border p-3 text-lg font-semibold">
+          Prodotti venduti
         </h2>
-        <div className="overflow-x-auto rounded-lg border border-gray-100 dark:border-zinc-800">
+        <div className="overflow-x-auto rounded-b-md border border-gray-100 dark:border-zinc-800">
           <table className="min-w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 dark:bg-zinc-800">
+              <tr className="bg-gray-50 text-xs uppercase sm:text-sm dark:bg-zinc-800">
                 {["Nome", "Prezzo unitario", "Quantità", "Totale riga"].map(
                   (heading) => (
                     <th
                       key={heading}
-                      className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200"
+                      className="px-4 py-3 text-left font-semibold text-gray-700 dark:text-gray-200"
                     >
                       {heading}
                     </th>
@@ -479,17 +484,17 @@ export function OrderDetailsSkeleton() {
             <tbody className="divide-y divide-gray-100 dark:divide-zinc-800">
               {[...Array(3)].map((_, idx) => (
                 <tr key={idx} className={`bg-white dark:bg-zinc-900`}>
-                  <td className="px-4 py-2">
-                    <SkeletonBlock className="h-4 w-32" />
-                  </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-3">
                     <SkeletonBlock className="h-4 w-20" />
                   </td>
-                  <td className="px-4 py-2">
-                    <SkeletonBlock className="h-4 w-12" />
+                  <td className="px-4 py-3">
+                    <SkeletonBlock className="h-4 w-1/2" />
                   </td>
-                  <td className="px-4 py-2">
-                    <SkeletonBlock className="h-4 w-20" />
+                  <td className="px-4 py-3">
+                    <SkeletonBlock className="h-4 w-1/3" />
+                  </td>
+                  <td className="px-4 py-3">
+                    <SkeletonBlock className="h-4 w-2/3" />
                   </td>
                 </tr>
               ))}
@@ -535,7 +540,7 @@ function FormButtons() {
 function PageTitleSkeleton({ breadcumbs }: { breadcumbs?: boolean }) {
   return (
     <div
-      className={`${shimmer} relative h-8 overflow-hidden md:h-10 ${breadcumbs ? "mb-6 w-80 md:w-120" : "w-48"} animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+      className={`${shimmer} relative h-6.5 overflow-hidden md:h-7 ${breadcumbs ? "mb-6 w-80 md:w-60" : "w-48"} animate-none rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
     />
   );
 }

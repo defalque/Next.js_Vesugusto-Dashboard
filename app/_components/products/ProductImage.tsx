@@ -18,7 +18,7 @@ function ProductImage({ product }: { product: Product }) {
         images={product.image}
       >
         <DialogContextProvider>
-          <div className="flex flex-col items-center gap-y-4 lg:sticky lg:top-5">
+          <div className="flex w-full flex-col gap-y-4 lg:sticky lg:top-5 lg:w-fit lg:items-center">
             {product.image.length > 0 && (
               <div className="hidden w-full flex-col items-center gap-4 lg:flex">
                 {product.image.map((img, index) => (
@@ -39,15 +39,12 @@ function ProductImage({ product }: { product: Product }) {
               </div>
             )}
             <AddProductImageButton id={product.id}>
-              {/* <PlusIcon
-                aria-hidden="true"
-                className="size-5.5 text-zinc-600 dark:text-white"
-              /> */}
-              Aggiungi
+              <span className="hidden lg:block">Aggiungi</span>
+              <span className="block lg:hidden">Aggiungi immagine/i</span>
             </AddProductImageButton>
           </div>
 
-          <div className="relative flex aspect-2/3 h-auto w-full text-center lg:sticky lg:top-5">
+          <div className="_h-auto relative flex aspect-2/3 w-full text-center lg:sticky lg:top-5">
             {product.image.length === 0 && (
               <span>Nessuna immagine presente.</span>
             )}

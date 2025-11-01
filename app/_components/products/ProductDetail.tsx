@@ -31,7 +31,7 @@ function ProductDetail({
           // whileHover="hover"
           // initial="initial"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="group flex cursor-pointer items-center px-3 py-3 text-left text-base font-medium"
+          className="group flex cursor-pointer items-center px-3 py-3 text-left text-base font-medium md:text-lg lg:text-base"
         >
           {label}
           <m.span
@@ -55,7 +55,7 @@ function ProductDetail({
               {isOpen && (
                 <m.p
                   exit={{ opacity: 1, height: 0 }}
-                  className="_border-t border-gray-200 px-3 pb-3 text-sm/6 text-neutral-600 dark:border-zinc-700/40 dark:text-zinc-300"
+                  className="_border-t border-gray-200 px-3 pb-3 text-sm/6 text-neutral-600 md:text-base lg:text-sm/7 dark:border-zinc-700/40 dark:text-zinc-300"
                 >
                   {productAttribute}
                 </m.p>

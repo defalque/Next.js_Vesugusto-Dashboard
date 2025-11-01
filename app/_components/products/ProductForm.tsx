@@ -105,7 +105,7 @@ function ProductForm({ product }: { product?: Product }) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       aria-labelledby="title"
-      className="dark:text-light _min-h-screen space-y-5 rounded bg-gray-50 px-3 py-5 sm:px-6 dark:bg-zinc-800/60"
+      className="dark:text-light bg-box box-style space-y-5 rounded border px-3 py-5 text-neutral-700 sm:px-6"
       encType="multipart/form-data" // Importante per l'upload dei file
     >
       <HeadingFormHidden id="title" className="sr-only">

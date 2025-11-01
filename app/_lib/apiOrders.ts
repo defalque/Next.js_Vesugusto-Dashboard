@@ -142,7 +142,7 @@ export async function getTotalOrders(filters: {
   return { count: allOrders.length ?? 0, error: false };
 }
 
-export async function getOrder(id: string): Promise<OrdersInfo> {
+export async function getOrder(id: string) {
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -151,19 +151,22 @@ export async function getOrder(id: string): Promise<OrdersInfo> {
       "id, orderDate, status, userId(image), name, email, totalCost, order_items(productId(name, regularPrice), quantity)",
     )
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
-  if (error || !data) {
-    // notFound();
-    console.error(error);
+  if (error) {
+    console.error("Non è stato possibile caricare l'ordine: ", error);
     throw new Error("Non è stato possibile caricare l'ordine.");
+  }
+
+  if (!data) {
+    return null;
   }
 
   const normalizedUserId = Array.isArray(data.userId)
     ? data.userId[0]
     : data.userId;
 
-  const normalizedOrderItems = (data.order_items ?? []).map((item) => ({
+  const normalizedOrderItems = (data?.order_items ?? []).map((item) => ({
     quantity: item.quantity,
     productId: Array.isArray(item.productId)
       ? item.productId[0]

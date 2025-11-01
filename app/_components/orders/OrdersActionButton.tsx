@@ -8,7 +8,7 @@ function OrdersActionButton({ id, status }: { id: string; status: string }) {
 
   return (
     <Button
-      className="px-4 text-xs"
+      className="px-4 text-base sm:text-sm"
       onClick={(e) => {
         e.preventDefault();
         openDialog({

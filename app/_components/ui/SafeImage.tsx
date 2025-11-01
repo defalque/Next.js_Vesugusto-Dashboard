@@ -13,7 +13,7 @@ function SafeImage(props: ImageProps) {
       {...props}
       src={src}
       onError={() => setSrc(FALLBACK_SRC)}
-      alt={props.alt || "Immagine"}
+      alt={props.alt || "Immagine di default"}
     />
   );
 }

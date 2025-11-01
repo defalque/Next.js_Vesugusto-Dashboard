@@ -1,15 +1,14 @@
-import { FaceFrownIcon } from "@heroicons/react/24/outline";
-import Button from "@/app/_components/ui/Button";
+import PageNotFound from "@/app/_components/ui/NotFound";
 
 export default function NotFound() {
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-2">
-      <FaceFrownIcon className="w-10 text-gray-400" />
-      <h2 className="text-xl font-semibold">404 Not Found</h2>
-      <p>Non è stato possibile trovare il prodotto da te selezionato.</p>
-      <Button className="px-4" href="/dashboard/products">
-        Torna ai prodotti
-      </Button>
+    <main className="dark:text-light my-auto grid h-full place-content-center text-neutral-700">
+      <PageNotFound
+        title="Prodotto non trovato"
+        message="Non è stato possibile trovare il prodotto da te selezionato."
+        buttonText="Torna ai prodotti"
+        href="/dashboard/products"
+      />
     </main>
   );
 }

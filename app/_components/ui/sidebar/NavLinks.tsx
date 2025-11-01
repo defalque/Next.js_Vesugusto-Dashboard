@@ -28,7 +28,7 @@ function NavLinks({
               className={`focus-visible:outline-brand-950 outline-brand-dark-100 relative z-100 flex items-center justify-start space-x-5 rounded font-semibold transition-colors duration-300 focus-visible:outline-2 ${
                 pathname === link.href
                   ? "text-brand-950 dark:text-light _text-neutral-700"
-                  : "hover:text-brand-950 dark:hover:text-light _hover:text-neutral-700 hover:bg-white/80 dark:hover:bg-black/15"
+                  : "hover:text-brand-950 dark:hover:text-light _hover:text-neutral-700 hover:bg-white/95 dark:hover:bg-black/15"
               }`}
               aria-current={pathname === link.href ? "page" : undefined}
               onNavigate={() => {

@@ -40,7 +40,7 @@ export default async function Page({ params }: Slug) {
         ]}
       />
 
-      <div className="grid grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
+      <div className="grid grid-cols-1 gap-x-5 gap-y-8 lg:grid-cols-2 lg:gap-y-0">
         <ProductImage product={product}></ProductImage>
         <ProductDetails product={product}></ProductDetails>
       </div>

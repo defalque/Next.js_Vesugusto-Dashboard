@@ -38,7 +38,7 @@ async function ProductDetails({ product }: { product: Product }) {
       </div>
 
       <div className="dark:text-light flex flex-row gap-5 text-neutral-700 md:flex-col lg:flex-row">
-        <div className="flex grow flex-col rounded border border-gray-200 bg-gray-50/30 font-medium dark:border-zinc-700/40 dark:bg-zinc-800/40">
+        <div className="bg-box flex grow flex-col rounded border border-gray-200 font-medium dark:border-zinc-700/40">
           <p className="border-b border-gray-200 px-3 py-2 text-center text-sm tracking-wide uppercase sm:text-base md:text-lg lg:text-xs dark:border-zinc-700/40">
             Prezzo
           </p>

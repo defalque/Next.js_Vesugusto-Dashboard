@@ -9,7 +9,7 @@ function ImageBox({ index, children }: { index: number; children: ReactNode }) {
   return (
     <div
       key={index + 1}
-      className={`absolute top-0 left-0 h-full w-full overflow-hidden rounded-md transition-opacity duration-500 ${
+      className={`box-style absolute top-0 h-full w-full overflow-hidden rounded-md border transition-opacity duration-500 ${
         selectedIndex === index ? "opacity-100" : "opacity-0"
       }`}
     >

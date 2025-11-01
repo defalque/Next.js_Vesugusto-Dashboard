@@ -60,7 +60,7 @@ function FormRow({
           id={type + "-"}
           placeholder={placeholder}
           type={type === "password" ? (showPassword ? "text" : type) : type}
-          className={`bg-style w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-base placeholder:text-sm focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none ${!nonInteractive && "disabled:animate-pulse"} disabled:cursor-not-allowed disabled:opacity-35 dark:border-zinc-700 dark:placeholder:text-zinc-600 dark:focus:border-zinc-400 dark:focus:ring-zinc-600`}
+          className={`bg-style w-full appearance-none rounded-md border border-gray-300 px-2.5 py-1.5 text-base placeholder:text-sm focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none ${!nonInteractive && "disabled:animate-pulse"} disabled:cursor-not-allowed disabled:opacity-35 dark:border-zinc-700 dark:placeholder:text-zinc-600 dark:focus:border-zinc-400 dark:focus:ring-zinc-600`}
           // className="focus:border-brand-950 focus:ring-brand-950/20 w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-base transition-all duration-200 placeholder:text-gray-500 hover:border-gray-400 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-zinc-400 dark:border-gray-500 dark:bg-zinc-600/30 dark:disabled:border-zinc-700 dark:disabled:text-zinc-500"
           //py,px,pl,h-,
           {...props}

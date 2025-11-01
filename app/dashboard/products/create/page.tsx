@@ -12,7 +12,7 @@ export default function Page() {
         breadcrumbs={[
           { label: "Prodotti", href: "/dashboard/products" },
           {
-            label: `Crea prodotto`,
+            label: `Aggiungi prodotto`,
             href: `/dashboard/products/create`,
             active: true,
           },

@@ -16,7 +16,7 @@ function MiniImageButton({
 
   return (
     <button
-      className="focus relative aspect-2/3 w-full overflow-hidden rounded-md"
+      className="focus box-style relative aspect-2/3 w-full overflow-hidden rounded-md border"
       disabled={isSelected}
       aria-pressed={isSelected}
       onMouseOver={() => {

@@ -67,7 +67,7 @@ function CustomPanel({
           </button>
 
           <Button
-            className="data-hover:bg-brand-900 data-open:bg-brand-700 dark:data-open:bg-brand-950/25 inset-shadow-brand-50/60 dark:border-brand-dark-100 dark:data-hover:bg-brand-950/60 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 bg-brand-950 hover:bg-brand-900 dark:bg-brand-950/40 dark:hover:bg-brand-950/50 border-brand-dark-100 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold transition-colors duration-200 text-shadow-2xs focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border"
+            className="data-hover:bg-brand-900 data-open:bg-brand-700 dark:data-open:bg-brand-dark-600 inset-shadow-brand-50/60 dark:border-brand-dark-100 dark:data-hover:bg-brand-dark-400 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 bg-brand-950 hover:bg-brand-900 dark:bg-brand-dark-600 dark:hover:bg-brand-dark-400 border-brand-dark-100 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold shadow-2xs transition-colors duration-200 text-shadow-2xs focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border"
             {...(!hasForm && { onClick: () => actionFn() })}
             type={formRow ? "submit" : "button"}
           >

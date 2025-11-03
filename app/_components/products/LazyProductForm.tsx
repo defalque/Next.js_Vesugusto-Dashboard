@@ -8,7 +8,7 @@ const ProductForm = dynamic(() => import("./ProductForm"), {
   loading: () => <UpdateProductFormSkeleton title={false} />,
 });
 
-function ProductFormClient({ product }: { product?: Product }) {
+function LazyProductForm({ product }: { product?: Product }) {
   if (product) {
     return <ProductForm product={product} />;
   }
@@ -16,4 +16,4 @@ function ProductFormClient({ product }: { product?: Product }) {
   return <ProductForm />;
 }
 
-export default ProductFormClient;
+export default LazyProductForm;

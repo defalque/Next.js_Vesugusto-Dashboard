@@ -66,10 +66,6 @@ function ProductImage({ product }: { product: Product }) {
               ))}
             {product.image.length > 0 && (
               <CancelProductImageButton name={product.name}>
-                {/* <XMarkIcon
-                  aria-hidden="true"
-                  className="size-5.5 text-zinc-600 dark:text-white"
-                /> */}
                 Elimina
               </CancelProductImageButton>
             )}

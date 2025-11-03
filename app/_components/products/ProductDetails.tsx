@@ -10,17 +10,6 @@ async function ProductDetails({ product }: { product: Product }) {
   return (
     <div className="_md:ml-3 flex flex-col gap-8">
       <div className="flex flex-wrap items-center justify-between gap-5">
-        {/* {product.quantity === 0 && (
-          <p className="mr-auto rounded-full bg-gradient-to-r from-red-400/30 to-red-300/30 px-3 py-1 text-xs font-semibold tracking-wide text-red-700 uppercase shadow-sm dark:from-red-400/20 dark:to-red-300/10 dark:text-red-500">
-            Esaurito
-          </p>
-        )}
-        {product.quantity < 10 && product.quantity > 0 && (
-          <p className="_animate-pulse mr-auto rounded-full bg-gradient-to-r from-yellow-400/30 to-amber-300/30 px-3 py-1 text-xs font-semibold tracking-wide text-yellow-700 uppercase shadow-sm dark:from-yellow-400/20 dark:to-amber-300/10 dark:text-yellow-500">
-            In esaurimento
-          </p>
-        )} */}
-
         <div className="flex flex-1 gap-3">
           <Button
             className="basis-1/2 px-4 py-2 text-center text-base"

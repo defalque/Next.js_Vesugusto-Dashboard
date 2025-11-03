@@ -96,7 +96,7 @@ export default async function Page({ params }: Slug) {
           <div className="flex flex-wrap gap-2 p-3 text-sm">
             <div className="bg-style box-style inline-flex w-fit items-center gap-2 rounded border px-2 py-1">
               <Image
-                src={order.userId.image}
+                src={order.userId?.image}
                 className="rounded-full"
                 width={28}
                 height={28}

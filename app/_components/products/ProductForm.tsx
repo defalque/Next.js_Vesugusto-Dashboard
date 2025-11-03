@@ -29,12 +29,12 @@ function ProductForm({ product }: { product?: Product }) {
         quantity: product.quantity,
         type: (product.type === "food" || product.type === "drink"
           ? product.type
-          : "food") as "food" | "drink", // <-- type assertion esplicita
+          : "food") as "food" | "drink",
         info: product.info,
         details: product.details,
         description: product.description,
         ingredients: product.ingredients,
-        image: undefined, // deve essere incluso per rispettare il tipo
+        image: undefined,
       };
     }
     return {
@@ -47,7 +47,7 @@ function ProductForm({ product }: { product?: Product }) {
       details: "",
       description: "",
       ingredients: "",
-      image: undefined, // stesso discorso qui
+      image: undefined,
     };
   }, [product]);
 

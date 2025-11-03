@@ -2,7 +2,6 @@
 
 import { useDialog } from "@/app/_contexts/DialogContext";
 import { ReactNode } from "react";
-import Button from "../ui/Button";
 
 function AddProductImageButton({
   id,
@@ -29,19 +28,6 @@ function AddProductImageButton({
       >
         {children}
       </button>
-
-      {/* <Button
-        className="px-2 lg:hidden"
-        onClick={(e) => {
-          e.preventDefault();
-          openDialog({
-            type: "add",
-            itemId: id,
-          });
-        }}
-      >
-        Aggiungi immagine/i +
-      </Button> */}
     </>
   );
 }

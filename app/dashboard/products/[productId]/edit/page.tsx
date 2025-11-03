@@ -1,5 +1,5 @@
 // import UpdateProductForm from "@/app/_components/products/ProductForm";
-import ProductFormClient from "@/app/_components/products/ProductFormClient";
+import ProductFormClient from "@/app/_components/products/LazyProductForm";
 import Breadcrumbs from "@/app/_components/ui/Breadcumbs";
 import { getProduct, getProductName } from "@/app/_lib/apiProducts";
 import { notFound } from "next/navigation";

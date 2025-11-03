@@ -2,19 +2,19 @@
 
 import Button from "@/app/_components/ui/Button";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 export default function Error({
-  error,
+  // error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  // error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Optionally log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  // useEffect(() => {
+  //   // Optionally log the error to an error reporting service
+  //   console.error(error);
+  // }, [error]);
 
   return (
     <main className="dark:text-light grid h-full place-content-center text-neutral-700">
@@ -28,10 +28,7 @@ export default function Error({
           </p>
           <Button
             className="group flex items-center gap-2 self-center px-4 py-1.5"
-            onClick={
-              // Attempt to recover by trying to re-render the invoices route
-              () => reset()
-            }
+            onClick={() => reset()}
           >
             Riprova
             <ArrowPathIcon className="size-4 transition-transform duration-300 ease-out group-hover:rotate-180" />

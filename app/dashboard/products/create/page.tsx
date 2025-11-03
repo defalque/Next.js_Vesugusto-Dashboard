@@ -1,4 +1,4 @@
-import ProductFormClient from "@/app/_components/products/ProductFormClient";
+import LazyProductForm from "@/app/_components/products/LazyProductForm";
 import Breadcrumbs from "@/app/_components/ui/Breadcumbs";
 
 export const metadata = {
@@ -20,7 +20,7 @@ export default function Page() {
       />
 
       <div>
-        <ProductFormClient />
+        <LazyProductForm />
       </div>
     </div>
   );

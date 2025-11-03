@@ -1,10 +1,5 @@
 import { createClient as createServerClient } from "@/utils/supabase/server";
-// import { Product } from "./definitions";
 
-// export async function getProducts(
-//   limit: number,
-//   filters: { page: string | number; type: string; sort: string; query: string },
-// ): Promise<Product[]> {
 export async function getProducts(
   limit: number,
   filters: { page: string | number; type: string; sort: string; query: string },
@@ -95,21 +90,6 @@ export async function getTotalProducts(filters: {
   return { count: count ?? 0, error: false };
 }
 
-export async function getAllProducts() {
-  // const supabase = await createClient2();
-  const supabase = await createServerClient();
-
-  const { data, error } = await supabase.from("products").select("*");
-
-  if (error) {
-    console.error(error);
-    throw new Error("Non è stato possibile caricare il prodotto.");
-    // notFound();
-  }
-
-  return data;
-}
-
 export async function getProduct(id: string) {
   const supabase = await createServerClient();
 
@@ -122,7 +102,6 @@ export async function getProduct(id: string) {
   if (error) {
     console.error(error);
     throw new Error("Non è stato possibile caricare il prodotto.");
-    // notFound();
   }
 
   return data;
@@ -140,7 +119,6 @@ export async function getProductName(id: string) {
   if (error) {
     console.error(error);
     throw new Error("Non è stato possibile caricare il prodotto.");
-    // notFound();
   }
 
   return data;

@@ -1,17 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 
-import { OrdersInfo } from "./definitions";
 import { subMonths, format, startOfDay } from "date-fns";
 
-// export async function getOrders(
-//   limit: number,
-//   filters: {
-//     page: string | number;
-//     status: string;
-//     sort: string;
-//     query: string;
-//   },
-// ): Promise<OrdersInfo[]> {
 export async function getOrders(
   limit: number,
   filters: {
@@ -162,9 +152,9 @@ export async function getOrder(id: string) {
     return null;
   }
 
-  const normalizedUserId = Array.isArray(data.userId)
-    ? data.userId[0]
-    : data.userId;
+  const normalizedUserId = Array.isArray(data?.userId)
+    ? data?.userId[0]
+    : data?.userId;
 
   const normalizedOrderItems = (data?.order_items ?? []).map((item) => ({
     quantity: item.quantity,

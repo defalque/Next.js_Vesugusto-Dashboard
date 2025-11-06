@@ -3,6 +3,8 @@ import NavLinks from "./NavLinks";
 import SidebarFooter from "./SidebarFooter";
 import { NavLink } from "@/app/_lib/definitions";
 import UserAvatar from "./UserAvatar";
+import { Suspense } from "react";
+import { NavbarBlockSkeleton, NavbarSkeleton } from "../Skeletons";
 
 function Sidebar({ links }: { links: NavLink[] }) {
   return (
@@ -10,12 +12,16 @@ function Sidebar({ links }: { links: NavLink[] }) {
       <Logo py="py-10" />
 
       <nav aria-label="Navigazione principale" className="self-stretch">
-        <NavLinks links={links} />
+        <Suspense fallback={<NavbarSkeleton />}>
+          <NavLinks links={links} />
+        </Suspense>
       </nav>
 
-      <SidebarFooter>
-        <UserAvatar />
-      </SidebarFooter>
+      <Suspense fallback={<NavbarBlockSkeleton className="mt-auto" />}>
+        <SidebarFooter>
+          <UserAvatar />
+        </SidebarFooter>
+      </Suspense>
     </aside>
   );
 }

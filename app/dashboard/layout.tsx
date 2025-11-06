@@ -38,9 +38,9 @@ export default async function Layout({
 }>) {
   return (
     <div className="text-dark bg-style grid grid-cols-1 grid-rows-[auto_1fr] text-sm md:grid-cols-[auto_1fr] md:grid-rows-[1fr] md:gap-y-4 xl:grid-cols-[var(--spacing-sidebar)_1fr] dark:text-gray-100">
-      <Sidebar links={links} />
-
       <SidebarDrawerContextProvider>
+        <Sidebar links={links} />
+
         <SidebarDrawer links={links}>
           <UserAvatar />
         </SidebarDrawer>

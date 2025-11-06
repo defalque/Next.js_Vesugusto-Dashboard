@@ -43,7 +43,7 @@ export default function SidebarDrawer({
             Sidebar menu
           </Drawer.Description>
           <Drawer.Content
-            className="fixed top-2 bottom-2 left-2 z-250 flex w-[var(--spacing-sidebar)] outline-none xl:hidden"
+            className="fixed top-2 bottom-2 left-2 z-250 flex w-(--spacing-sidebar) outline-none xl:hidden"
             // The gap between the edge of the screen and the drawer is 8px in this case.
             style={
               {
@@ -57,12 +57,12 @@ export default function SidebarDrawer({
               </Drawer.Title>
 
               <nav aria-label="Navigazione principale">
-                <NavLinks links={links} onClose={() => setIsOpen(false)} />
+                <NavLinks links={links} isMobile />
               </nav>
 
-              <SidebarFooter onClose={() => setIsOpen(false)}>
-                {children}
-              </SidebarFooter>
+              {/* <Suspense fallback={<div>Caricamento...</div>}> */}
+              <SidebarFooter>{children}</SidebarFooter>
+              {/* </Suspense> */}
             </div>
           </Drawer.Content>
         </Drawer.Portal>

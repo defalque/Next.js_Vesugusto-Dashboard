@@ -4,15 +4,11 @@ import { ReactNode, Suspense } from "react";
 import { UserAvatarSkeleton } from "../Skeletons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSidebarDrawer } from "@/app/_contexts/SidebarDrawerContext";
 
-function SidebarFooter({
-  children,
-  onClose,
-}: {
-  children: ReactNode;
-  onClose?: () => void;
-}) {
+function SidebarFooter({ children }: { children?: ReactNode }) {
   const pathname = usePathname();
+  const { closeDialog } = useSidebarDrawer();
 
   return (
     <div
@@ -26,7 +22,7 @@ function SidebarFooter({
         <Link
           href="/dashboard/account"
           className="dark:hover:text-brand-50 hover:text-brand-950 focus-visible:outline-brand-950 outline-brand-dark-100 w-full rounded p-0.5 transition-colors duration-300 focus-visible:outline-2"
-          onNavigate={onClose}
+          onNavigate={closeDialog}
         >
           {children}
         </Link>

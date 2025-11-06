@@ -71,6 +71,22 @@ export const ORDER_SORTBY_OPTIONS: SortOption[] = [
 
 //----------------------------------------------------------
 
+export type ProductParams = {
+  type: string;
+  sort: string;
+  query: string;
+  page: string;
+};
+
+export type OrderParams = {
+  status: string;
+  sort: string;
+  query: string;
+  page: string;
+};
+
+//----------------------------------------------------------
+
 export type CredentialsFormProps = {
   title: "Login" | "Registrazione";
   isActive: boolean;

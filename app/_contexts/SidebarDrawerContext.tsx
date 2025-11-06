@@ -5,6 +5,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 type State = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  closeDialog: () => void;
 };
 
 const SidebarDrawerContext = createContext<State | null>(null);
@@ -16,10 +17,12 @@ export default function SidebarDrawerContextProvider({
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const value = { isOpen, setIsOpen };
+  const closeDialog = () => setIsOpen(false);
+
+  const values = { isOpen, setIsOpen, closeDialog };
 
   return (
-    <SidebarDrawerContext.Provider value={value}>
+    <SidebarDrawerContext.Provider value={values}>
       {children}
     </SidebarDrawerContext.Provider>
   );

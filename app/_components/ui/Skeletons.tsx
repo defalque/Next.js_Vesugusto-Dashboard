@@ -11,7 +11,7 @@ export function UserAvatarSkeleton() {
         className={`${shimmer} relative h-9 w-9 overflow-hidden rounded-full bg-gray-200 dark:bg-zinc-700`}
       />
       <div
-        className={`${shimmer} relative h-6 w-24 overflow-hidden rounded-full bg-gray-200 dark:bg-zinc-700`}
+        className={`${shimmer} relative h-5 w-24 overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700`}
       />
     </div>
   );
@@ -140,6 +140,27 @@ export function SignUpFormSkeleton() {
   );
 }
 
+export function NavbarBlockSkeleton({ className }: { className?: string }) {
+  return (
+    <div
+      className={`${className} ${shimmer} relative flex h-10 w-full cursor-not-allowed items-center space-x-5 overflow-hidden rounded-md bg-gray-100 dark:animate-pulse dark:bg-zinc-800/40`}
+    >
+      <div className="ml-4 h-6 w-6 rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+      <div className="h-4 w-20 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+    </div>
+  );
+}
+
+export function NavbarSkeleton() {
+  return (
+    <div className="flex flex-col gap-1">
+      {[0, 1, 2].map((link, i) => (
+        <NavbarBlockSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
+
 // -------------------------------------------------------------
 // PRODUCT
 
@@ -222,7 +243,7 @@ export function ProductsListSkeleton() {
   );
 }
 
-function SkeletonPageBlock({ className }: { className: string }) {
+export function SkeletonPageBlock({ className }: { className: string }) {
   return (
     <div
       className={`${shimmer} relative animate-none overflow-hidden rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700 ${className}`}

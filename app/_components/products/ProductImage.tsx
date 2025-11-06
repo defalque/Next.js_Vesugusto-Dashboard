@@ -29,8 +29,8 @@ function ProductImage({ product }: { product: Product }) {
                       fill
                       placeholder="blur"
                       blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8L8VQDwAE0wGaYyyo1gAAAABJRU5ErkJggg=="
-                      quality={80}
-                      priority={false}
+                      quality={75}
+                      // priority={false}
                       sizes="2.75rem"
                       className={`dark:shadow-primary-dark-700 object-cover dark:shadow-sm dark:brightness-80`}
                     />
@@ -57,8 +57,8 @@ function ProductImage({ product }: { product: Product }) {
                     fill
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8L8VQDwAE0wGaYyyo1gAAAABJRU5ErkJggg=="
-                    quality={80}
-                    priority={index === 0 ? true : false}
+                    quality={75}
+                    // priority={index === 0 ? true : false}
                     sizes="(max-width: 64rem) 100vw, 66vw"
                     className="dark:shadow-dark-100 object-cover dark:shadow-sm dark:brightness-80"
                   />

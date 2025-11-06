@@ -14,9 +14,9 @@ async function OrdersListWrapper({
   filters,
 }: {
   filters: {
+    status: string;
     page: string;
     sort: string;
-    status: string;
     query: string;
   };
 }) {

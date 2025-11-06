@@ -17,6 +17,24 @@ async function ProductsListWrapper({
     query: string;
   };
 }) {
+  // async function ProductsListWrapper({
+  //   filterParams,
+  // }: {
+  //   filterParams: Promise<{
+  //     type: string;
+  //     sort: string;
+  //     query: string;
+  //     page: string;
+  //   }>;
+  // }) {
+  // const params = await filterParams;
+  // const filters = {
+  //   type: params?.type || "all",
+  //   sort: params?.sort || "most-recent",
+  //   query: params?.query || "",
+  //   page: params?.page || "1",
+  // };
+
   const productsData = getProducts(LIMIT, filters);
   const productsCountData = getTotalProducts(filters);
 

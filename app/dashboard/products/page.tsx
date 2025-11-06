@@ -4,9 +4,13 @@ import { Suspense } from "react";
 import Button from "@/app/_components/ui/Button";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
 import CustomDialogWrapper from "@/app/_components/ui/dialog/CustomDialogWrapper";
-import ProductsListWrapper from "@/app/_components/products/ProductsListWrapper";
-import { PRODUCT_SORTBY_OPTIONS, TYPE_OPTIONS } from "@/app/_lib/definitions";
+import {
+  PRODUCT_SORTBY_OPTIONS,
+  ProductParams,
+  TYPE_OPTIONS,
+} from "@/app/_lib/definitions";
 import LazyControls from "@/app/_components/ui/controls/LazyControls";
+import ProductsFiltersResolver from "@/app/_components/products/ProductsFiltersResolver";
 
 export const metadata = {
   title: "Prodotti",
@@ -15,21 +19,14 @@ export const metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{
-    type: string;
-    sort: string;
-    query: string;
-    page: string;
-  }>;
+  searchParams: Promise<ProductParams>;
 }) {
-  const params = await searchParams;
-  const filters = {
-    type: params?.type || "all",
-    sort: params?.sort || "most-recent",
-    query: params?.query || "",
-    page: params?.page || "1",
-  };
-  const filtersKey = `${filters.type}-${filters.sort}-${filters.query}-${filters.page}`;
+  const filterParams = searchParams.then((sp) => ({
+    type: sp.type,
+    sort: sp.sort,
+    query: sp.query,
+    page: sp.page,
+  }));
 
   return (
     <section>
@@ -53,7 +50,7 @@ export default async function Page({
         </Button>
       </div>
 
-      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:-mx-0 md:border dark:border-zinc-700/40">
+      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:mx-0 md:border dark:border-zinc-700/40">
         <div className="grow px-(--page-padding-x) md:px-0">
           <DialogContextProvider>
             <table className="_relative _overflow-hidden min-w-full">
@@ -73,8 +70,8 @@ export default async function Page({
                 </tr>
               </thead>
 
-              <Suspense fallback={<ProductsListSkeleton />} key={filtersKey}>
-                <ProductsListWrapper filters={filters} />
+              <Suspense fallback={<ProductsListSkeleton />}>
+                <ProductsFiltersResolver filterParams={filterParams} />
               </Suspense>
             </table>
 

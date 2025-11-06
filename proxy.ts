@@ -7,7 +7,7 @@ import { updateSession } from "./utils/supabase/middleware";
 
 // The middleware function is called on every matched request.
 // It delegates session management and authentication checks to updateSession.
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // console.log("Middleware triggered for:", request.nextUrl.pathname);
   return await updateSession(request);
 }

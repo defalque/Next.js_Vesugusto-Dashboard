@@ -1,11 +1,15 @@
-import OrdersListWrapper from "@/app/_components/orders/OrdersListWrapper";
 import CustomDialogWrapper from "@/app/_components/ui/dialog/CustomDialogWrapper";
 import ItemsTableHeadingCell from "@/app/_components/ui/items-table/ItemsTableHeadingCell";
 import { OrdersListSkeleton } from "@/app/_components/ui/Skeletons";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
-import { ORDER_SORTBY_OPTIONS, STATUS_OPTIONS } from "@/app/_lib/definitions";
+import {
+  ORDER_SORTBY_OPTIONS,
+  OrderParams,
+  STATUS_OPTIONS,
+} from "@/app/_lib/definitions";
 import { Suspense } from "react";
 import LazyControls from "@/app/_components/ui/controls/LazyControls";
+import OrdersFiltersResolver from "@/app/_components/dashboard/OrdersFiltersResolver";
 
 export const metadata = {
   title: "Ordini",
@@ -14,22 +18,14 @@ export const metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{
-    status: string;
-    sort: string;
-    query: string;
-    page: string;
-  }>;
+  searchParams: Promise<OrderParams>;
 }) {
-  const params = await searchParams;
-
-  const filters = {
-    status: params?.status || "all",
-    sort: params?.sort || "most-recent",
-    query: params?.query || "",
-    page: params?.page || "1",
-  };
-  const filtersKey = `${filters.status}-${filters.sort}-${filters.query}-${filters.page}`;
+  const filterParams = searchParams.then((sp) => ({
+    status: sp.status,
+    sort: sp.sort,
+    query: sp.query,
+    page: sp.page,
+  }));
 
   return (
     <section>
@@ -43,7 +39,7 @@ export default async function Page({
         />
       </div>
 
-      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:-mx-0 md:border dark:border-zinc-700/40">
+      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:mx-0 md:border dark:border-zinc-700/40">
         <div className="grow px-(--page-padding-x) md:px-0">
           <DialogContextProvider>
             <table className="min-w-full">
@@ -63,8 +59,8 @@ export default async function Page({
                 </tr>
               </thead>
 
-              <Suspense fallback={<OrdersListSkeleton />} key={filtersKey}>
-                <OrdersListWrapper filters={filters} />
+              <Suspense fallback={<OrdersListSkeleton />}>
+                <OrdersFiltersResolver filterParams={filterParams} />
               </Suspense>
             </table>
             <CustomDialogWrapper />

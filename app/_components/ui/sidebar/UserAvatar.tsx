@@ -1,10 +1,9 @@
-import { createClient } from "@/utils/supabase/server";
+import getCurrentUser from "@/app/_lib/helpers";
 import Image from "next/image";
 
 async function UserAvatar() {
-  const supabase = await createClient();
+  const data = await getCurrentUser();
 
-  const { data } = await supabase.auth.getUser();
   const fullName = data?.user?.user_metadata?.fullName ?? "Il tuo profilo";
   const avatar = data?.user?.user_metadata?.avatar ?? "";
 

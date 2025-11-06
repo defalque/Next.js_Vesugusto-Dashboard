@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 
 import { LatestOrdersInfo } from "@/app/_lib/definitions";
@@ -36,25 +36,28 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
     },
   };
 
-  let array;
+  const array = useMemo(() => {
+    let result;
 
-  if (filterDate === true) {
-    array = orders.sort(
-      (a, b) =>
-        new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime(),
-    );
-  } else {
-    array = orders.sort(
-      (a, b) =>
-        new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime(),
-    );
-  }
+    if (filterDate === true) {
+      result = orders.sort(
+        (a, b) =>
+          new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime(),
+      );
+    } else {
+      result = orders.sort(
+        (a, b) =>
+          new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime(),
+      );
+    }
 
-  if (filterInput) {
-    array = orders.filter((order) =>
-      order.email.toLowerCase().includes(filterInput.trim().toLowerCase()),
-    );
-  }
+    if (filterInput) {
+      result = orders.filter((order) =>
+        order.email.toLowerCase().includes(filterInput.trim().toLowerCase()),
+      );
+    }
+    return result;
+  }, [filterDate, filterInput, orders]);
 
   const totalOrdersCount = array.length;
 
@@ -66,7 +69,7 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
 
   return (
     <LazyMotion features={loadFeatures}>
-      <div className="-mx-(--box-padding) flex overflow-x-auto p-(--box-padding) md:-mx-0">
+      <div className="-mx-(--box-padding) flex overflow-x-auto p-(--box-padding) md:mx-0">
         <div className="h-105 grow px-(--box-padding) md:px-0 lg:h-100">
           <div className="flex items-center justify-between pb-(--box-padding)">
             <input
@@ -122,7 +125,7 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
                         <div className="flex items-center gap-2">
                           <Image
                             src={order.userId.image}
-                            className="flex-shrink-0 rounded-full"
+                            className="shrink-0 rounded-full"
                             width={28}
                             height={28}
                             alt={`Immagine del profilo di ${order.name}`}

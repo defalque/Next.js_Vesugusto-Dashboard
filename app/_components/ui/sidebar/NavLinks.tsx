@@ -6,17 +6,13 @@ import { NavLink } from "@/app/_lib/definitions";
 
 import * as m from "motion/react-m";
 import { LazyMotion } from "motion/react";
+import { useSidebarDrawer } from "@/app/_contexts/SidebarDrawerContext";
 const loadFeatures = () =>
   import("../../../_lib/features").then((res) => res.default);
 
-function NavLinks({
-  onClose,
-  links,
-}: {
-  onClose?: () => void;
-  links: NavLink[];
-}) {
+function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
   const pathname = usePathname();
+  const { closeDialog } = useSidebarDrawer();
 
   return (
     <LazyMotion features={loadFeatures}>
@@ -32,8 +28,8 @@ function NavLinks({
               }`}
               aria-current={pathname === link.href ? "page" : undefined}
               onNavigate={() => {
-                if (onClose) {
-                  onClose();
+                if (isMobile) {
+                  closeDialog();
                 }
               }}
             >

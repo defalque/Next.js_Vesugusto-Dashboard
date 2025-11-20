@@ -153,7 +153,7 @@ export type OrdersInfo = {
 
 export type LatestOrdersInfo = {
   id: string;
-  userId: {
+  users: {
     image: string;
   };
   orderDate: string;

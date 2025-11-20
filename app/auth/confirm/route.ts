@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 // import { error } from "console";
 
 export async function GET(request: NextRequest) {
-  console.log(request);
+  // console.log(request);
   const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;

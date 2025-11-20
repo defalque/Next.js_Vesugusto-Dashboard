@@ -19,7 +19,7 @@ export async function getOrders(
   let query = supabase
     .from("orders")
     .select(
-      "id, orderDate, status, userId(image), name, email, totalCost, order_items(productId(name, regularPrice), quantity)",
+      "id, orderDate, status, users:users!orders_userId_clerkUserId_fkey (image), name, email, totalCost, order_items(productId(name, regularPrice), quantity)",
     )
     .range(from, to);
 
@@ -62,7 +62,7 @@ export async function getOrders(
 
     return {
       ...order,
-      userId: Array.isArray(order.userId) ? order.userId[0] : order.userId, // <-- aggiungi questa normalizzazione
+      userId: Array.isArray(order.users) ? order.users[0] : order.users, // <-- aggiungi questa normalizzazione
       order_items: normalizedOrderItems,
     };
   });
@@ -138,7 +138,7 @@ export async function getOrder(id: string) {
   const { data, error } = await supabase
     .from("orders")
     .select(
-      "id, orderDate, status, userId(image), name, email, totalCost, order_items(productId(name, regularPrice), quantity)",
+      "id, orderDate, status, users:users!orders_userId_clerkUserId_fkey (image), name, email, totalCost, order_items(productId(name, regularPrice), quantity)",
     )
     .eq("id", id)
     .maybeSingle();
@@ -152,9 +152,9 @@ export async function getOrder(id: string) {
     return null;
   }
 
-  const normalizedUserId = Array.isArray(data?.userId)
-    ? data?.userId[0]
-    : data?.userId;
+  const normalizedUserId = Array.isArray(data?.users)
+    ? data?.users[0]
+    : data?.users;
 
   const normalizedOrderItems = (data?.order_items ?? []).map((item) => ({
     quantity: item.quantity,
@@ -239,7 +239,9 @@ export async function getOrdersActivity() {
 
   const { data, error } = await supabase
     .from("orders")
-    .select("id, userId(image), name, email, orderDate, status, totalCost")
+    .select(
+      "id, users:users!orders_userId_clerkUserId_fkey (image), name, email, orderDate, status, totalCost",
+    )
     .order("created_at", { ascending: false })
     .neq("status", "delivered");
 
@@ -253,7 +255,7 @@ export async function getOrdersActivity() {
 
   const fixedOrders = data.map((order) => ({
     ...order,
-    userId: Array.isArray(order.userId) ? order.userId[0] : order.userId,
+    users: Array.isArray(order.users) ? order.users[0] : order.users,
   }));
 
   return fixedOrders;

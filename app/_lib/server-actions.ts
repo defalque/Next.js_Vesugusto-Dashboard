@@ -397,7 +397,7 @@ export async function updateProduct(id: string, data: UpdateProductFormInputs) {
     discount: Math.round(productData.discount * 100),
   };
 
-  console.log(extractedData);
+  // console.log(extractedData);
 
   // Valida i dati del prodotto
   const validatedFields = updateProductSchema.safeParse(extractedData);

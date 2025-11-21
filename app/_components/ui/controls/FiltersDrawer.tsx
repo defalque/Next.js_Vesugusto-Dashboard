@@ -20,7 +20,6 @@ export default function FiltersDrawer({
   filterOptions,
   sortByField,
   sortByOptions,
-  children,
 }: FiltersDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,14 +41,12 @@ export default function FiltersDrawer({
             <div className="flex-1 rounded-t-[10px] bg-white p-4 dark:bg-zinc-900/60">
               <div
                 aria-hidden
-                className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-200 dark:bg-zinc-600"
+                className="mx-auto mb-8 h-1.5 w-12 shrink-0 rounded-full bg-gray-200 dark:bg-zinc-600"
               />
               <div className="mx-auto max-w-2xl">
                 <Drawer.Title className="dark:text-light sr-only mb-4 font-medium text-neutral-700">
                   Drawer for React.
                 </Drawer.Title>
-
-                {children}
 
                 <div className="dark:text-light divide-y divide-gray-200 text-neutral-700 dark:divide-zinc-700/50">
                   <DrawerFilter

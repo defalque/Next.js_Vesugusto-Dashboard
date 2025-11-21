@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 
 import { useDialog } from "@/app/_contexts/DialogContext";
+import { Fragment } from "react/jsx-runtime";
 
 const iconStyle = "size-4 text-zinc-700  dark:text-white";
 
@@ -44,40 +45,49 @@ export default function Dropdown({
       </MenuButton>
 
       <MenuItems
+        modal={false}
         transition
         anchor="bottom end"
         className={`${type === "overview" ? "w-42 rounded-xl text-base lg:w-34 lg:rounded-lg lg:text-[0.813rem]" : "w-42 rounded-xl text-base"} origin-top-right border border-gray-200 bg-white p-1 text-sm/6 text-white shadow-2xs transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0 dark:border-white/10 dark:bg-zinc-900`}
       >
         <MenuItem>
-          <Link
-            href={
-              variation === "ordine"
-                ? type === "page"
-                  ? `orders/${itemId}`
-                  : `dashboard/orders/${itemId}`
-                : `products/${itemId}`
-            }
-            className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
-          >
-            <ClipboardDocumentListIcon className={iconStyle} />
-            <span className="text-zinc-700 dark:text-white">Vedi dettagli</span>
-          </Link>
+          {({ close }) => (
+            <Link
+              onClick={close}
+              href={
+                variation === "ordine"
+                  ? type === "page"
+                    ? `orders/${itemId}`
+                    : `dashboard/orders/${itemId}`
+                  : `products/${itemId}`
+              }
+              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
+            >
+              <ClipboardDocumentListIcon className={iconStyle} />
+              <span className="text-zinc-700 dark:text-white">
+                Vedi dettagli
+              </span>
+            </Link>
+          )}
         </MenuItem>
 
         {variation === "prodotto" && (
           <MenuItem>
-            <Link
-              href={`products/${itemId}/edit`}
-              className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85"
-            >
-              <PencilIcon className={iconStyle} />
-              <span className="text-zinc-700 dark:text-white">Modifica</span>
-            </Link>
+            {({ close }) => (
+              <Link
+                onClick={close}
+                href={`products/${itemId}/edit`}
+                className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85"
+              >
+                <PencilIcon className={iconStyle} />
+                <span className="text-zinc-700 dark:text-white">Modifica</span>
+              </Link>
+            )}
           </MenuItem>
         )}
 
         {variation === "ordine" && status === "unconfirmed" && (
-          <MenuItem>
+          <MenuItem as={Fragment}>
             <button
               className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
               onClick={(e) => {
@@ -93,7 +103,7 @@ export default function Dropdown({
         )}
 
         {variation === "ordine" && status === "ready" && (
-          <MenuItem>
+          <MenuItem as={Fragment}>
             <button
               className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
               onClick={(e) => {
@@ -109,7 +119,7 @@ export default function Dropdown({
         )}
 
         {variation === "prodotto" && (
-          <MenuItem>
+          <MenuItem as={Fragment}>
             <button
               className="group flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85"
               onClick={(e) => {

@@ -11,6 +11,7 @@ import {
 } from "@/app/_lib/definitions";
 import LazyControls from "@/app/_components/ui/controls/LazyControls";
 import ProductsFiltersResolver from "@/app/_components/products/ProductsFiltersResolver";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const metadata = {
   title: "Prodotti",
@@ -37,16 +38,16 @@ export default async function Page({
           filterOptions={TYPE_OPTIONS}
           sortByField="sort"
           sortByOptions={PRODUCT_SORTBY_OPTIONS}
-        >
-          <div className="flex py-5">
-            <Button href="products/create" className="flex-1 py-2 text-center">
-              Aggiungi prodotto
-            </Button>
-          </div>
-        </LazyControls>
+        />
 
-        <Button className="hidden px-4 py-3 lg:block" href="products/create">
-          Aggiungi
+        <Button
+          className="touch-hitbox flex items-center px-3 py-3 sm:px-4"
+          href="products/create"
+        >
+          <span className="hidden sm:block">Aggiungi</span>
+          <span className="block sm:hidden">
+            <PlusIcon className="size-5" />
+          </span>
         </Button>
       </div>
 

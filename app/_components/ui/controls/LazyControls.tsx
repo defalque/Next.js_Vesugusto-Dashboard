@@ -1,7 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
-
 import { FilterOption, SortOption } from "@/app/_lib/definitions";
 
 import dynamic from "next/dynamic";
@@ -17,7 +15,6 @@ type ControlsProps = {
   filterOptions: FilterOption[];
   sortByField: "sort";
   sortByOptions: SortOption[];
-  children?: ReactNode;
 };
 
 function LazyControls({
@@ -26,7 +23,6 @@ function LazyControls({
   filterOptions,
   sortByField,
   sortByOptions,
-  children,
 }: ControlsProps) {
   return (
     <Controls
@@ -35,9 +31,7 @@ function LazyControls({
       filterOptions={filterOptions}
       sortByField={sortByField}
       sortByOptions={sortByOptions}
-    >
-      {children}
-    </Controls>
+    />
   );
 }
 

@@ -1,7 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
-
 import Filter from "./Filter";
 import Search from "./Search";
 import SortBy from "./SortBy";
@@ -16,7 +14,6 @@ type ControlsProps = {
   filterOptions: FilterOption[];
   sortByField: "sort";
   sortByOptions: SortOption[];
-  children: ReactNode;
 };
 
 function Controls({
@@ -25,7 +22,6 @@ function Controls({
   filterOptions,
   sortByField,
   sortByOptions,
-  children,
 }: ControlsProps) {
   return (
     <>
@@ -41,9 +37,7 @@ function Controls({
           filterOptions={filterOptions}
           sortByField={sortByField}
           sortByOptions={sortByOptions}
-        >
-          {children}
-        </FiltersDrawer>
+        />
       </ControlsProvider>
     </>
   );

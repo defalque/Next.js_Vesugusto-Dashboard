@@ -198,32 +198,32 @@ function ProductSkeleton({ value }: { value: number }) {
       className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
     >
       {/* Product Name */}
-      <td className="px-4 py-4.5 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         <div className="h-4 w-22 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Regular Price */}
-      <td className="px-4 py-4.5 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Discount */}
-      <td className="px-4 py-4.5 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         <div className="h-4 w-10 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Type */}
-      <td className="px-4 py-4.5 whitespace-nowrap capitalize">
+      <td className="px-4 py-3 whitespace-nowrap capitalize">
         <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Quantity */}
-      <td className="px-4 py-4.5 text-center whitespace-nowrap">
+      <td className="px-4 py-3 text-center whitespace-nowrap">
         <div className="mx-auto h-4 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Dropdown */}
-      <td className="px-4 py-4.5 text-center whitespace-nowrap">
+      <td className="px-4 py-3 text-center whitespace-nowrap">
         <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
     </tr>
@@ -233,7 +233,7 @@ function ProductSkeleton({ value }: { value: number }) {
 export function ProductsListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative h-full divide-y divide-zinc-700/10 overflow-hidden bg-gray-50/30 text-gray-800/70 dark:divide-zinc-700/40 dark:bg-zinc-800/40 dark:text-gray-50/80`}
+      className={`${shimmer} relative h-full divide-y divide-gray-200/80 overflow-hidden text-gray-800/70 dark:divide-zinc-700/20 dark:text-gray-50/80`}
     >
       {Array.from({ length: LIMIT }, (_, i) => (
         <ProductSkeleton key={i} value={i + 1} />
@@ -326,7 +326,7 @@ export function ProductPageSkeleton() {
 function FooterSkeleton({ colSpan }: { colSpan: number }) {
   return (
     <tfoot
-      className={`${shimmer} relative cursor-not-allowed overflow-hidden bg-gray-50/30 dark:animate-pulse dark:bg-zinc-800/40`}
+      className={`${shimmer} relative cursor-not-allowed overflow-hidden dark:animate-pulse`}
     >
       <tr>
         <td colSpan={colSpan} className="p-4">

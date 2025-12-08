@@ -84,7 +84,7 @@ async function ProductsListWrapper({
     <>
       <LazyProductsList products={products} />
 
-      <tfoot className="border-t border-gray-200 bg-gray-50/30 text-sm dark:border-zinc-700/40 dark:bg-zinc-800/40">
+      <tfoot className="text-sm">
         <tr>
           {error ? (
             <td colSpan={6}>

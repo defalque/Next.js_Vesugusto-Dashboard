@@ -41,6 +41,17 @@ export function formatDate(dateString: string): string {
   }
 }
 
+export function formatType(type: string): string {
+  switch (type) {
+    case "food":
+      return "Cibo";
+    case "drink":
+      return "Bevanda";
+    default:
+      return type;
+  }
+}
+
 export const capitalize = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 

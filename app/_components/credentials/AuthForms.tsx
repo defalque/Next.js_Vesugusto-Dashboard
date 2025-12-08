@@ -23,12 +23,12 @@ export default function AuthForms() {
   };
 
   return (
-    <div className="box-style bg-box dark:text-light w-full gap-1 overflow-hidden rounded-md border text-neutral-700 shadow-lg sm:w-110">
+    <div className="box-style bg-box dark:text-light w-full gap-1 overflow-hidden rounded-md border text-neutral-700 shadow-xl/20 sm:w-110 dark:shadow-zinc-700">
       <LazyMotion features={loadFeatures}>
         <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.5 }}>
           <m.div animate={{ height: bounds.height }}>
             <div ref={ref} className="relative">
-              <div className="box-style relative overflow-hidden border-b">
+              {/* <div className="box-style relative overflow-hidden border-b">
                 <AnimatePresence mode="popLayout" initial={false}>
                   <m.p
                     className="p-3 text-center text-2xl/9 font-bold tracking-tight"
@@ -45,7 +45,7 @@ export default function AuthForms() {
                     )}
                   </m.p>
                 </AnimatePresence>
-              </div>
+              </div> */}
 
               <AnimatePresence mode="popLayout" initial={false}>
                 <m.div

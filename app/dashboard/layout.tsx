@@ -1,32 +1,39 @@
 import { Toaster } from "react-hot-toast";
 
-import {
-  ClipboardDocumentCheckIcon,
-  HomeIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/24/outline";
-
 import SidebarDrawerContextProvider from "../_contexts/SidebarDrawerContext";
 import Sidebar from "../_components/ui/sidebar/Sidebar";
 import SidebarDrawer from "../_components/ui/sidebar/SidebarDrawer";
+
+import {
+  HomeModernIcon,
+  Squares2X2Icon,
+  ClipboardDocumentCheckIcon,
+} from "@heroicons/react/24/solid";
 import UserAvatar from "../_components/ui/sidebar/UserAvatar";
 
 const links = [
   {
     name: "Dashboard",
     href: "/dashboard",
-    icon: <HomeIcon className="size-5.5" aria-hidden={true} />,
+    icon: (
+      <HomeModernIcon className="size-7 fill-current md:size-5" aria-hidden />
+    ),
   },
   {
     name: "Prodotti",
     href: "/dashboard/products",
-    icon: <Squares2X2Icon className="size-5.5" aria-hidden={true} />,
+    icon: (
+      <Squares2X2Icon className="size-7 fill-current md:size-5" aria-hidden />
+    ),
   },
   {
     name: "Ordini",
     href: "/dashboard/orders",
     icon: (
-      <ClipboardDocumentCheckIcon className="size-5.5" aria-hidden={true} />
+      <ClipboardDocumentCheckIcon
+        className="size-7 fill-current md:size-5"
+        aria-hidden
+      />
     ),
   },
 ];
@@ -40,7 +47,6 @@ export default async function Layout({
     <div className="text-dark bg-style grid grid-cols-1 grid-rows-[auto_1fr] text-sm md:grid-cols-[auto_1fr] md:grid-rows-[1fr] md:gap-y-4 xl:grid-cols-[var(--spacing-sidebar)_1fr] dark:text-gray-100">
       <SidebarDrawerContextProvider>
         <Sidebar links={links} />
-
         <SidebarDrawer links={links}>
           <UserAvatar />
         </SidebarDrawer>

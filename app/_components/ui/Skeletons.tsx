@@ -6,13 +6,16 @@ const shimmer =
 
 export function UserAvatarSkeleton() {
   return (
-    <div className="flex animate-none items-center gap-3 dark:animate-pulse">
+    <div className="flex animate-none items-center gap-2 dark:animate-pulse">
       <div
-        className={`${shimmer} relative h-9 w-9 overflow-hidden rounded-full bg-gray-200 dark:bg-zinc-700`}
-      />
-      <div
-        className={`${shimmer} relative h-5 w-24 overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700`}
-      />
+        className={`${shimmer} relative flex w-fit cursor-not-allowed items-center gap-3 overflow-hidden rounded-md dark:animate-pulse`}
+      >
+        <div className="h-8 w-8 rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+        <div className="hidden flex-col gap-1 xl:flex">
+          <div className="h-4 w-15 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+          <div className="h-3 w-30 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -22,11 +25,11 @@ export function LoginFormSkeleton({ isAuthForm }: { isAuthForm?: true }) {
     <div
       className={`bg-box box-style ${isAuthForm && "border"} _animate-pulse w-full gap-3 rounded-md sm:w-110`}
     >
-      {isAuthForm && (
+      {/* {isAuthForm && (
         <div className="box-style border-b p-3 text-center text-2xl/9 font-bold tracking-tight">
           Accedi alla dashboard
         </div>
-      )}
+      )} */}
       <div className="dark:text-light _mt-5 flex w-full flex-col gap-3.5 px-5 pt-5 text-sm text-neutral-700 sm:px-10">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
@@ -142,11 +145,16 @@ export function SignUpFormSkeleton() {
 
 export function NavbarBlockSkeleton({ className }: { className?: string }) {
   return (
-    <div
-      className={`${className} ${shimmer} relative flex h-10 w-full cursor-not-allowed items-center space-x-5 overflow-hidden rounded-md bg-gray-100 dark:animate-pulse dark:bg-zinc-800/40`}
-    >
-      <div className="ml-4 h-6 w-6 rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
-      <div className="h-4 w-20 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+    <div className="px-2 py-1 md:p-2 xl:p-4">
+      <div
+        className={`${className} ${shimmer} relative flex w-full cursor-not-allowed items-center gap-3 overflow-hidden rounded-md dark:animate-pulse`}
+      >
+        <div className="h-8 w-8 rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+        <div className="hidden flex-col gap-1 xl:flex">
+          <div className="h-4 w-15 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+          <div className="h-3 w-30 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+        </div>
+      </div>
     </div>
   );
 }

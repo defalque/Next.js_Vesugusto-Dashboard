@@ -20,7 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${inter.className} bg-style mx-auto h-full max-w-[95rem] antialiased`}
+        className={`${inter.className} bg-style mx-auto h-full max-w-380 antialiased`}
       >
         {children}
       </body>

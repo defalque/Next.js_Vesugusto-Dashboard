@@ -65,7 +65,7 @@ function CredentialsForm({
         {...props}
         action={formAction}
         aria-labelledby="title"
-        className="space-y-3 px-5 py-5 sm:px-10"
+        className="space-y-4 px-5 py-5 sm:px-10"
       >
         <HeadingFormHidden id="title" className="sr-only">
           Form di {title}
@@ -112,7 +112,7 @@ function CredentialsForm({
 
         <button
           type="submit"
-          className="bg-brand-950 hover:bg-brand-900 active:bg-brand-900 mt-5 w-full cursor-pointer self-center rounded-md px-4 py-1 text-lg font-semibold text-white shadow-sm transition-all duration-300 text-shadow-2xs active:scale-97 disabled:animate-pulse disabled:cursor-not-allowed disabled:opacity-25 dark:bg-white dark:text-black dark:text-shadow-none dark:hover:bg-gray-200 dark:active:bg-gray-200"
+          className="bg-brand-950 hover:bg-brand-900 active:bg-brand-900 mt-5 w-full cursor-pointer self-center rounded-md px-4 py-1.5 text-[15px] font-semibold text-white shadow-sm transition-all duration-300 text-shadow-2xs active:scale-97 disabled:animate-pulse disabled:cursor-not-allowed disabled:opacity-25 dark:bg-white dark:text-black dark:text-shadow-none dark:hover:bg-gray-200 dark:active:bg-gray-200"
           disabled={pending}
           aria-label={
             title === "Login"
@@ -140,7 +140,7 @@ function CredentialsForm({
           {title === "Registrazione" && "Hai già un account? "}
           <button
             type="button"
-            className="dark:text-light focus cursor-pointer rounded px-0.5 font-semibold text-neutral-700 hover:underline"
+            className="dark:text-light focus text-brand-950 cursor-pointer rounded px-0.5 font-semibold hover:underline"
             onClick={onChangeForm}
           >
             {title === "Login" && "Registrati"}

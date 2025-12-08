@@ -34,7 +34,7 @@ function DrawerFilter({ filterField, options, onClose }: FilterProps) {
                 handleChange(option);
                 onClose(false);
               }}
-              className={`${activeStatusFilter === option.value && "bg-gray-200/50 dark:bg-zinc-900"} flex w-full cursor-pointer justify-between rounded-md px-2 py-3 hover:bg-gray-200/50 dark:hover:bg-zinc-900`}
+              className={`${activeStatusFilter === option.value && "bg-brand-950/10 dark:bg-zinc-950"} hover:bg-brand-950/10 flex w-full cursor-pointer justify-between rounded-md px-2 py-3 dark:hover:bg-zinc-950`}
             >
               {option.label}
               {activeStatusFilter === option.value && (

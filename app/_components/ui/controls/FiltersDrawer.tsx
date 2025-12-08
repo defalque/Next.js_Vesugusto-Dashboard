@@ -26,7 +26,7 @@ export default function FiltersDrawer({
   return (
     <div className="flex lg:hidden">
       <button
-        className="focus-visible:shadow-focus-ring-button dark:text-light cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-neutral-700 transition-colors hover:bg-gray-100/70 md:font-medium dark:border-zinc-700 dark:bg-zinc-900/60 dark:hover:bg-zinc-800/70"
+        className="focus-visible:outline-brand-950 dark:text-light cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-neutral-700 shadow-sm transition-colors hover:bg-gray-100/70 md:font-medium dark:border-zinc-700/60 dark:bg-zinc-700/35 dark:hover:bg-zinc-700/70 dark:focus-visible:outline-zinc-700"
         onClick={() => setIsOpen(true)}
       >
         <ListBulletIcon className="size-6" />

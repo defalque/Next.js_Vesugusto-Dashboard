@@ -35,7 +35,7 @@ function SortBy({
     <div className="hidden lg:flex">
       <Listbox value={selected} by="value" onChange={handleChange}>
         <div className="relative w-52">
-          <ListboxButton className="_data-focus:outline-2 _data-focus:-outline-offset-2 relative h-full w-full cursor-pointer rounded-md border border-gray-300 bg-gray-50/30 py-3 pr-8 pl-3 text-left text-black focus:not-data-focus:outline-none data-focus:border-zinc-400 data-focus:ring-2 data-focus:ring-gray-300 data-focus:outline-none dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-white dark:data-focus:border-zinc-400 dark:data-focus:ring-zinc-600">
+          <ListboxButton className="data-focus:border-brand-950 data-focus:ring-brand-950/20 relative h-full w-full cursor-pointer rounded-lg border border-gray-300 py-2.5 pr-8 pl-3 text-left text-black shadow-sm focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border-zinc-700/60 dark:bg-zinc-700/35 dark:text-white dark:data-focus:border-zinc-400 dark:data-focus:ring-zinc-600">
             {selectedLabel}
             <ArrowsUpDownIcon
               className="group pointer-events-none absolute top-1/2 right-2.5 size-5 -translate-y-1/2 dark:text-white"
@@ -48,13 +48,13 @@ function SortBy({
           modal={false}
           anchor="bottom"
           transition
-          className="w-(--button-width) rounded-md border border-gray-300 bg-white p-1 text-white transition duration-100 ease-in [--anchor-gap:--spacing(1)] focus:outline-none data-leave:data-closed:opacity-0 dark:border-zinc-700 dark:bg-zinc-900"
+          className="w-(--button-width) rounded-lg border border-gray-300 bg-white p-1 text-white transition duration-100 ease-in [--anchor-gap:--spacing(1)] focus:outline-none data-leave:data-closed:opacity-0 dark:border-zinc-700 dark:bg-zinc-950"
         >
           {options.map((option) => (
             <ListboxOption
               key={option.value}
               value={option}
-              className="group flex cursor-default items-center gap-2 rounded px-3 py-1.5 select-none data-focus:bg-gray-100 dark:data-focus:bg-zinc-800/85"
+              className="group data-focus:bg-brand-950/10 flex cursor-default items-center gap-2 rounded px-3 py-1.5 select-none dark:data-focus:bg-zinc-800/85"
             >
               <CheckIcon className="invisible size-4 text-black group-data-selected:visible dark:text-white" />
               <div className="text-sm/6 text-zinc-700 dark:text-white">

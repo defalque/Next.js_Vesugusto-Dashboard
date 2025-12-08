@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 
 type ProductFilters = {
   value: "all" | "food" | "drink";
-  label: "Tutto" | "Food" | "Drink";
+  label: "Qualsiasi tipo" | "Food" | "Drink";
 };
 
 type OrderFilters = {
   value: "all" | "delivered" | "unconfirmed" | "ready" | "drink";
-  label: "Tutto" | "Consegnato" | "In attesa" | "Pronto";
+  label: "Qualsiasi stato" | "Consegnato" | "In attesa" | "Pronto";
 };
 
 export type FilterOption = ProductFilters | OrderFilters;
@@ -41,13 +41,13 @@ type OrderSort = {
 export type SortOption = OrderSort | ProductSort;
 
 export const TYPE_OPTIONS: FilterOption[] = [
-  { value: "all", label: "Tutto" },
+  { value: "all", label: "Qualsiasi tipo" },
   { value: "drink", label: "Drink" },
   { value: "food", label: "Food" },
 ];
 
 export const STATUS_OPTIONS: FilterOption[] = [
-  { value: "all", label: "Tutto" },
+  { value: "all", label: "Qualsiasi stato" },
   { value: "delivered", label: "Consegnato" },
   { value: "unconfirmed", label: "In attesa" },
   { value: "ready", label: "Pronto" },

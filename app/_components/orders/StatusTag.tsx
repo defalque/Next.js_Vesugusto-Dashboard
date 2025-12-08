@@ -7,13 +7,13 @@ function StatusTag({
 }) {
   return (
     <span
-      className={`${className} rounded px-3 py-1 text-center text-xs font-bold tracking-wide text-white uppercase text-shadow-2xs ${
+      className={`${className} _text-white _text-shadow-2xs rounded-lg px-3 py-1 text-center text-xs font-medium tracking-wide uppercase ${
         status === "unconfirmed"
-          ? "bg-amber-500 dark:bg-amber-500/15 dark:text-amber-500"
+          ? "bg-yellow-500/20 text-yellow-600 dark:bg-amber-500/10 dark:text-amber-400"
           : status === "delivered"
-            ? "bg-green-600 dark:bg-green-400/10 dark:text-green-500"
+            ? "bg-green-600/20 text-green-600 dark:bg-green-400/10 dark:text-green-400"
             : status === "ready"
-              ? "bg-blue-500 dark:bg-blue-400/10 dark:text-blue-400"
+              ? "bg-blue-500/20 text-blue-600 dark:bg-blue-400/10 dark:text-blue-300"
               : ""
       }`}
     >

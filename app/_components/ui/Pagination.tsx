@@ -2,8 +2,6 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import Button from "./Button";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
   const searchParams = useSearchParams();
@@ -41,22 +39,15 @@ function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
   return (
     <div className="flex w-full items-center justify-between px-4 py-3">
       {pageCount > 1 && (
-        <p className="text-sm">
-          {(currentPage - 1) * LIMIT + 1 ===
-          (currentPage === pageCount ? count : currentPage * LIMIT) ? (
-            <span>Ultimo risultato</span>
-          ) : (
-            <>
-              <span className="font-semibold">
-                {(currentPage - 1) * LIMIT + 1}
-              </span>{" "}
-              a{" "}
-              <span className="font-semibold">
-                {currentPage === pageCount ? count : currentPage * LIMIT}
-              </span>
-            </>
-          )}{" "}
-          di <span className="font-semibold">{count}</span> risultati trovati.
+        <p className="dark:text-light/80 py-2 text-sm text-neutral-700">
+          <span className="dark:text-light font-semibold text-black">
+            {(currentPage - 1) * LIMIT + 1}
+          </span>{" "}
+          di{" "}
+          <span className="dark:text-light font-semibold text-black">
+            {count}
+          </span>{" "}
+          risultati trovati.
         </p>
       )}
 
@@ -73,17 +64,23 @@ function Pagination({ count, LIMIT }: { count: number; LIMIT: number }) {
       {pageCount > 1 && (
         <div className="flex gap-2">
           {currentPage !== 1 && (
-            <Button isPaginationButton onClick={prevPage} className="space-x-1">
-              <ChevronLeftIcon className="size-5" />
-              <span className="pr-1.5">Indietro</span>
-            </Button>
+            <button
+              type="button"
+              className="bg-brand-950 hover:bg-brand-900 flex cursor-pointer items-center rounded-lg px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-300 dark:bg-zinc-700/40 dark:hover:bg-zinc-700/80"
+              onClick={prevPage}
+            >
+              Indietro
+            </button>
           )}
 
           {currentPage !== pageCount && (
-            <Button isPaginationButton onClick={nextPage} className="space-x-1">
-              <span className="pl-1.5">Continua</span>
-              <ChevronRightIcon className="size-5" />
-            </Button>
+            <button
+              type="button"
+              className="bg-brand-950 hover:bg-brand-900 flex cursor-pointer items-center rounded-lg px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-300 dark:bg-zinc-700/40 dark:hover:bg-zinc-700/80"
+              onClick={nextPage}
+            >
+              Continua
+            </button>
           )}
         </div>
       )}

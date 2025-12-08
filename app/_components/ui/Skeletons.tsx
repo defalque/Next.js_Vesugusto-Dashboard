@@ -395,7 +395,7 @@ function OrderSkeleton({ value }: { value: number }) {
 export function OrdersListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative cursor-not-allowed divide-y divide-zinc-700/10 overflow-hidden bg-gray-50/30 text-sm text-gray-800/70 dark:divide-zinc-700/40 dark:bg-zinc-800/40 dark:text-gray-50/80`}
+      className={`${shimmer} relative cursor-not-allowed divide-y divide-gray-200/80 overflow-hidden text-sm text-gray-800/70 dark:divide-zinc-700/20 dark:text-gray-50/80`}
     >
       {Array.from({ length: ORDERS_LIMIT }, (_, i) => (
         <OrderSkeleton key={i} value={i + 1} />

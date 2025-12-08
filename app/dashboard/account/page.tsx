@@ -1,6 +1,5 @@
 import AccountForm from "@/app/_components/account/AccountForm";
 import EditAccountForm from "@/app/_components/account/EditAccountForm";
-import Logout from "@/app/_components/credentials/Logout";
 import { AccountInfoFormSkeleton } from "@/app/_components/ui/Skeletons";
 import { Suspense } from "react";
 import LazyAccountPasswordForm from "@/app/_components/account/LazyAccountPasswordForm";
@@ -19,10 +18,6 @@ export default function Page() {
       <AccountForm title="Modifica la tua password">
         <LazyAccountPasswordForm />
       </AccountForm>
-
-      <div className="flex items-center justify-between gap-2">
-        <Logout />
-      </div>
     </div>
   );
 }

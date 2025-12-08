@@ -69,7 +69,7 @@ async function OrdersListWrapper({
     <>
       <LazyOrdersList orders={orders} />
 
-      <tfoot className="border-t border-gray-200 bg-gray-50/30 text-sm dark:border-zinc-700/40 dark:bg-zinc-800/40">
+      <tfoot className="border-gray-200 text-sm dark:border-zinc-700/40">
         <tr>
           {error ? (
             <td colSpan={7}>

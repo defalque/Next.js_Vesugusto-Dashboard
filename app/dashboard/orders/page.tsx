@@ -39,17 +39,17 @@ export default async function Page({
         />
       </div>
 
-      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md border-gray-200 md:mx-0 md:border dark:border-zinc-700/40">
+      <div className="-mx-(--page-padding-x) flex overflow-x-auto rounded-md md:mx-0">
         <div className="grow px-(--page-padding-x) md:px-0">
           <DialogContextProvider>
             <table className="min-w-full">
-              <thead className="border-b border-gray-200 bg-gray-50/30 text-xs sm:text-sm dark:border-zinc-700/40 dark:bg-zinc-800/40">
+              <thead className="border-b border-gray-200/80 text-xs sm:text-sm dark:border-zinc-700/40">
                 <tr>
-                  <ItemsTableHeadingCell>ID</ItemsTableHeadingCell>
+                  <ItemsTableHeadingCell>Numero</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Cliente</ItemsTableHeadingCell>
-                  <ItemsTableHeadingCell>Data</ItemsTableHeadingCell>
+                  <ItemsTableHeadingCell>Data ordine</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell className="text-center">
-                    Status
+                    Stato
                   </ItemsTableHeadingCell>
                   <ItemsTableHeadingCell>Totale</ItemsTableHeadingCell>
                   <ItemsTableHeadingCell className="text-center">

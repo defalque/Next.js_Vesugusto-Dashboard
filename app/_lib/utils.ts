@@ -1,4 +1,4 @@
-import { format, subMonths } from "date-fns";
+import { format, subMonths, differenceInDays, startOfToday } from "date-fns";
 import { it } from "date-fns/locale";
 
 export function formatCurrency(amount: number): string {
@@ -13,7 +13,32 @@ export function formatCurrency(amount: number): string {
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString("it-IT");
+
+  const today = startOfToday();
+  const dateStart = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  );
+  const daysDiff = differenceInDays(today, dateStart);
+
+  if (daysDiff === 0) {
+    return "Oggi";
+  } else if (daysDiff === 1) {
+    return "Ieri";
+  } else if (daysDiff > 1 && daysDiff <= 7) {
+    return `${daysDiff} giorni fa`;
+  } else {
+    const formatted = format(date, "d MMM, yyyy", { locale: it });
+    const spaceIndex = formatted.indexOf(" ");
+    if (spaceIndex !== -1) {
+      return (
+        formatted.substring(0, spaceIndex + 1) +
+        capitalize(formatted.substring(spaceIndex + 1))
+      );
+    }
+    return formatted;
+  }
 }
 
 export const capitalize = (str: string) =>

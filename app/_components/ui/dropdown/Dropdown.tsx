@@ -36,7 +36,7 @@ export default function Dropdown({
 
   return (
     <Menu>
-      <MenuButton className="data-focus:outline-brand-950 inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm/6 font-semibold focus:not-data-focus:outline-none data-focus:outline-2 data-hover:bg-gray-200/80 data-open:bg-gray-200/50 dark:data-hover:bg-zinc-700/50 dark:data-open:bg-zinc-700">
+      <MenuButton className="data-focus:outline-brand-950 data-open:bg-brand-950/10 data-hover:bg-brand-950/10 inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm/6 font-semibold focus:not-data-focus:outline-none data-focus:outline-2 dark:data-hover:bg-zinc-950 dark:data-open:bg-zinc-950">
         {type === "page" ? (
           <EllipsisVerticalIcon className="size-5" />
         ) : (
@@ -48,7 +48,7 @@ export default function Dropdown({
         modal={false}
         transition
         anchor="bottom end"
-        className={`${type === "overview" ? "w-42 rounded-xl text-base lg:w-34 lg:rounded-lg lg:text-[0.813rem]" : "w-42 rounded-xl text-base"} origin-top-right border border-gray-200 bg-white p-1 text-sm/6 text-white shadow-2xs transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0 dark:border-white/10 dark:bg-zinc-900`}
+        className={`${type === "overview" ? "w-42 rounded-xl text-base lg:w-34 lg:rounded-lg lg:text-[0.813rem]" : "w-42 rounded-xl text-base"} origin-top-right border border-gray-200 bg-white p-1 text-sm/6 text-white shadow-2xs transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0 dark:border-white/15 dark:bg-zinc-950`}
       >
         <MenuItem>
           {({ close }) => (
@@ -61,7 +61,7 @@ export default function Dropdown({
                     : `dashboard/orders/${itemId}`
                   : `products/${itemId}`
               }
-              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
+              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group data-focus:bg-brand-950/10 flex w-full cursor-pointer items-center gap-2 dark:data-focus:bg-zinc-800/85`}
             >
               <ClipboardDocumentListIcon className={iconStyle} />
               <span className="text-zinc-700 dark:text-white">
@@ -77,7 +77,7 @@ export default function Dropdown({
               <Link
                 onClick={close}
                 href={`products/${itemId}/edit`}
-                className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85"
+                className="group data-focus:bg-brand-950/10 flex w-full items-center gap-2 rounded-lg px-3 py-1.5 dark:data-focus:bg-zinc-800/85"
               >
                 <PencilIcon className={iconStyle} />
                 <span className="text-zinc-700 dark:text-white">Modifica</span>
@@ -89,7 +89,7 @@ export default function Dropdown({
         {variation === "ordine" && status === "unconfirmed" && (
           <MenuItem as={Fragment}>
             <button
-              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
+              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group data-focus:bg-brand-950/10 flex w-full cursor-pointer items-center gap-2 dark:data-focus:bg-zinc-800/85`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -105,7 +105,7 @@ export default function Dropdown({
         {variation === "ordine" && status === "ready" && (
           <MenuItem as={Fragment}>
             <button
-              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group flex w-full cursor-pointer items-center gap-2 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85`}
+              className={`${type === "overview" ? "rounded-lg px-3 py-1.5 lg:rounded-md lg:px-1.5 lg:py-1" : "rounded-lg px-3 py-1.5"} group data-focus:bg-brand-950/10 flex w-full cursor-pointer items-center gap-2 dark:data-focus:bg-zinc-800/85`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -121,7 +121,7 @@ export default function Dropdown({
         {variation === "prodotto" && (
           <MenuItem as={Fragment}>
             <button
-              className="group flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-gray-200/50 dark:data-focus:bg-zinc-800/85"
+              className="group data-focus:bg-brand-950/10 flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-1.5 dark:data-focus:bg-zinc-800/85"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

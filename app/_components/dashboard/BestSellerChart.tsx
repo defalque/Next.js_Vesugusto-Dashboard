@@ -31,8 +31,8 @@ type Data = {
 
 function BestSellersChart({ data }: { data: Data[] }) {
   return (
-    <div className="h-full">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full min-w-0 flex-1">
+      <ResponsiveContainer width="100%" height={405} minHeight={405}>
         <PieChart margin={{ top: 16, right: 16, bottom: 16, left: 16 }}>
           <Pie
             activeShape={renderActiveShape}

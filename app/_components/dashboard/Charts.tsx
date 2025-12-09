@@ -73,7 +73,7 @@ function Charts({
             </div>
           </div>
 
-          <div className="relative h-75 overflow-hidden">
+          <div className="relative min-h-[300px] w-full overflow-hidden">
             <AnimatePresence mode="popLayout" initial={false}>
               <m.div
                 initial={{
@@ -86,6 +86,7 @@ function Charts({
                   opacity: 0,
                 }}
                 key={chart}
+                className="min-h-[300px] w-full min-w-0"
               >
                 {chart === "revenue" ? revenueChart : ordersChart}
               </m.div>

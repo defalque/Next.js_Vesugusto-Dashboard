@@ -424,7 +424,7 @@ export function OrderPageSkeleton() {
 
 function SkeletonBlock({ className = "" }: { className?: string }) {
   return (
-    <div
+    <span
       className={`${shimmer} relative h-4 overflow-hidden rounded bg-gray-200 dark:bg-zinc-700 ${className} animate-none dark:animate-pulse`}
     />
   );
@@ -660,17 +660,11 @@ export function AccountPasswordFormSkeleton() {
 export function StatsSkeleton() {
   return (
     <div className="col-span-full">
-      <div className="dark:text-light grid grid-cols-2 grid-rows-3 justify-between gap-3 text-neutral-700 md:grid-rows-2 lg:flex lg:flex-row">
-        <StatSkeleton position="row-start-2 md:row-start-1" label="Ordini" />
-        <StatSkeleton
-          position="row-start-1 col-span-full md:col-span-1"
-          label="Ricavi"
-        />
-        <StatSkeleton label="Clienti" />
-        <StatSkeleton
-          position="row-start-3 col-span-full md:row-start-2 md:col-span-1"
-          label="Cliente top"
-        />
+      <div className="dark:text-light grid grid-cols-1 gap-x-10 gap-y-4 text-neutral-700 sm:grid-cols-2 lg:grid-cols-4">
+        <StatSkeleton label="Ordini totali" />
+        <StatSkeleton label="Ricavi totali" />
+        <StatSkeleton label="Clienti totali" />
+        <StatSkeleton label="Miglior cliente" />
       </div>
     </div>
   );
@@ -685,16 +679,16 @@ export function StatSkeleton({
 }) {
   return (
     <div
-      className={`${shimmer} relative grid h-26 w-full grow animate-none grid-cols-[4.2rem_1fr] grid-rows-[auto_auto] gap-x-2 gap-y-1 overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 p-3 md:p-4 lg:w-60 dark:animate-pulse dark:border-zinc-700/40 dark:bg-zinc-800/40 ${position}`}
+      className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40 ${position}`}
     >
-      <div className="row-span-full flex aspect-square size-15 items-center justify-center rounded-full bg-gray-200 dark:bg-zinc-700">
-        <div className="h-10 w-10 rounded-full bg-gray-50 dark:bg-zinc-900/80" />
-      </div>
-
-      <h5 className="self-baseline text-xs font-medium tracking-wide uppercase md:font-semibold">
+      <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
         {label}
       </h5>
-      <p className="h-10 w-20 self-baseline rounded bg-gray-200 text-3xl dark:bg-zinc-700" />
+      <SkeletonBlock className="h-12 w-20 sm:h-11 md:h-10" />
+      <div className="flex items-center gap-1">
+        <SkeletonBlock className="h-6 w-10 sm:h-5 md:h-4" />
+        <SkeletonBlock className="h-6 w-20 sm:h-5 md:h-4" />
+      </div>
     </div>
   );
 }

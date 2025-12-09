@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 
-import { subMonths, format, startOfDay } from "date-fns";
+import { subMonths, format, startOfDay, subDays } from "date-fns";
 
 export async function getOrders(
   limit: number,
@@ -220,18 +220,55 @@ export async function getLastYearOrders() {
 export async function getStatsOrders() {
   const supabase = await createClient();
 
+  const sevenDaysAgo = subDays(new Date(), 7).toISOString();
+
   const {
     data: orders,
-    count,
-    error,
+    count: totalCount,
+    error: totalError,
   } = await supabase.from("orders").select("totalCost", { count: "exact" });
 
-  if (error) {
-    console.error("Non è stato possibile caricare gli ordini: ", error);
+  if (totalError) {
+    console.error(
+      "Non è stato possibile caricare il totale degli ordini: ",
+      totalError,
+    );
     return null;
   }
 
-  return { orders, count };
+  const {
+    data: last7DaysOrders,
+    count: last7DaysCount,
+    error: last7DaysError,
+  } = await supabase
+    .from("orders")
+    .select("totalCost", { count: "exact" })
+    .gte("created_at", sevenDaysAgo);
+
+  if (last7DaysError) {
+    console.error(
+      "Non è stato possibile caricare ordini dell'ultima settimana: ",
+      last7DaysError,
+    );
+    return null;
+  }
+
+  const ordersRevenues = orders?.reduce(
+    (sum, order) => sum + order.totalCost,
+    0,
+  );
+
+  const last7DaysRevenues = last7DaysOrders?.reduce(
+    (sum, order) => sum + order.totalCost,
+    0,
+  );
+
+  return {
+    ordersRevenues: ordersRevenues,
+    last7daysRevenues: last7DaysRevenues,
+    total: totalCount,
+    last7Days: last7DaysCount,
+  };
 }
 
 export async function getOrdersActivity() {

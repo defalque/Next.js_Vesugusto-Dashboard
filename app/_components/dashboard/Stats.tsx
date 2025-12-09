@@ -1,15 +1,10 @@
-import {
-  BanknotesIcon,
-  StarIcon,
-  Square3Stack3DIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline";
-
-import AnimatedStatWrapper from "./AnimatedStatWrapper";
-import Stat from "./Stat";
-
 import { getStatsOrders, getTopCustomer } from "@/app/_lib/apiOrders";
 import { getTotalEcommerceUsers } from "@/app/_lib/apiEcommerceUsers";
+
+import OrdersStats from "./OrdersStats";
+import UsersStats from "./UsersStats";
+import RevenuesStats from "./RevenuesStats";
+import CustomersStats from "./CustomersStats";
 
 async function Stats() {
   const ordersData = getStatsOrders();
@@ -22,82 +17,66 @@ async function Stats() {
     customerData,
   ]);
 
-  const orders =
-    ordersResult.status === "fulfilled" && ordersResult.value
-      ? ordersResult.value.orders
-      : [];
   const revenues =
-    orders && orders.reduce((sum, val) => sum + val.totalCost, 0);
-
-  const count =
     ordersResult.status === "fulfilled" && ordersResult.value
-      ? ordersResult.value.count
+      ? (ordersResult.value.ordersRevenues ?? "Errore")
+      : "Errore";
+
+  const last7DaysRevenues =
+    ordersResult.status === "fulfilled" && ordersResult.value
+      ? (ordersResult.value.last7daysRevenues ?? "Errore")
+      : "Errore";
+
+  const totalCount =
+    ordersResult.status === "fulfilled" && ordersResult.value
+      ? (ordersResult.value.total ?? "Errore")
+      : "Errore";
+
+  const last7DaysCount =
+    ordersResult.status === "fulfilled" && ordersResult.value
+      ? (ordersResult.value.last7Days ?? "Errore")
       : "Errore";
 
   const users =
     usersResult.status === "fulfilled" && usersResult.value
-      ? usersResult.value
+      ? (usersResult.value.total ?? "Errore")
+      : "Errore";
+
+  const last7DaysUsers =
+    usersResult.status === "fulfilled" && usersResult.value
+      ? (usersResult.value.last7Days ?? "Errore")
       : "Errore";
 
   const customer =
     customerResult.status === "fulfilled" && customerResult.value
-      ? customerResult.value
-      : [];
-  const { customer_name, customer_email } = customer[0] ?? {
-    customer_name: "Errore",
-    customer_email: "Errore nel recupero dati",
-  };
+      ? Array.isArray(customerResult.value)
+        ? customerResult.value.length > 0
+          ? customerResult.value[0]
+          : null
+        : customerResult.value
+      : "Errore";
 
   return (
-    <div className="text-dark dark:text-light grid grid-cols-2 grid-rows-3 justify-between gap-3 md:grid-rows-2 lg:flex lg:flex-row lg:flex-wrap">
-      <Stat title="Ordini" value={count} position="row-start-2 md:row-start-1">
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <Square3Stack3DIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
-        </div>
-      </Stat>
+    <div className="text-dark dark:text-light grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+      <OrdersStats
+        title="Ordini totali"
+        value={totalCount}
+        filteredValue={last7DaysCount}
+      />
 
-      {revenues ? (
-        <AnimatedStatWrapper
-          title="Ricavi"
-          value={revenues}
-          position="row-start-1 col-span-full md:col-span-1"
-        >
-          <BanknotesIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
-        </AnimatedStatWrapper>
-      ) : (
-        <Stat
-          title="Ricavi"
-          value="Errore"
-          position="row-start-1 col-span-full md:col-span-1"
-        >
-          <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-            <BanknotesIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
-          </div>
-        </Stat>
-      )}
+      <RevenuesStats
+        title="Ricavi totali"
+        value={revenues}
+        filteredValue={last7DaysRevenues}
+      />
 
-      <Stat title="Clienti" value={users ?? 0} position="row-start-2">
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <UserGroupIcon className="dark:text-brand-950 text-light size-9 sm:size-8 md:size-10" />
-        </div>
-      </Stat>
+      <UsersStats
+        title="Clienti totali"
+        value={users}
+        filteredValue={last7DaysUsers}
+      />
 
-      <Stat
-        title="Cliente top"
-        value={
-          <span className="flex flex-col gap-0.5">
-            <span className="text-base font-semibold">{customer_name}</span>
-            <span className="text-xs text-neutral-500 dark:text-neutral-400">
-              {customer_email}
-            </span>
-          </span>
-        }
-        position="row-start-3 col-span-full md:row-start-2 md:col-span-1"
-      >
-        <div className="bg-brand-950 dark:border-brand-950 dark:bg-brand-dark-600 row-span-full flex aspect-square size-15 items-center justify-center rounded-full dark:border">
-          <StarIcon className="dark:text-brand-950 text-light size-10 sm:size-8 md:size-10" />
-        </div>
-      </Stat>
+      <CustomersStats title="Miglior cliente" value={customer} />
     </div>
   );
 }

@@ -69,7 +69,7 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
 
   return (
     <LazyMotion features={loadFeatures}>
-      <div className="-mx-(--box-padding) flex overflow-x-auto p-(--box-padding) md:mx-0">
+      <div className="-mx-(--box-padding) flex overflow-x-auto py-(--box-padding) md:mx-0">
         <div className="h-105 grow px-(--box-padding) md:px-0 lg:h-100">
           <div className="flex items-center justify-between pb-(--box-padding)">
             <input

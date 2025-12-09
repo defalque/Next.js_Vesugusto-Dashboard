@@ -696,9 +696,9 @@ export function StatSkeleton({
 export function OrdersActivitySkeleton() {
   return (
     <div
-      className={`relative col-span-full flex cursor-not-allowed flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 [--box-padding:--spacing(4)] lg:col-span-1 lg:overflow-clip dark:border-zinc-700/40 dark:bg-zinc-800/40 ${shimmer}`}
+      className={`_border _bg-gray-50/65 _dark:bg-zinc-800/40 relative col-span-full flex animate-pulse cursor-not-allowed flex-col overflow-hidden rounded-md border-gray-200 [--box-padding:--spacing(4)] lg:col-span-1 lg:overflow-clip dark:border-zinc-700/40 _${shimmer}`}
     >
-      <div className="space-y-1 border-b border-gray-200 p-(--box-padding) dark:border-zinc-700/40">
+      <div className="space-y-1 border-b border-gray-200 py-(--box-padding) dark:border-zinc-700/40">
         <h2 className="dark:text-light rounded text-xl font-semibold text-neutral-700">
           Attività ordini
         </h2>
@@ -715,7 +715,7 @@ export function OrdersActivitySkeleton() {
 export function OrdersActivityBodySkeleton() {
   return (
     <div
-      className={`h-105 grow animate-none cursor-not-allowed bg-gray-50/65 p-(--box-padding) lg:h-100 dark:animate-pulse dark:bg-zinc-800/40`}
+      className={`_bg-gray-50/65 _dark:bg-zinc-800/40 h-105 grow animate-none cursor-not-allowed py-(--box-padding) lg:h-100 dark:animate-pulse`}
     >
       <div className="flex items-center justify-between pb-(--box-padding)">
         <div className="h-10 w-2/3 rounded-md bg-gray-200 lg:h-8 dark:bg-zinc-700" />
@@ -760,9 +760,9 @@ export function OrdersActivityBodySkeleton() {
 export function BestSellersSkeleton() {
   return (
     <div
-      className={`${shimmer} relative col-span-full row-span-1 row-start-2 flex cursor-not-allowed flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/65 [--box-padding:--spacing(4)] lg:col-start-2 dark:border-zinc-700/40 dark:bg-zinc-800/40`}
+      className={`_${shimmer} _border _bg-gray-50/65 _dark:bg-zinc-800/40 relative col-span-full row-span-1 row-start-2 flex cursor-not-allowed flex-col overflow-hidden rounded-md border-gray-200 [--box-padding:--spacing(4)] lg:col-start-2 dark:border-zinc-700/40`}
     >
-      <div className="space-y-1 border-b border-gray-200 p-(--box-padding) dark:border-zinc-700/40">
+      <div className="space-y-1 border-b border-gray-200 py-(--box-padding) dark:border-zinc-700/40">
         <h2 className="dark:text-light rounded text-xl font-semibold text-neutral-700">
           Prodotti più venduti
         </h2>
@@ -780,7 +780,7 @@ export function BestSellersSkeleton() {
 export function BestSellersChartSkeleton() {
   return (
     <div
-      className={`flex h-full w-full animate-none cursor-not-allowed flex-col items-center justify-center gap-6 p-(--box-padding) dark:animate-pulse`}
+      className={`_dark:animate-pulse _animate-none flex h-full w-full animate-pulse cursor-not-allowed flex-col items-center justify-center gap-6 py-(--box-padding)`}
     >
       <div className="pieChart:h-55 pieChart:w-55 _dark:border-zinc-600 relative mb-2 h-30 w-30 rounded-full border border-gray-300 bg-gray-200 sm:h-40 sm:w-40 md:h-60 md:w-60 lg:h-40 lg:w-40 dark:border-none dark:bg-zinc-700">
         <div className="absolute inset-8 rounded-full border border-gray-300 bg-gray-100 sm:inset-10 dark:border-none dark:bg-zinc-900/90" />

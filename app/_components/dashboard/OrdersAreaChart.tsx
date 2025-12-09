@@ -1,6 +1,7 @@
 "use client";
 
 import { capitalize } from "@/app/_lib/utils";
+import { Data } from "@/app/_lib/definitions";
 import { colors } from "@/constants/const";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
@@ -16,13 +17,6 @@ import {
   // Legend,
 } from "recharts";
 
-type Data = {
-  month: string;
-  orderCount: number;
-  fullDate: Date;
-  statusCounts?: { delivered: number; ready: number; unconfirmed: number };
-};
-
 function OrdersAreaChart({ data }: { data: Data[] }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -33,7 +27,7 @@ function OrdersAreaChart({ data }: { data: Data[] }) {
         <CartesianGrid vertical={false} stroke={colors.cartesian} />
 
         <XAxis
-          dataKey="month"
+          dataKey="value"
           tick={{ fill: colors.data, fontWeight: "400", fontSize: "13px" }}
           tickLine={false}
           axisLine={false}
@@ -52,7 +46,7 @@ function OrdersAreaChart({ data }: { data: Data[] }) {
         />
 
         <Bar
-          dataKey="orderCount"
+          dataKey="totalOrders"
           name="Totale"
           fill={colors.bar}
           radius={[4, 4, 4, 4]}
@@ -106,7 +100,7 @@ const CustomTooltip = ({
   if (active && payload && payload.length) {
     const dateObj = payload?.[0]?.payload?.fullDate;
     const formattedDate = dateObj
-      ? capitalize(format(dateObj, "MMMM yyyy", { locale: it }))
+      ? capitalize(format(dateObj, "d MMMM yyyy", { locale: it }))
       : label;
 
     return (

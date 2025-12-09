@@ -1,16 +1,16 @@
-import { getLastYearOrders } from "@/app/_lib/apiOrders";
+import { getFilteredOrders } from "@/app/_lib/apiOrders";
 import { prepareOrdersChartData } from "@/app/_lib/utils";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import LazyRevenueChart from "./LazyRevenueChart";
 
 async function RevenueChartWrapper() {
-  const orders = await getLastYearOrders();
+  const orders = await getFilteredOrders();
 
   if (!orders) {
     return (
       <div className="relative h-75 w-full overflow-hidden rounded-md">
         <div
-          className="absolute inset-6 bg-gray-200 bg-gradient-to-t to-transparent p-5 dark:bg-zinc-700"
+          className="absolute inset-6 bg-gray-200 bg-linear-to-t to-transparent p-5 dark:bg-zinc-700"
           style={{
             clipPath: `path("M0,100 C100,250 350,100  600,200 C850,300 1100,100 1400,250 L1400,400 L0,500 Z")`,
           }}
@@ -28,7 +28,7 @@ async function RevenueChartWrapper() {
     );
   }
 
-  const data = prepareOrdersChartData(orders);
+  const data = prepareOrdersChartData("revenues", "last-7-days", orders) ?? [];
 
   return <LazyRevenueChart data={data} />;
 }

@@ -151,9 +151,9 @@ async function OrdersActivityWrapper() {
 
   return (
     <div
-      className={`relative col-span-full flex flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/30 [--box-padding:--spacing(4)] md:overflow-clip lg:col-span-1 dark:border-zinc-700/40 dark:bg-zinc-800/40`}
+      className={`_border _bg-gray-50/30 _dark:bg-zinc-800/40 relative col-span-full flex flex-col overflow-hidden rounded-md border-gray-200 [--box-padding:--spacing(4)] md:overflow-clip lg:col-span-1 dark:border-zinc-700/40`}
     >
-      <div className="space-y-1 border-b border-gray-200 p-(--box-padding) dark:border-zinc-700/40">
+      <div className="space-y-1 border-b border-gray-200 py-(--box-padding) dark:border-zinc-700/40">
         <h2 className="dark:text-light rounded text-xl font-semibold text-neutral-700">
           Attività ordini
         </h2>

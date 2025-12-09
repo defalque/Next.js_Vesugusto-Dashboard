@@ -19,7 +19,7 @@ function Charts({
   return (
     <LazyMotion features={loadFeatures}>
       <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.5 }}>
-        <div className="col-span-full rounded-md border border-gray-200 bg-gray-50/30 dark:border-zinc-700/40 dark:bg-zinc-800/40">
+        <div className="_bg-gray-50/30 _dark:bg-zinc-800/40 col-span-full rounded-md border border-gray-200 dark:border-zinc-700/40">
           <div className="flex flex-col border-b border-gray-200 sm:flex-row dark:border-zinc-700/40">
             <div className="basis-2/3 border-gray-200 p-5 sm:border-r dark:border-zinc-700/40">
               <div className="relative h-full overflow-hidden">

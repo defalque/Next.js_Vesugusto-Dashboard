@@ -1,10 +1,10 @@
-import { getLastYearOrders } from "@/app/_lib/apiOrders";
+import { getFilteredOrders } from "@/app/_lib/apiOrders";
 import { prepareOrdersChartData } from "@/app/_lib/utils";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import LazyOrdersAreaChart from "./LazyOrdersAreaChart";
 
 async function OrdersChartWrapper() {
-  const orders = await getLastYearOrders();
+  const orders = await getFilteredOrders();
 
   if (!orders) {
     return (
@@ -33,7 +33,9 @@ async function OrdersChartWrapper() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const ordersWithoutTotalCost = orders.map(({ totalCost, ...rest }) => rest);
 
-  const data = prepareOrdersChartData(ordersWithoutTotalCost);
+  const data =
+    prepareOrdersChartData("orders", "last-7-days", ordersWithoutTotalCost) ??
+    [];
 
   return <LazyOrdersAreaChart data={data} />;
 }

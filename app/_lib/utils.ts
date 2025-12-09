@@ -1,4 +1,12 @@
-import { format, subMonths, differenceInDays, startOfToday } from "date-fns";
+import {
+  format,
+  differenceInDays,
+  startOfToday,
+  subDays,
+  startOfDay,
+  subMonths,
+  startOfMonth,
+} from "date-fns";
 import { it } from "date-fns/locale";
 
 export function formatCurrency(amount: number): string {
@@ -55,49 +63,9 @@ export function formatType(type: string): string {
 export const capitalize = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
-// export function prepareOrdersChartData(
-//   orders: {
-//     id: number;
-//     orderDate: string;
-//     totalCost?: number;
-//     status?: string;
-//   }[],
-// ) {
-//   const totalRevenuesByMonthYear = orders.reduce(
-//     (acc, order) => {
-//       const date = new Date(order.orderDate);
-//       const key = format(date, "yyyy-MM");
-//       acc[key] =
-//         (acc[key] || 0) + (order.totalCost ? order.totalCost / 100 : 1);
-//       return acc;
-//     },
-//     {} as Record<string, number>,
-//   );
-
-//   const now = new Date();
-
-//   // Crea array con gli ultimi 12 mesi da 12 mesi fa a oggi
-//   const monthsArray = [];
-//   for (let i = 11; i >= 0; i--) {
-//     const date = subMonths(now, i);
-//     monthsArray.push(date);
-//   }
-
-//   const monthlyData = monthsArray.map((date) => {
-//     const key = format(date, "yyyy-MM");
-//     const monthAbbrev = format(date, "MMM", { locale: it });
-
-//     return {
-//       month: monthAbbrev.charAt(0).toUpperCase() + monthAbbrev.slice(1),
-//       orderCount: totalRevenuesByMonthYear[key] || 0,
-//       fullDate: date,
-//     };
-//   });
-
-//   return monthlyData;
-// }
-
 export function prepareOrdersChartData(
+  type: "orders" | "revenues",
+  filter: "last-7-days" | "last-month" | "last-year",
   orders: {
     id: number;
     orderDate: string;
@@ -105,62 +73,95 @@ export function prepareOrdersChartData(
     status?: string;
   }[],
 ) {
-  const totalRevenuesByMonthYear: Record<string, number> = {};
-  const statusCountsByMonthYear: Record<
+  const today = startOfToday();
+  const daysArray: Date[] = [];
+  let dateFormat: string;
+  let valueFormat: string;
+
+  if (filter === "last-7-days") {
+    for (let i = 6; i >= 0; i--) {
+      daysArray.push(startOfDay(subDays(today, i)));
+    }
+    dateFormat = "yyyy-MM-dd";
+    valueFormat = "EEE";
+  } else if (filter === "last-month") {
+    for (let i = 29; i >= 0; i--) {
+      daysArray.push(startOfDay(subDays(today, i)));
+    }
+    dateFormat = "yyyy-MM-dd";
+    valueFormat = "d MMM";
+  } else if (filter === "last-year") {
+    for (let i = 11; i >= 0; i--) {
+      daysArray.push(startOfMonth(subMonths(today, i)));
+    }
+    dateFormat = "yyyy-MM";
+    valueFormat = "MMM";
+  }
+
+  // Group orders by day and sum totalCost
+  const revenues: Record<string, number> = {};
+  const ordersCount: Record<string, number> = {};
+  const statusCountsByFilter: Record<
     string,
     { delivered: number; ready: number; unconfirmed: number }
   > = {};
 
+  const startDate = daysArray[0];
+  const endDate = daysArray[daysArray.length - 1];
+
   orders.forEach((order) => {
-    const date = new Date(order.orderDate);
-    const key = format(date, "yyyy-MM");
+    const orderDateObj = new Date(order.orderDate);
+    // For "last-year" filter, use month-level grouping; otherwise use day-level
+    const orderDate =
+      filter === "last-year"
+        ? startOfMonth(orderDateObj)
+        : startOfDay(orderDateObj);
+    const dayKey = format(orderDate, dateFormat);
 
-    // Totale ricavi
-    totalRevenuesByMonthYear[key] =
-      (totalRevenuesByMonthYear[key] || 0) +
-      (order.totalCost ? order.totalCost / 100 : 1);
+    // Only include orders within the filter range
+    if (orderDate >= startDate && orderDate <= endDate) {
+      revenues[dayKey] =
+        (revenues[dayKey] || 0) + (order.totalCost ? order.totalCost / 100 : 0);
 
-    // Conta gli status
-    if (!statusCountsByMonthYear[key]) {
-      statusCountsByMonthYear[key] = { delivered: 0, ready: 0, unconfirmed: 0 };
-    }
+      ordersCount[dayKey] = (ordersCount[dayKey] || 0) + 1;
 
-    const status = order.status?.toLowerCase();
-    if (
-      status === "delivered" ||
-      status === "ready" ||
-      status === "unconfirmed"
-    ) {
-      statusCountsByMonthYear[key][status]++;
+      // Conta gli status
+      if (!statusCountsByFilter[dayKey]) {
+        statusCountsByFilter[dayKey] = {
+          delivered: 0,
+          ready: 0,
+          unconfirmed: 0,
+        };
+      }
+
+      const status = order.status?.toLowerCase();
+      if (
+        status === "delivered" ||
+        status === "ready" ||
+        status === "unconfirmed"
+      ) {
+        statusCountsByFilter[dayKey][status]++;
+      }
     }
   });
 
-  const now = new Date();
-
-  const monthsArray = [];
-  for (let i = 11; i >= 0; i--) {
-    monthsArray.push(subMonths(now, i));
-  }
-
-  const monthlyData = monthsArray.map((date) => {
-    const key = format(date, "yyyy-MM");
-    const monthAbbrev = format(date, "MMMM", { locale: it });
-    const capitalizedMonth =
-      monthAbbrev.charAt(0).toUpperCase() + monthAbbrev.slice(1);
-
-    const statusCounts = statusCountsByMonthYear[key] || {
-      delivered: 0,
-      ready: 0,
-      unconfirmed: 0,
-    };
+  // Map days array to chart data format
+  const dailyData = daysArray.map((date) => {
+    const dayKey = format(date, dateFormat);
+    const value = capitalize(format(date, valueFormat, { locale: it }));
 
     return {
-      month: capitalizedMonth,
-      orderCount: totalRevenuesByMonthYear[key] || 0,
+      value,
+      totalRevenues: type === "revenues" ? (revenues[dayKey] ?? 0) : undefined,
+      totalOrders: type === "orders" ? (ordersCount[dayKey] ?? 0) : undefined,
       fullDate: date,
-      statusCounts, // ← nuovo campo: { delivered, ready, done }
+      statusCounts: statusCountsByFilter[dayKey] || {
+        delivered: 0,
+        ready: 0,
+        unconfirmed: 0,
+      },
     };
   });
 
-  return monthlyData;
+  return dailyData;
 }

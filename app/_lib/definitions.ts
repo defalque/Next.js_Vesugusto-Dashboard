@@ -240,8 +240,9 @@ export type BestSeller = {
 };
 
 export type Data = {
-  month: string;
-  orderCount: number;
+  value: string;
+  totalRevenues?: number;
+  totalOrders?: number;
   fullDate: Date;
   statusCounts?: { delivered: number; ready: number; unconfirmed: number };
 };

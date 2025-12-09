@@ -19,21 +19,18 @@ import {
 function RevenueChart({ data }: { data: Data[] }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <AreaChart
-        data={data}
-        margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-      >
+      <AreaChart data={data} margin={{ top: 30, bottom: 30 }} responsive>
         <defs>
           <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="10%"
               stopColor={colors.barChartColor}
-              stopOpacity={1}
+              stopOpacity={0.65}
             />
             <stop
               offset="100%"
               stopColor={colors.barChartColor}
-              stopOpacity={0.3}
+              stopOpacity={0.05}
             />
           </linearGradient>
         </defs>
@@ -41,7 +38,7 @@ function RevenueChart({ data }: { data: Data[] }) {
         <CartesianGrid vertical={false} stroke={colors.cartesian} />
 
         <XAxis
-          dataKey="month"
+          dataKey="value"
           padding={{ left: 30, right: 30 }}
           tick={{ fill: colors.data, fontWeight: "400", fontSize: "12px" }}
           tickLine={false}
@@ -52,9 +49,9 @@ function RevenueChart({ data }: { data: Data[] }) {
 
         <Area
           type="bump"
-          dataKey={"orderCount"}
+          dataKey="totalRevenues"
           stroke={colors.barChartColor}
-          strokeWidth={0}
+          strokeWidth={1.5}
           fillOpacity={1}
           name="Totale guadagni"
           fill="url(#area)"
@@ -75,7 +72,7 @@ const CustomTooltip = ({
   if (active && payload && payload.length) {
     const dateObj = payload?.[0]?.payload?.fullDate;
     const formattedDate = dateObj
-      ? capitalize(format(dateObj, "MMMM yyyy", { locale: it }))
+      ? capitalize(format(dateObj, "d MMMM yyyy", { locale: it }))
       : label;
 
     return (

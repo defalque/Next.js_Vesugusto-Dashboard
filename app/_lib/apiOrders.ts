@@ -1,6 +1,7 @@
+import { OVERVIEW_FILTER } from "@/constants/const";
 import { createClient } from "@/utils/supabase/server";
 
-import { subMonths, format, startOfDay, subDays } from "date-fns";
+import { subDays, subYears } from "date-fns";
 
 export async function getOrders(
   limit: number,
@@ -188,23 +189,17 @@ export async function getOrderId(id: string) {
   return data;
 }
 
-export async function getLastYearOrders() {
+export async function getFilteredOrders() {
   const supabase = await createClient();
 
-  // Data di oggi, a fine giornata
-  const now = new Date();
-
-  // Data esattamente 12 mesi fa, all'inizio del giorno
-  const lastYearDate = startOfDay(subMonths(now, 12)); // Esempio: 2024-08-13T00:00:00
-
-  const fromDate = format(lastYearDate, "yyyy-MM-dd");
-  const toDate = format(now, "yyyy-MM-dd"); // oppure: format(endOfDay(now), ...) se vuoi precisione massima
+  const sevenDaysAgo = subDays(new Date(), OVERVIEW_FILTER).toISOString();
+  // const oneYearAgo = subYears(new Date(), 1).toISOString();
 
   const { data: orders, error } = await supabase
     .from("orders")
     .select("id, orderDate, totalCost, status")
-    .gte("orderDate", fromDate)
-    .lte("orderDate", toDate);
+    .gte("created_at", sevenDaysAgo);
+  // .gte("created_at", oneYearAgo);
 
   if (error) {
     console.error(

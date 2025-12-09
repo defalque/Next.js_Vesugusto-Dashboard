@@ -40,11 +40,11 @@ export default async function Page({
         />
 
         <Link
-          className="bg-brand-950 hover:bg-brand-900 touch-hitbox border-brand-950/20 flex cursor-pointer items-center rounded-lg border px-3 py-2.5 font-semibold text-white shadow-sm inset-shadow-2xs transition-colors duration-300 dark:border-zinc-700/40 dark:bg-zinc-700/80 dark:inset-shadow-white/20 dark:hover:bg-zinc-600/90"
+          className="bg-brand-950 hover:bg-brand-900 touch-hitbox border-brand-950 flex cursor-pointer items-center rounded-lg border px-3 py-2.5 font-semibold text-white shadow-sm inset-shadow-2xs transition-colors duration-300 dark:border-zinc-700/40 dark:bg-zinc-700/80 dark:inset-shadow-white/20 dark:hover:bg-zinc-600/90"
           href="products/create"
         >
-          <span className="hidden sm:block">Aggiungi prodotto</span>
-          <span className="block sm:hidden">Aggiungi</span>
+          <span className="">Aggiungi prodotto</span>
+          {/* <span className="block sm:hidden">Aggiungi</span> */}
         </Link>
       </div>
 

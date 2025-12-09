@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 type ProductFilters = {
   value: "all" | "food" | "drink";
-  label: "Qualsiasi tipo" | "Food" | "Drink";
+  label: "Qualsiasi tipo" | "Cibo" | "Bevanda";
 };
 
 type OrderFilters = {
@@ -42,8 +42,8 @@ export type SortOption = OrderSort | ProductSort;
 
 export const TYPE_OPTIONS: FilterOption[] = [
   { value: "all", label: "Qualsiasi tipo" },
-  { value: "drink", label: "Drink" },
-  { value: "food", label: "Food" },
+  { value: "drink", label: "Bevanda" },
+  { value: "food", label: "Cibo" },
 ];
 
 export const STATUS_OPTIONS: FilterOption[] = [

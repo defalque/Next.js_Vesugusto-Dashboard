@@ -5,11 +5,12 @@ import OrdersStats from "./OrdersStats";
 import UsersStats from "./UsersStats";
 import RevenuesStats from "./RevenuesStats";
 import CustomersStats from "./CustomersStats";
+import { DateRange } from "@/app/_lib/definitions";
 
-async function Stats() {
-  const ordersData = getStatsOrders();
-  const usersData = getTotalEcommerceUsers();
-  const customerData = getTopCustomer();
+async function Stats({ dateRange }: { dateRange: DateRange }) {
+  const ordersData = getStatsOrders(dateRange);
+  const usersData = getTotalEcommerceUsers(dateRange);
+  const customerData = getTopCustomer(dateRange);
 
   const [ordersResult, usersResult, customerResult] = await Promise.allSettled([
     ordersData,
@@ -62,21 +63,28 @@ async function Stats() {
         title="Ordini totali"
         value={totalCount}
         filteredValue={last7DaysCount}
+        dateRange={dateRange}
       />
 
       <RevenuesStats
         title="Ricavi totali"
         value={revenues}
         filteredValue={last7DaysRevenues}
+        dateRange={dateRange}
       />
 
       <UsersStats
         title="Clienti totali"
         value={users}
         filteredValue={last7DaysUsers}
+        dateRange={dateRange}
       />
 
-      <CustomersStats title="Miglior cliente" value={customer} />
+      <CustomersStats
+        title="Miglior cliente"
+        value={customer}
+        dateRange={dateRange}
+      />
     </div>
   );
 }

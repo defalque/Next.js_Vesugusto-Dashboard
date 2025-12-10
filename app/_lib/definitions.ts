@@ -71,6 +71,12 @@ export const ORDER_SORTBY_OPTIONS: SortOption[] = [
 
 //----------------------------------------------------------
 
+export type DateRange = "last-7-days" | "last-month" | "last-year";
+
+export type DateRangeParams = {
+  dateRange: DateRange;
+};
+
 export type ProductParams = {
   type: string;
   sort: string;

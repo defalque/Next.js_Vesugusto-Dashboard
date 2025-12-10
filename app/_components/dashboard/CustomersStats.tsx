@@ -1,3 +1,5 @@
+import { DateRange } from "@/app/_lib/definitions";
+
 type CustomersStatsProps = {
   title: string;
   value:
@@ -8,9 +10,10 @@ type CustomersStatsProps = {
       }
     | null
     | string;
+  dateRange: DateRange;
 };
 
-function CustomersStats({ title, value }: CustomersStatsProps) {
+function CustomersStats({ title, value, dateRange }: CustomersStatsProps) {
   if (!value || value === "Errore") {
     return (
       <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
@@ -46,7 +49,11 @@ function CustomersStats({ title, value }: CustomersStatsProps) {
           {value.num_orders} ordini
         </span>
         <span className="text-neutral-500 dark:text-neutral-400">
-          nell&apos;ultima settimana
+          {dateRange === "last-7-days"
+            ? "nell'ultima settimana"
+            : dateRange === "last-month"
+              ? "nell'ultimo mese"
+              : "nell'ultimo anno"}
         </span>
       </div>
     </div>

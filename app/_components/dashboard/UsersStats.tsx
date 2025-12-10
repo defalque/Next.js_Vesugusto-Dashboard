@@ -1,10 +1,18 @@
+import { DateRange } from "@/app/_lib/definitions";
+
 type UsersStatsProps = {
   title: string;
   value: number | string;
   filteredValue: number | string;
+  dateRange: DateRange;
 };
 
-function UsersStats({ title, value, filteredValue }: UsersStatsProps) {
+function UsersStats({
+  title,
+  value,
+  filteredValue,
+  dateRange,
+}: UsersStatsProps) {
   const isValueNumber = typeof value === "number" && !isNaN(value);
   const isFilteredValueNumber =
     typeof filteredValue === "number" && !isNaN(filteredValue);
@@ -30,8 +38,16 @@ function UsersStats({ title, value, filteredValue }: UsersStatsProps) {
         {title}
       </h5>
       <p className="text-4xl leading-none font-medium md:text-3xl">{value}</p>
-      {filteredValue > 0 && <UsersStatsNumber value={filteredValue} />}
-      {filteredValue === 0 && <UsersStatsNumber value={filteredValue} muted />}
+      {filteredValue > 0 && (
+        <UsersStatsNumber value={filteredValue} dateRange={dateRange} />
+      )}
+      {filteredValue === 0 && (
+        <UsersStatsNumber
+          value={filteredValue}
+          muted={true}
+          dateRange={dateRange}
+        />
+      )}
     </div>
   );
 }
@@ -39,9 +55,11 @@ function UsersStats({ title, value, filteredValue }: UsersStatsProps) {
 function UsersStatsNumber({
   value,
   muted,
+  dateRange,
 }: {
   value: number;
   muted?: boolean;
+  dateRange: "last-7-days" | "last-month" | "last-year";
 }) {
   return (
     <div className="flex items-center gap-1">
@@ -51,7 +69,11 @@ function UsersStatsNumber({
         {!muted ? `+${value}` : value}
       </span>
       <span className="text-xs text-neutral-500 dark:text-neutral-400">
-        nell&apos;ultima settimana
+        {dateRange === "last-7-days"
+          ? "nell'ultima settimana"
+          : dateRange === "last-month"
+            ? "nell'ultimo mese"
+            : "nell'ultimo anno"}
       </span>
     </div>
   );

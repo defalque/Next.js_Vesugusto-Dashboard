@@ -6,15 +6,22 @@
 // const loadFeatures = () =>
 //   import("../../_lib/features").then((res) => res.default);
 
+import { DateRange } from "@/app/_lib/definitions";
 import { formatCurrency } from "@/app/_lib/utils";
 
 type RevenuesStatsProps = {
   title: string;
   value: number | string;
   filteredValue: number | string;
+  dateRange: DateRange;
 };
 
-function RevenuesStats({ title, value, filteredValue }: RevenuesStatsProps) {
+function RevenuesStats({
+  title,
+  value,
+  filteredValue,
+  dateRange,
+}: RevenuesStatsProps) {
   //   const countValue = useSpring(0, {
   //     stiffness: 185,
   //     damping: 25,
@@ -60,9 +67,18 @@ function RevenuesStats({ title, value, filteredValue }: RevenuesStatsProps) {
         {formatCurrency(value)}
       </span>
       {/* </LazyMotion> */}
-      {percentage > 0 && <RevenuesStatsPercentage percentage={percentage} />}
+      {percentage > 0 && (
+        <RevenuesStatsPercentage
+          percentage={percentage}
+          dateRange={dateRange}
+        />
+      )}
       {percentage === 0 && (
-        <RevenuesStatsPercentage percentage={percentage} muted />
+        <RevenuesStatsPercentage
+          percentage={percentage}
+          muted={true}
+          dateRange={dateRange}
+        />
       )}
     </div>
   );
@@ -71,9 +87,11 @@ function RevenuesStats({ title, value, filteredValue }: RevenuesStatsProps) {
 function RevenuesStatsPercentage({
   percentage,
   muted,
+  dateRange,
 }: {
   percentage: number;
   muted?: boolean;
+  dateRange: "last-7-days" | "last-month" | "last-year";
 }) {
   return (
     <div className="flex items-center gap-1">
@@ -83,7 +101,11 @@ function RevenuesStatsPercentage({
         {percentage.toFixed(1)}%
       </span>
       <span className="text-xs text-neutral-500 dark:text-neutral-400">
-        nell&apos;ultima settimana
+        {dateRange === "last-7-days"
+          ? "nell'ultima settimana"
+          : dateRange === "last-month"
+            ? "nell'ultimo mese"
+            : "nell'ultimo anno"}
       </span>
     </div>
   );

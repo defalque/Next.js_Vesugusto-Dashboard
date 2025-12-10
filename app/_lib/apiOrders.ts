@@ -2,6 +2,7 @@ import { OVERVIEW_FILTER } from "@/constants/const";
 import { createClient } from "@/utils/supabase/server";
 
 import { subDays, subYears } from "date-fns";
+import { DateRange } from "./definitions";
 
 export async function getOrders(
   limit: number,
@@ -212,10 +213,8 @@ export async function getFilteredOrders() {
   return orders;
 }
 
-export async function getStatsOrders() {
+export async function getStatsOrders(dateRange: DateRange) {
   const supabase = await createClient();
-
-  const sevenDaysAgo = subDays(new Date(), 7).toISOString();
 
   const {
     data: orders,
@@ -231,14 +230,21 @@ export async function getStatsOrders() {
     return null;
   }
 
+  let query = supabase.from("orders").select("totalCost", { count: "exact" });
+
+  if (dateRange === "last-7-days") {
+    query = query.gte("created_at", subDays(new Date(), 7).toISOString());
+  } else if (dateRange === "last-month") {
+    query = query.gte("created_at", subDays(new Date(), 30).toISOString());
+  } else if (dateRange === "last-year") {
+    query = query.gte("created_at", subYears(new Date(), 1).toISOString());
+  }
+
   const {
     data: last7DaysOrders,
     count: last7DaysCount,
     error: last7DaysError,
-  } = await supabase
-    .from("orders")
-    .select("totalCost", { count: "exact" })
-    .gte("created_at", sevenDaysAgo);
+  } = await query;
 
   if (last7DaysError) {
     console.error(
@@ -293,10 +299,21 @@ export async function getOrdersActivity() {
   return fixedOrders;
 }
 
-export async function getTopCustomer() {
+export async function getTopCustomer(dateRange: DateRange) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.rpc("get_top_customer");
+  let range;
+  if (dateRange === "last-7-days") {
+    range = subDays(new Date(), 7).toISOString();
+  } else if (dateRange === "last-month") {
+    range = subDays(new Date(), 30).toISOString();
+  } else if (dateRange === "last-year") {
+    range = subYears(new Date(), 1).toISOString();
+  }
+
+  const { data, error } = await supabase.rpc("get_top_customer", {
+    date_range: range,
+  });
 
   if (error) {
     console.error(

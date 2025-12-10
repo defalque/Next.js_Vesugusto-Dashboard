@@ -1,10 +1,18 @@
+import { DateRange } from "@/app/_lib/definitions";
+
 type OrdersStatsProps = {
   title: string;
   value: number | string;
   filteredValue: number | string;
+  dateRange: DateRange;
 };
 
-function OrdersStats({ title, value, filteredValue }: OrdersStatsProps) {
+function OrdersStats({
+  title,
+  value,
+  filteredValue,
+  dateRange,
+}: OrdersStatsProps) {
   const isValueNumber = typeof value === "number" && !isNaN(value);
   const isFilteredValueNumber =
     typeof filteredValue === "number" && !isNaN(filteredValue);
@@ -34,9 +42,15 @@ function OrdersStats({ title, value, filteredValue }: OrdersStatsProps) {
         {title}
       </h5>
       <p className="text-4xl leading-none font-medium md:text-3xl">{value}</p>
-      {percentage > 0 && <OrdersStatsPercentage percentage={percentage} />}
+      {percentage > 0 && (
+        <OrdersStatsPercentage percentage={percentage} dateRange={dateRange} />
+      )}
       {percentage === 0 && (
-        <OrdersStatsPercentage percentage={percentage} muted />
+        <OrdersStatsPercentage
+          percentage={percentage}
+          muted={true}
+          dateRange={dateRange}
+        />
       )}
     </div>
   );
@@ -45,9 +59,11 @@ function OrdersStats({ title, value, filteredValue }: OrdersStatsProps) {
 function OrdersStatsPercentage({
   percentage,
   muted,
+  dateRange,
 }: {
   percentage: number;
   muted?: boolean;
+  dateRange: "last-7-days" | "last-month" | "last-year";
 }) {
   return (
     <div className="flex items-center gap-1">
@@ -57,7 +73,11 @@ function OrdersStatsPercentage({
         {percentage.toFixed(1)}%
       </span>
       <span className="text-xs text-neutral-500 dark:text-neutral-400">
-        nell&apos;ultima settimana
+        {dateRange === "last-7-days"
+          ? "nell'ultima settimana"
+          : dateRange === "last-month"
+            ? "nell'ultimo mese"
+            : "nell'ultimo anno"}
       </span>
     </div>
   );

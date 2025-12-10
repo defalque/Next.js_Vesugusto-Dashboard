@@ -1,20 +1,17 @@
 import { Suspense } from "react";
 import {
   BestSellersSkeleton,
+  ChartsSkeleton,
   OrdersActivitySkeleton,
-  OrdersAreaChartSkeleton,
-  RevenueChartSkeleton,
   StatsSkeleton,
 } from "../ui/Skeletons";
-import BestSellerChartWrapper from "./BestSellerChartWrapper";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
-import OrdersActivityWrapper from "./OrdersActivityWrapper";
 import CustomDialogWrapper from "../ui/dialog/CustomDialogWrapper";
-import ChartsWrapper from "./ChartsWrapper";
-import RevenueChartWrapper from "./RevenueChartWrapper";
-import OrdersChartWrapper from "./OrdersChartWrapper";
 import { DateRangeParams } from "@/app/_lib/definitions";
-import Stats from "./Stats";
+import Stats from "./stats/Stats";
+import ChartsResolver from "./charts/ChartsResolver";
+import BestSellerChartWrapper from "./bestSellers/BestSellerChartWrapper";
+import OrdersActivityWrapper from "./ordersActivity/OrdersActivityWrapper";
 
 async function DateRangeResolver({
   dateRangeParams,
@@ -44,18 +41,9 @@ async function DateRangeResolver({
         <CustomDialogWrapper />
       </DialogContextProvider>
 
-      <ChartsWrapper
-        revenueChart={
-          <Suspense fallback={<RevenueChartSkeleton />}>
-            <RevenueChartWrapper />
-          </Suspense>
-        }
-        ordersChart={
-          <Suspense fallback={<OrdersAreaChartSkeleton />}>
-            <OrdersChartWrapper />
-          </Suspense>
-        }
-      />
+      <Suspense fallback={<ChartsSkeleton />}>
+        <ChartsResolver dateRange={dateRange} />
+      </Suspense>
     </>
   );
 }

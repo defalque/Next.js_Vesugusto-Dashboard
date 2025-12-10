@@ -1,11 +1,16 @@
-import { getFilteredOrders } from "@/app/_lib/apiOrders";
+// import { getFilteredOrders } from "@/app/_lib/apiOrders";
 import { prepareOrdersChartData } from "@/app/_lib/utils";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import LazyRevenueChart from "./LazyRevenueChart";
+import { ChartOrders, DateRange } from "@/app/_lib/definitions";
 
-async function RevenueChartWrapper() {
-  const orders = await getFilteredOrders();
-
+async function RevenueChartWrapper({
+  dateRange,
+  orders,
+}: {
+  dateRange: DateRange;
+  orders: ChartOrders[] | null;
+}) {
   if (!orders) {
     return (
       <div className="relative h-75 w-full overflow-hidden rounded-md">
@@ -28,7 +33,7 @@ async function RevenueChartWrapper() {
     );
   }
 
-  const data = prepareOrdersChartData("revenues", "last-7-days", orders) ?? [];
+  const data = prepareOrdersChartData("revenues", dateRange, orders) ?? [];
 
   return <LazyRevenueChart data={data} />;
 }

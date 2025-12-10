@@ -2,8 +2,8 @@ import { getBestSeller } from "@/app/_lib/apiProducts";
 
 import { BestSeller } from "@/app/_lib/definitions";
 
-import EmptyWrapper from "./EmptyWrapper";
-import ErrorWrapper from "./ErrorWrapper";
+import EmptyWrapper from "../EmptyWrapper";
+import ErrorWrapper from "../ErrorWrapper";
 import LazyBestSellerChart from "./LazyBestSellerChart";
 
 async function BestSellerChartWrapper() {

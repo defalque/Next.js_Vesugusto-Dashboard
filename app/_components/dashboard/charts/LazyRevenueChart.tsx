@@ -3,7 +3,7 @@
 import { Data } from "@/app/_lib/definitions";
 
 import dynamic from "next/dynamic";
-import { RevenueChartSkeleton } from "../ui/Skeletons";
+import { RevenueChartSkeleton } from "../../ui/Skeletons";
 const RevenueChart = dynamic(() => import("./RevenueChart"), {
   ssr: false,
   loading: () => <RevenueChartSkeleton />,

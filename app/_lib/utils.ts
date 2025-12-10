@@ -8,6 +8,7 @@ import {
   startOfMonth,
 } from "date-fns";
 import { it } from "date-fns/locale";
+import { ChartOrders } from "./definitions";
 
 export function formatCurrency(amount: number): string {
   return (amount / 100).toLocaleString("it-IT", {
@@ -66,12 +67,7 @@ export const capitalize = (str: string) =>
 export function prepareOrdersChartData(
   type: "orders" | "revenues",
   filter: "last-7-days" | "last-month" | "last-year",
-  orders: {
-    id: number;
-    orderDate: string;
-    totalCost?: number;
-    status?: string;
-  }[],
+  orders: ChartOrders[],
 ) {
   const today = startOfToday();
   const daysArray: Date[] = [];

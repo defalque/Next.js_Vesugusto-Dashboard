@@ -1,6 +1,5 @@
 export const LIMIT = 10;
 export const ORDERS_LIMIT = 10;
-export const OVERVIEW_FILTER = 30;
 
 export const toastStyle = {
   backgroundColor: "var(--toast-bg)",

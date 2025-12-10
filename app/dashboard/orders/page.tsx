@@ -9,7 +9,7 @@ import {
 } from "@/app/_lib/definitions";
 import { Suspense } from "react";
 import LazyControls from "@/app/_components/ui/controls/LazyControls";
-import OrdersFiltersResolver from "@/app/_components/dashboard/OrdersFiltersResolver";
+import OrdersFiltersResolver from "@/app/_components/orders/OrdersFiltersResolver";
 
 export const metadata = {
   title: "Ordini",

@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 
 import dynamic from "next/dynamic";
-import { ChartsSkeleton } from "../ui/Skeletons";
+import { ChartsSkeleton } from "../../ui/Skeletons";
 const Charts = dynamic(() => import("./Charts"), {
   ssr: false,
   loading: () => <ChartsSkeleton />,

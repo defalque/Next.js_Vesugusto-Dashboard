@@ -5,9 +5,8 @@ import Image from "next/image";
 
 import { LatestOrdersInfo } from "@/app/_lib/definitions";
 import { formatCurrency } from "@/app/_lib/utils";
-
-import StatusTag from "../orders/StatusTag";
-import Dropdown from "../ui/dropdown/Dropdown";
+import StatusTag from "@/app/_components/orders/StatusTag";
+import Dropdown from "@/app/_components/ui/dropdown/Dropdown";
 
 import {
   BarsArrowDownIcon,
@@ -17,7 +16,7 @@ import {
 import { AnimatePresence, LazyMotion } from "motion/react";
 import * as m from "motion/react-m";
 const loadFeatures = () =>
-  import("../../_lib/features").then((res) => res.default);
+  import("../../../_lib/features").then((res) => res.default);
 
 function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
   const [currentPage, setCurrentPage] = useState(1);

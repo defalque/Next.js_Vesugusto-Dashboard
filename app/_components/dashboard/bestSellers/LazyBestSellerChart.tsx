@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { BestSellersChartSkeleton } from "../ui/Skeletons";
+import { BestSellersChartSkeleton } from "../../ui/Skeletons";
 const BestSellersChart = dynamic(() => import("./BestSellerChart"), {
   ssr: false,
   loading: () => <BestSellersChartSkeleton />,

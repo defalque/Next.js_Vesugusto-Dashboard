@@ -5,7 +5,7 @@ import { ReactNode, useState } from "react";
 import { AnimatePresence, LazyMotion, MotionConfig } from "motion/react";
 import * as m from "motion/react-m";
 const loadFeatures = () =>
-  import("../../_lib/features").then((res) => res.default);
+  import("../../../_lib/features").then((res) => res.default);
 
 function Charts({
   revenueChart,

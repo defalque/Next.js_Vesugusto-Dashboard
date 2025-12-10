@@ -177,6 +177,13 @@ export type OrderItem = {
   };
 };
 
+export type ChartOrders = {
+  id: string;
+  orderDate: string;
+  totalCost: number;
+  status: string;
+};
+
 // dropdown menu context
 
 export type MenusContextValues = {

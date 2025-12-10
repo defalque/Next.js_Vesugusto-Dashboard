@@ -1,6 +1,6 @@
 import { getOrdersActivity } from "@/app/_lib/apiOrders";
-import EmptyWrapper from "./EmptyWrapper";
-import ErrorWrapper from "./ErrorWrapper";
+import EmptyWrapper from "../EmptyWrapper";
+import ErrorWrapper from "../ErrorWrapper";
 import LazyOrdersActivity from "./LazyOrdersActivity";
 
 // const DUMMY = [

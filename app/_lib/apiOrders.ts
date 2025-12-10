@@ -1,4 +1,3 @@
-import { OVERVIEW_FILTER } from "@/constants/const";
 import { createClient } from "@/utils/supabase/server";
 
 import { subDays, subYears } from "date-fns";
@@ -190,16 +189,23 @@ export async function getOrderId(id: string) {
   return data;
 }
 
-export async function getFilteredOrders() {
+export async function getFilteredOrders(dateRange: DateRange) {
   const supabase = await createClient();
 
-  const sevenDaysAgo = subDays(new Date(), OVERVIEW_FILTER).toISOString();
+  let range;
+  if (dateRange === "last-7-days") {
+    range = subDays(new Date(), 7).toISOString();
+  } else if (dateRange === "last-month") {
+    range = subDays(new Date(), 30).toISOString();
+  } else if (dateRange === "last-year") {
+    range = subYears(new Date(), 1).toISOString();
+  }
   // const oneYearAgo = subYears(new Date(), 1).toISOString();
 
   const { data: orders, error } = await supabase
     .from("orders")
     .select("id, orderDate, totalCost, status")
-    .gte("created_at", sevenDaysAgo);
+    .gte("created_at", range);
   // .gte("created_at", oneYearAgo);
 
   if (error) {

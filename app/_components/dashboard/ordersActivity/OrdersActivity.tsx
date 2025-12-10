@@ -70,10 +70,10 @@ function OrdersActivity({ orders }: { orders: LatestOrdersInfo[] }) {
     <LazyMotion features={loadFeatures}>
       <div className="-mx-(--box-padding) flex overflow-x-auto py-(--box-padding) md:mx-0">
         <div className="h-105 grow px-(--box-padding) md:px-0 lg:h-100">
-          <div className="flex items-center justify-between pb-(--box-padding)">
+          <div className="flex items-center justify-between px-0.5 pb-(--box-padding)">
             <input
               type="text"
-              className="w-2/3 rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder:text-sm focus:border-zinc-400 focus:ring-2 focus:ring-gray-300 focus:outline-none lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
+              className="focus:border-brand-950 ring-brand-950/20 w-2/3 rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder:text-sm focus:ring-2 focus:outline-none lg:py-1 dark:border-zinc-700 dark:bg-zinc-900/60 dark:focus:border-zinc-400 dark:focus:ring-zinc-600"
               placeholder="Filtra ordini per email..."
               value={filterInput}
               onChange={(e) => setFilterInput(e.target.value)}

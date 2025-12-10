@@ -26,6 +26,8 @@ import { DateRangeParams } from "@/app/_lib/definitions";
 import { DateRangeProvider } from "@/app/_contexts/DateRangeProvider";
 import DateRangeResolver from "@/app/_components/dashboard/DateRangeResolver";
 import DateRangePicker from "@/app/_components/dashboard/DateRangePicker";
+import { DashboardSkeleton } from "@/app/_components/ui/Skeletons";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Dashboard",
@@ -52,7 +54,9 @@ export default function Page({
       </div>
 
       <div className="grid grid-cols-2 grid-rows-[auto_30rem_auto_1fr] gap-x-15 gap-y-12 md:grid-cols-[1fr_1fr] md:grid-rows-[auto_28rem_auto_1fr] lg:grid-cols-[1fr_1fr] lg:grid-rows-[auto_auto_1fr]">
-        <DateRangeResolver dateRangeParams={dateRangeParam} />
+        <Suspense fallback={<DashboardSkeleton />}>
+          <DateRangeResolver dateRangeParams={dateRangeParam} />
+        </Suspense>
       </div>
     </>
   );

@@ -10,7 +10,7 @@ export function UserAvatarSkeleton() {
       <div
         className={`${shimmer} relative flex w-fit cursor-not-allowed items-center gap-3 overflow-hidden rounded-md dark:animate-pulse`}
       >
-        <div className="h-8 w-8 rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
+        <div className="h-9.5 w-9.5 rounded-full bg-gray-200 md:h-10 md:w-10 dark:animate-pulse dark:bg-zinc-700" />
         <div className="hidden flex-col gap-1 xl:flex">
           <div className="h-4 w-15 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
           <div className="h-3 w-30 rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700" />
@@ -664,7 +664,19 @@ export function StatsSkeleton() {
         <StatSkeleton label="Ordini totali" />
         <StatSkeleton label="Ricavi totali" />
         <StatSkeleton label="Clienti totali" />
-        <StatSkeleton label="Miglior cliente" />
+        <div
+          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+        >
+          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+            Miglior cliente
+          </h5>
+          <SkeletonBlock className="h-8 w-20 sm:h-6 md:h-5.5 md:w-20" />
+          <SkeletonBlock className="h-4.5 w-50 sm:h-4.5 md:h-4 md:w-40" />
+          <div className="flex items-center gap-1">
+            <SkeletonBlock className="h-5.5 w-10 sm:h-5.5 md:h-5" />
+            <SkeletonBlock className="h-5.5 w-25 sm:h-5.5 md:h-5" />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -684,10 +696,10 @@ export function StatSkeleton({
       <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
         {label}
       </h5>
-      <SkeletonBlock className="h-12 w-20 sm:h-11 md:h-10" />
+      <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
       <div className="flex items-center gap-1">
-        <SkeletonBlock className="h-6 w-10 sm:h-5 md:h-4" />
-        <SkeletonBlock className="h-6 w-20 sm:h-5 md:h-4" />
+        <SkeletonBlock className="h-5 w-10 sm:h-5.5 md:h-5.5" />
+        <SkeletonBlock className="h-5 w-20 sm:h-5.5 md:h-5.5" />
       </div>
     </div>
   );
@@ -715,14 +727,14 @@ export function OrdersActivitySkeleton() {
 export function OrdersActivityBodySkeleton() {
   return (
     <div
-      className={`_bg-gray-50/65 _dark:bg-zinc-800/40 h-105 grow animate-none cursor-not-allowed py-(--box-padding) lg:h-100 dark:animate-pulse`}
+      className={`_bg-gray-50/65 _dark:bg-zinc-800/40 h-117 grow animate-none cursor-not-allowed py-(--box-padding) sm:h-113 lg:h-108 dark:animate-pulse`}
     >
       <div className="flex items-center justify-between pb-(--box-padding)">
         <div className="h-10 w-2/3 rounded-md bg-gray-200 lg:h-8 dark:bg-zinc-700" />
         <div className="h-10 w-18 rounded-md bg-gray-200 lg:h-8 lg:w-18 dark:bg-zinc-700"></div>
       </div>
 
-      <ul className={`flex h-76 flex-col rounded`}>
+      <ul className={`flex h-81 flex-col rounded`}>
         {[...Array(5)].map((_, i) => (
           <li
             key={i}
@@ -780,13 +792,13 @@ export function BestSellersSkeleton() {
 export function BestSellersChartSkeleton() {
   return (
     <div
-      className={`_dark:animate-pulse _animate-none flex h-full w-full animate-pulse cursor-not-allowed flex-col items-center justify-center gap-6 py-(--box-padding)`}
+      className={`_dark:animate-pulse _animate-none flex min-h-[405px] w-full animate-pulse cursor-not-allowed flex-col items-center justify-center gap-6 py-(--box-padding)`}
     >
-      <div className="pieChart:h-55 pieChart:w-55 _dark:border-zinc-600 relative mb-2 h-30 w-30 rounded-full border border-gray-300 bg-gray-200 sm:h-40 sm:w-40 md:h-60 md:w-60 lg:h-40 lg:w-40 dark:border-none dark:bg-zinc-700">
-        <div className="absolute inset-8 rounded-full border border-gray-300 bg-gray-100 sm:inset-10 dark:border-none dark:bg-zinc-900/90" />
+      <div className="relative mb-2 aspect-square h-40 w-40 rounded-full border border-gray-300 bg-gray-200 dark:border-none dark:bg-zinc-700">
+        <div className="absolute inset-10 aspect-square rounded-full border border-gray-300 bg-gray-100 dark:border-none dark:bg-zinc-900/90" />
       </div>
 
-      <ul className="flex flex-wrap justify-center gap-2">
+      <ul className="flex flex-wrap justify-center gap-3">
         {Array.from({ length: 5 }).map((_, index) => (
           <li
             key={index}
@@ -805,7 +817,7 @@ export function AreaChartSkeleton() {
   return (
     <div className="px-4">
       <div
-        className={`${shimmer} relative h-[15.625rem] w-full animate-none overflow-hidden rounded-md bg-gray-50/65 dark:animate-pulse dark:bg-zinc-800/40`}
+        className={`${shimmer} relative h-62.5 w-full animate-none overflow-hidden rounded-md bg-gray-50/65 dark:animate-pulse dark:bg-zinc-800/40`}
       />
     </div>
   );
@@ -864,7 +876,7 @@ export function RevenueChartSkeleton() {
   return (
     <div className="relative h-75 w-full animate-pulse overflow-hidden rounded-md">
       <div
-        className="absolute inset-6 bg-gray-200 bg-gradient-to-t to-transparent p-5 dark:bg-zinc-700"
+        className="absolute inset-6 bg-gray-200 bg-linear-to-t to-transparent p-5 dark:bg-zinc-700"
         style={{
           clipPath: `path("M0,100 C100,250 350,100  600,200 C850,300 1100,100 1400,250 L1400,400 L0,500 Z")`,
         }}
@@ -875,20 +887,13 @@ export function RevenueChartSkeleton() {
 
 export function DashboardSkeleton() {
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="_dark:bg-zinc-800/40 _bg-gray-50 _px-6 w-fit rounded py-2 text-2xl">
-          Dashboard
-        </h1>
-      </div>
-
-      <div className="grid grid-cols-1 grid-rows-[auto_22rem_auto_1fr] gap-x-8 gap-y-12 md:grid-cols-[1fr_1fr] md:grid-rows-[auto_28rem_auto_1fr] lg:grid-cols-[1fr_1fr] lg:grid-rows-[auto_auto_1fr]">
+    <>
+      <div className="col-span-full">
         <StatsSkeleton />
-        <BestSellersSkeleton />
-        <OrdersActivitySkeleton />
-        <AreaChartSkeleton />
-        <AreaChartSkeleton />
       </div>
-    </div>
+      <BestSellersSkeleton />
+      <OrdersActivitySkeleton />
+      <ChartsSkeleton />
+    </>
   );
 }

@@ -19,7 +19,7 @@ import {
 function RevenueChart({ data }: { data: Data[] }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <AreaChart data={data} margin={{ top: 30, bottom: 30 }} responsive>
+      <AreaChart data={data} margin={{ top: 30, bottom: 30 }}>
         <defs>
           <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
             <stop

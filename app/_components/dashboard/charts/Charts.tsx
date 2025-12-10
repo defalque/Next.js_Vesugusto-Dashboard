@@ -118,7 +118,8 @@ function ChartButton({
       {isActive && (
         <m.div
           layoutId="tab"
-          className="absolute top-0 z-0 h-full w-full bg-gray-300/10 dark:bg-zinc-900/50"
+          transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
+          className="absolute top-0 z-0 h-full w-full bg-gray-400/10 dark:bg-zinc-950/30"
         />
       )}
     </button>

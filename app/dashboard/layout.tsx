@@ -1,5 +1,3 @@
-// import { Toaster } from "react-hot-toast";
-import { Toaster } from "sonner";
 import SidebarDrawerContextProvider from "../_contexts/SidebarDrawerContext";
 import Sidebar from "../_components/ui/sidebar/Sidebar";
 import SidebarDrawer from "../_components/ui/sidebar/SidebarDrawer";
@@ -10,6 +8,7 @@ import {
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
 import UserAvatar from "../_components/ui/sidebar/UserAvatar";
+import { Toaster } from "../_components/ui/Toaster";
 
 const links = [
   {
@@ -52,20 +51,9 @@ export default async function Layout({
         </SidebarDrawer>
       </SidebarDrawerContextProvider>
 
-      <main className="min-h-screen overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-3 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 sm:pt-5 xl:px-10 xl:py-10 dark:bg-zinc-900/80 dark:backdrop-blur-md">
-        {/* <Toaster
-          position="top-center"
-          gutter={12}
-          toastOptions={{
-            success: {
-              duration: 5000,
-            },
-            error: {
-              duration: 5000,
-            },
-          }}
-        /> */}
-        <Toaster position="top-right" duration={10000} closeButton richColors />
+      <main className="_dark:backdrop-blur-md min-h-screen overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-3 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 sm:pt-5 xl:px-10 xl:py-10 dark:bg-zinc-900/80">
+        <Toaster />
+
         {children}
       </main>
     </div>

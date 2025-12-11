@@ -279,5 +279,6 @@ export type DialogData = {
   name?: string;
   itemId?: number;
   itemName?: string;
+  itemNames?: string[];
   // status?: string;
 };

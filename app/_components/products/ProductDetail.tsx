@@ -20,27 +20,18 @@ function ProductDetail({
   const [isOpen, setIsOpen] = useState(true);
   const [ref, bounds] = useMeasure();
 
-  // const iconVariants = {
-  //   hover: { rotate: [-35, 23, -11, 8, -5, 3, -2, 0] },
-  // };
-
   return (
     <LazyMotion features={loadFeatures}>
-      <div className="dark:text-light flex w-full flex-col overflow-hidden rounded-md border border-gray-200 bg-gray-50/30 p-0.5 text-neutral-700 dark:border-zinc-700/40 dark:bg-zinc-800/40">
+      <div className="dark:text-light flex w-full flex-col overflow-hidden border-t border-gray-200 pt-5 text-neutral-700 lg:pt-3.5 dark:border-zinc-700/40">
         <m.button
-          // whileHover="hover"
-          // initial="initial"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="group flex cursor-pointer items-center px-3 py-3 text-left text-base font-medium md:text-lg lg:text-base"
+          className="group flex cursor-pointer items-center border-gray-200 text-left text-lg font-medium lg:text-base"
         >
           {label}
-          <m.span
-            // variants={iconVariants}
-            className="ml-auto"
-          >
+          <m.span className="ml-auto">
             <ChevronDownIcon
               className={`ml-auto size-5 transition-transform duration-300 ${
-                isOpen ? "-rotate-90" : "-rotate-0"
+                isOpen ? "-rotate-90" : "rotate-0"
               }`}
             />
           </m.span>
@@ -55,7 +46,7 @@ function ProductDetail({
               {isOpen && (
                 <m.p
                   exit={{ opacity: 1, height: 0 }}
-                  className="_border-t border-gray-200 px-3 pb-3 text-sm/6 text-neutral-600 md:text-base lg:text-sm/7 dark:border-zinc-700/40 dark:text-zinc-300"
+                  className="border-gray-200 pt-4 text-[15px] text-neutral-600 lg:pt-2 xl:text-sm dark:border-zinc-700/40 dark:text-zinc-300"
                 >
                   {productAttribute}
                 </m.p>

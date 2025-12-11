@@ -8,16 +8,7 @@ export const metadata = {
 export default function Page() {
   return (
     <div>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: "Prodotti", href: "/dashboard/products" },
-          {
-            label: `Aggiungi prodotto`,
-            href: `/dashboard/products/create`,
-            active: true,
-          },
-        ]}
-      />
+      <Breadcrumbs href="/dashboard/products" label="Prodotti" />
 
       <div>
         <LazyProductForm />

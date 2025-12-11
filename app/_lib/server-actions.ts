@@ -535,18 +535,19 @@ export async function deleteProductImage(name: string, img: string) {
 
 export async function addProductImages(id: number, formData: FormData) {
   const supabase = await createClient();
-
   // Estrai i file immagine dal formData
   const imageFiles = formData.getAll("images") as File[];
-
-  // Filtra file validi
+  // Filtra file validi: deve essere un File, un'immagine valida e < 1MB
+  const MAX_FILE_SIZE = 1024 * 1024; // 1MB in bytes
   const validImageFiles = imageFiles.filter(
-    (file) => file instanceof File && file.size > 0,
+    (file) =>
+      file instanceof File &&
+      file.size > 0 &&
+      file.size < MAX_FILE_SIZE &&
+      file.type.startsWith("image/"),
   );
-
   if (validImageFiles.length === 0) {
-    // console.log("Nessuna immagine valida da caricare.");
-    return;
+    throw new Error("File non valido o troppo grande.");
   }
 
   // Recupera le immagini esistenti dal prodotto
@@ -558,21 +559,23 @@ export async function addProductImages(id: number, formData: FormData) {
 
   if (productError) {
     console.error("Errore nel recuperare il prodotto:", productError);
-    return;
+    throw new Error(
+      "Errore imprevisto durante il caricamento delle immagini. Riprova più tardi.",
+    );
   }
-
   // Prepara l'array delle immagini già esistenti (o vuoto)
   const existingImages: string[] = product?.image ?? [];
-
   // Array dove metteremo gli URL appena caricati
   const uploadedImages: string[] = [];
+  // Array dove metteremo i nomi delle immagini che non sono state caricate per mostrare all'utente
+  const notUploadedImages: string[] = [];
 
   for (let i = 0; i < validImageFiles.length; i++) {
     const file = validImageFiles[i];
-
     // Genera nome file unico
     const fileExtension = file.name.split(".").pop();
-    const fileName = `product-${id}-${i}-${Date.now()}.${fileExtension}`;
+    const uniqueId = crypto.randomUUID().slice(0, 8);
+    const fileName = `product-${id}-${i}-${Date.now()}-${uniqueId}.${fileExtension}`;
 
     // Carica file su Supabase Storage
     const { error: uploadError } = await supabase.storage
@@ -581,9 +584,9 @@ export async function addProductImages(id: number, formData: FormData) {
         cacheControl: "3600",
         upsert: false,
       });
-
     if (uploadError) {
       console.error(`Errore nel caricamento dell'immagine ${i}:`, uploadError);
+      notUploadedImages.push(file.name);
       continue;
     }
 
@@ -596,8 +599,10 @@ export async function addProductImages(id: number, formData: FormData) {
   }
 
   if (uploadedImages.length === 0) {
-    // console.log("Nessuna immagine è stata caricata correttamente.");
-    return;
+    console.log("Nessuna immagine è stata caricata correttamente.");
+    throw new Error(
+      "Nessuna immagine è stata caricata correttamente. Riprova più tardi.",
+    );
   }
 
   // Unisci le immagini vecchie con quelle nuove
@@ -617,6 +622,7 @@ export async function addProductImages(id: number, formData: FormData) {
   }
 
   revalidatePath(`/dashboard/products/${id}`);
+  return { success: true, notUploadedImages };
 }
 
 // ORDER

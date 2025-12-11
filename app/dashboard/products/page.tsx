@@ -30,7 +30,9 @@ export default async function Page({
 
   return (
     <section>
-      <div className="pb-4 text-2xl font-bold">Prodotti</div>
+      <div className="dark:text-light pb-4 text-2xl font-bold text-neutral-700">
+        Prodotti
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-3 lg:mb-8 lg:gap-5">
         <LazyControls

@@ -11,7 +11,7 @@ function StatusTag({
         status === "unconfirmed"
           ? "bg-yellow-500/20 text-yellow-600 dark:bg-amber-500/10 dark:text-amber-400"
           : status === "delivered"
-            ? "bg-green-600/20 text-green-600 dark:bg-green-400/10 dark:text-green-400"
+            ? "bg-emerald-600/10 text-emerald-500 dark:bg-emerald-400/10 dark:text-emerald-400"
             : status === "ready"
               ? "bg-blue-500/20 text-blue-600 dark:bg-blue-400/10 dark:text-blue-300"
               : ""

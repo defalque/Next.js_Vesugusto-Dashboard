@@ -25,19 +25,7 @@ async function OrderPage({ params }: { params: Promise<{ orderId: string }> }) {
 
   return (
     <>
-      <Breadcrumbs
-        breadcrumbs={[
-          {
-            label: "Ordini",
-            href: `/dashboard/orders`,
-          },
-          {
-            label: `Ordine #${order.id}`,
-            href: `/dashboard/orders/${order.id}`,
-            active: true,
-          },
-        ]}
-      />
+      <Breadcrumbs href="/dashboard/orders" label="Ordini" />
 
       <div className="dark:text-light flex w-full flex-col gap-8 text-neutral-700">
         <div className="box-style bg-box flex w-full flex-col gap-1 rounded-xl border lg:max-w-2xl">

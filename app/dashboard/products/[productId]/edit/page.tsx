@@ -27,17 +27,8 @@ export default async function Page({ params }: Slug) {
   return (
     <div>
       <Breadcrumbs
-        breadcrumbs={[
-          {
-            label: `${product.name}`,
-            href: `/dashboard/products/${productId}`,
-          },
-          {
-            label: `Modifica prodotto`,
-            href: `/dashboard/products/${productId}/edit`,
-            active: true,
-          },
-        ]}
+        href={`/dashboard/products/${productId}`}
+        label={product.name}
       />
 
       <div>

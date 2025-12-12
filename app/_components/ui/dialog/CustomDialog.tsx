@@ -106,6 +106,7 @@ export default function CustomDialog({
 
         {type === "confirm" && (
           <CustomPanel
+            type="confirm"
             title={`Conferma stato ordine "${itemId}"`}
             description="Sei sicuro di voler rendere questo ordine pronto per la spedizione?"
             actionLabel="Conferma"
@@ -116,6 +117,7 @@ export default function CustomDialog({
 
         {type === "done" && (
           <CustomPanel
+            type="done"
             title={`Conferma spedizione avvenuta ordine "${itemId}"`}
             description="Sei sicuro di voler confermare la spedizione avvenuta di questo ordine?"
             actionLabel="Conferma"
@@ -126,6 +128,7 @@ export default function CustomDialog({
 
         {type === "delete" && (
           <CustomPanel
+            type="delete"
             title={`Elimina prodotto "${itemName}"`}
             subTitle="Il prodotto verrà eliminato definitivamente."
             description="Sei sicuro di voler eliminare questo prodotto? Questa azione è irreversibile."
@@ -155,6 +158,7 @@ export default function CustomDialog({
 
         {type === "cancel" && (
           <CustomPanel
+            type="cancel"
             title={`Elimina ${(() => {
               const names =
                 itemNames?.map((name) =>

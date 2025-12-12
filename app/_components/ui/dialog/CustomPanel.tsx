@@ -1,3 +1,4 @@
+import { DialogType } from "@/app/_lib/definitions";
 import {
   Button,
   Description,
@@ -7,6 +8,7 @@ import {
 import { ReactNode } from "react";
 
 function CustomPanel({
+  type,
   title,
   subTitle,
   description,
@@ -15,6 +17,7 @@ function CustomPanel({
   actionLabel,
   onClose,
 }: {
+  type?: DialogType;
   title: string;
   subTitle?: string;
   description?: string;
@@ -30,6 +33,59 @@ function CustomPanel({
   };
 
   const hasForm = Boolean(formRow);
+
+  let actionButton: ReactNode;
+
+  switch (type) {
+    case "cancel":
+    case "delete":
+      actionButton = (
+        <button
+          className="touch-hitbox flex cursor-pointer items-center rounded-lg border border-inherit bg-red-500 px-3 py-2.5 text-base font-semibold text-white inset-shadow-2xs transition-colors duration-300 hover:bg-red-600 sm:text-[15px] md:text-sm dark:border-zinc-700/40 dark:bg-red-800 dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-red-700"
+          type="button"
+          onClick={() => actionFn()}
+        >
+          {actionLabel}
+        </button>
+      );
+      break;
+
+    case "confirm":
+      actionButton = (
+        <button
+          className="touch-hitbox flex cursor-pointer items-center rounded-lg border border-inherit bg-sky-500 px-3 py-2.5 text-base font-semibold text-white inset-shadow-2xs transition-colors duration-300 hover:bg-sky-600 sm:text-[15px] md:text-sm dark:border-zinc-700/40 dark:bg-sky-800 dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-sky-700"
+          type="button"
+          onClick={() => actionFn()}
+        >
+          {actionLabel}
+        </button>
+      );
+      break;
+
+    case "done":
+      actionButton = (
+        <button
+          className="touch-hitbox flex cursor-pointer items-center rounded-lg border border-inherit bg-emerald-500 px-3 py-2.5 text-base font-semibold text-white inset-shadow-2xs transition-colors duration-300 hover:bg-emerald-600 sm:text-[15px] md:text-sm dark:border-zinc-700/40 dark:bg-emerald-800 dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-emerald-700"
+          type="button"
+          onClick={() => actionFn()}
+        >
+          {actionLabel}
+        </button>
+      );
+      break;
+
+    default:
+      actionButton = (
+        <Button
+          className="data-hover:bg-brand-900 data-open:bg-brand-700 dark:data-open:bg-brand-dark-600 inset-shadow-brand-50/60 dark:border-brand-dark-100 dark:data-hover:bg-brand-dark-400 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 bg-brand-950 hover:bg-brand-900 dark:bg-brand-dark-600 dark:hover:bg-brand-dark-400 border-brand-dark-100 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold shadow-2xs transition-colors duration-200 text-shadow-2xs focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border"
+          {...(!hasForm && { onClick: () => actionFn() })}
+          type={formRow ? "submit" : "button"}
+        >
+          {actionLabel}
+        </Button>
+      );
+      break;
+  }
 
   return (
     <div className="fixed inset-0 flex w-screen items-center justify-center overflow-hidden p-4">
@@ -66,13 +122,7 @@ function CustomPanel({
             Annulla
           </button>
 
-          <Button
-            className="data-hover:bg-brand-900 data-open:bg-brand-700 dark:data-open:bg-brand-dark-600 inset-shadow-brand-50/60 dark:border-brand-dark-100 dark:data-hover:bg-brand-dark-400 text-brand-50 dark:data-focus:ring-brand-dark-300 data-focus:ring-brand-dark-300 bg-brand-950 hover:bg-brand-900 dark:bg-brand-dark-600 dark:hover:bg-brand-dark-400 border-brand-dark-100 inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold shadow-2xs transition-colors duration-200 text-shadow-2xs focus:not-data-focus:outline-none data-focus:ring-4 data-focus:outline-none dark:border"
-            {...(!hasForm && { onClick: () => actionFn() })}
-            type={formRow ? "submit" : "button"}
-          >
-            {actionLabel}
-          </Button>
+          {actionButton}
         </div>
       </DialogPanel>
     </div>

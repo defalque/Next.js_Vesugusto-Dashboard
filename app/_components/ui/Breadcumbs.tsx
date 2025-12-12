@@ -9,7 +9,10 @@ type Breadcrumb = {
 
 export default function Breadcrumbs({ href, label }: Breadcrumb) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-4 block w-fit list-none">
+    <nav
+      aria-label="Breadcrumb"
+      className="mb-4 hidden w-fit list-none sm:block"
+    >
       <li>
         <Link
           href={href}

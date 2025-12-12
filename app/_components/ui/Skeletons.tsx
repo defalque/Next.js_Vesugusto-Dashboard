@@ -261,52 +261,141 @@ export function SkeletonPageBlock({ className }: { className: string }) {
 
 export function ProductDataSkeleton() {
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="grid w-full max-w-full grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-2 lg:gap-y-0">
-        {/* Left: Image Skeleton */}
-        <div className="flex w-full items-start gap-x-5">
-          {/* Thumbnails */}
-          <div className="hidden flex-col items-center gap-4 lg:flex">
-            {[...Array(2)].map((_, i) => (
-              <SkeletonPageBlock key={i} className="relative h-28 w-18" />
-            ))}
-            <SkeletonPageBlock className="relative h-7 w-18" />
-          </div>
+    <div className="flex flex-col gap-8 sm:gap-5">
+      {/* Product header */}
+      <div className="flex flex-1 animate-pulse cursor-not-allowed flex-wrap items-center justify-between gap-x-4 gap-y-4">
+        <div className="flex items-center gap-2">
+          <SkeletonPageBlock className="h-8 w-30" />
+          <SkeletonPageBlock className="h-6 w-24 rounded-lg" />
+        </div>
+        <div className="flex gap-3">
+          <SkeletonPageBlock className="h-10.5 w-20 rounded-lg" />
+          <SkeletonPageBlock className="h-10.5 w-20 rounded-lg" />
+        </div>
+      </div>
 
-          {/* Main Image */}
-          <div className="relative aspect-2/3 w-full overflow-hidden rounded">
-            <SkeletonPageBlock className="absolute top-0 left-0 h-full w-full" />
+      {/* Stats */}
+      <div className="dark:text-light grid grid-cols-2 justify-between gap-10 text-neutral-700 md:grid-cols-3 2xl:grid-cols-6">
+        <div
+          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+        >
+          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+            Prezzo
+          </h5>
+          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+        </div>
+        <div
+          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+        >
+          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+            Stock
+          </h5>
+          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+        </div>
+        <div
+          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+        >
+          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+            Quantità vendute
+          </h5>
+          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+        </div>
+        <StatSkeleton label="Ricavi generati" />
+        <StatSkeleton label="Frequenza ordini" />
+        <StatSkeleton label="Wishlist utenti" />
+      </div>
+
+      {/* Product details */}
+      <div className="dark:text-light mt-8 flex basis-1/2 animate-pulse cursor-not-allowed flex-col gap-5 text-neutral-700 lg:mt-5 lg:gap-3.5">
+        <div className="flex w-full flex-col overflow-hidden border-t border-gray-200 pt-5 lg:pt-3.5 dark:border-zinc-700/40">
+          <div className="group flex items-center border-gray-200 text-left text-lg font-medium lg:text-base">
+            Descrizione
+          </div>
+          <div className="space-y-1.5 border-gray-200 pt-4 lg:pt-2 dark:border-zinc-700/40">
+            <SkeletonPageBlock className="h-5 w-full xl:h-4.5" />
+            <SkeletonPageBlock className="block h-5 w-full sm:w-1/4 lg:hidden" />
+            <SkeletonPageBlock className="block h-5 w-1/5 sm:hidden" />
           </div>
         </div>
-
-        {/* Right: Details Skeleton */}
-        <div className="flex w-full flex-col gap-8 lg:ml-3">
-          {/* Badges & Actions */}
-          <div className="flex items-center gap-5">
-            <SkeletonPageBlock className="h-10 basis-1/2" />
-            <SkeletonPageBlock className="h-10 basis-1/2" />
+        <div className="flex w-full flex-col overflow-hidden border-t border-gray-200 pt-5 lg:pt-3.5 dark:border-zinc-700/40">
+          <div className="group flex items-center border-gray-200 text-left text-lg font-medium lg:text-base">
+            Dettagli
           </div>
-
-          {/* Price, Discount, Stock */}
-          <div className="flex flex-row gap-5 md:flex-col lg:flex-row">
-            <SkeletonPageBlock className="h-18 basis-1/3 rounded md:w-full lg:basis-1/3" />
-            <SkeletonPageBlock className="h-18 basis-2/3 rounded md:w-full lg:basis-2/3" />
-            <SkeletonPageBlock className="h-18 basis-1/3 rounded md:w-full lg:basis-1/3" />
+          <div className="border-gray-200 pt-4 lg:pt-2 dark:border-zinc-700/40">
+            <SkeletonPageBlock className="h-5 w-full sm:w-[75%] lg:w-1/2 xl:h-4.5" />
           </div>
+        </div>
+        <div className="flex w-full flex-col overflow-hidden border-t border-gray-200 pt-5 lg:pt-3.5 dark:border-zinc-700/40">
+          <div className="group flex items-center border-gray-200 text-left text-lg font-medium lg:text-base">
+            Ingredienti
+          </div>
+          <div className="space-y-1.5 border-gray-200 pt-4 lg:pt-2 dark:border-zinc-700/40">
+            <SkeletonPageBlock className="h-5 w-full xl:h-4.5" />
+            <SkeletonPageBlock className="block h-5 w-full sm:w-[75%] md:w-1/3 lg:hidden" />
+            <SkeletonPageBlock className="block h-5 w-1/2 sm:hidden" />
+          </div>
+        </div>
+        <div className="flex w-full flex-col overflow-hidden border-t border-gray-200 pt-5 lg:pt-3.5 dark:border-zinc-700/40">
+          <div className="group flex items-center border-gray-200 text-left text-lg font-medium lg:text-base">
+            Informazioni nutrizionali
+          </div>
+          <div className="space-y-1.5 border-gray-200 pt-4 lg:pt-2 dark:border-zinc-700/40">
+            <SkeletonPageBlock className="h-5 w-full xl:h-4.5" />
+            <SkeletonPageBlock className="h-5 w-full md:w-1/2 xl:h-4.5" />
+            <SkeletonPageBlock className="h-5 w-full sm:w-1/3 md:hidden" />
+            <SkeletonPageBlock className="h-5 w-1/3 sm:hidden" />
+          </div>
+        </div>
+      </div>
 
-          {/* Product Description Blocks */}
-          <div className="flex flex-col gap-5">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className="box-style flex flex-col gap-2 rounded border bg-gray-100 px-3 py-3 dark:bg-zinc-800/40"
-              >
-                <SkeletonPageBlock className="mb-2 h-5 w-30" />
-                <SkeletonPageBlock className="h-4 w-full" />
-                <SkeletonPageBlock className="h-4 w-[85%]" />
-                <SkeletonPageBlock className="h-4 w-[70%]" />
+      {/* Product images */}
+      <div className="mt-8 flex animate-pulse cursor-not-allowed flex-col gap-5 lg:mt-5">
+        <h5 className="dark:text-light/80 border-gray-200 pt-2 text-lg font-semibold text-neutral-700 dark:border-zinc-700/40">
+          Gestione immagini
+        </h5>
+
+        <div className="flex animate-pulse cursor-not-allowed flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <div
+              className={`flex min-h-40 min-w-full justify-center rounded-lg border border-dashed border-pink-500 bg-pink-50/50 p-5 sm:w-sm dark:border-indigo-500 dark:bg-indigo-950/20`}
+            >
+              <div className="text-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  data-slot="icon"
+                  aria-hidden="true"
+                  className="mx-auto size-12 text-pink-700/40 dark:text-indigo-500/60"
+                >
+                  <path
+                    d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                <div className="mt-4 flex flex-wrap justify-center text-center text-[15px] text-pink-700/60 sm:text-sm/6 dark:text-indigo-500/80">
+                  <div
+                    className={`touch-hitbox dark:focus-within:outline-indigo-400} relative rounded-md bg-transparent font-semibold text-pink-600 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-pink-600 dark:text-indigo-400`}
+                  >
+                    <span>Carica una o più immagini</span>
+                  </div>
+                  <p className="pl-1 pointer-coarse:hidden pointer-fine:block">
+                    o trascinale e rilasciale
+                  </p>
+                </div>
+                <p className="mt-1 text-sm text-pink-700/60 sm:mt-0 sm:text-xs/5 dark:text-indigo-500/80">
+                  PNG, JPG, GIF fino a 1MB
+                </p>
               </div>
-            ))}
+            </div>
+
+            <div className="grid animate-pulse cursor-not-allowed grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+              {[...Array(5)].map((_, index) => (
+                <div key={index}>
+                  <div className="relative aspect-2/3 w-full overflow-hidden rounded-md bg-gray-200 dark:bg-zinc-700"></div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -416,7 +505,7 @@ export function OrdersListSkeleton() {
 export function OrderPageSkeleton() {
   return (
     <>
-      <PageTitleSkeleton breadcumbs />
+      <PageTitleSkeleton />
       <OrderDetailsSkeleton />
     </>
   );
@@ -569,7 +658,7 @@ function FormButtons() {
 function PageTitleSkeleton({ breadcumbs }: { breadcumbs?: boolean }) {
   return (
     <div
-      className={`${shimmer} relative h-6.5 overflow-hidden md:h-7 ${breadcumbs ? "mb-6 w-80 md:w-60" : "w-48"} animate-none rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+      className={`${shimmer} relative ${breadcumbs ? "hidden h-6 animate-pulse cursor-not-allowed sm:block" : "block h-6.5 md:h-7"} mb-4 w-30 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
     />
   );
 }
@@ -577,7 +666,7 @@ function PageTitleSkeleton({ breadcumbs }: { breadcumbs?: boolean }) {
 export function UpdateProductFormSkeleton({ title = true }) {
   return (
     <>
-      {title && <PageTitleSkeleton breadcumbs />}
+      {title && <PageTitleSkeleton />}
       <form
         aria-labelledby="title"
         className={`${shimmer} dark:text-light relative h-full space-y-5 overflow-hidden rounded bg-gray-50 px-3 py-5 sm:px-6 dark:bg-zinc-800/60`}

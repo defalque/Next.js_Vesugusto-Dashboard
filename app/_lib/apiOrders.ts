@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 
 import { subDays, subYears } from "date-fns";
 import { DateRange, GenericStats } from "./definitions";
+import { cache } from "react";
 
 export async function getOrders(
   limit: number,
@@ -133,7 +134,7 @@ export async function getTotalOrders(filters: {
   return { count: allOrders.length ?? 0, error: false };
 }
 
-export async function getOrder(id: string) {
+export const getOrder = cache(async (id: string) => {
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -169,7 +170,7 @@ export async function getOrder(id: string) {
     userId: normalizedUserId,
     order_items: normalizedOrderItems,
   };
-}
+});
 
 export async function getOrderId(id: string) {
   const supabase = await createClient();

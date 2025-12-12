@@ -1,4 +1,3 @@
-import { AtSymbolIcon } from "@heroicons/react/24/outline";
 import Breadcrumbs from "../ui/Breadcumbs";
 import StatusTag from "./StatusTag";
 import { formatCurrency, formatDate } from "@/app/_lib/utils";
@@ -60,7 +59,7 @@ async function OrderPage({ params }: { params: Promise<{ orderId: string }> }) {
                 <span>{formatDate(order.orderDate)}</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex h-10.5 items-center gap-2">
               <DialogContextProvider>
                 {order.status !== "delivered" && (
                   <OrdersActionButton

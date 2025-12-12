@@ -511,7 +511,7 @@ export function OrdersListSkeleton() {
 export function OrderPageSkeleton() {
   return (
     <>
-      <PageTitleSkeleton />
+      <PageTitleSkeleton breadcumbs />
       <OrderDetailsSkeleton />
     </>
   );
@@ -527,98 +527,103 @@ function SkeletonBlock({ className = "" }: { className?: string }) {
 
 export function OrderDetailsSkeleton() {
   return (
-    <div className="flex w-full cursor-not-allowed flex-col gap-8">
-      {/* Order Info */}
-      <div
-        className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border border-gray-200 lg:max-w-2xl dark:border-zinc-800`}
-      >
-        <div className="box-style flex justify-between border-b p-3">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            Dati ordine
-          </h2>
-          {/* Status Tag */}
-          <div
-            className={`${shimmer} relative h-6 w-24 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
-          />
+    <div className="dark:text-light flex w-full animate-pulse cursor-not-allowed flex-col gap-12 text-neutral-700">
+      <div className="flex w-full flex-col gap-5">
+        <div className="flex items-center gap-5">
+          <SkeletonBlock className="h-8 w-30 sm:h-8.5 md:h-7 lg:h-7" />
+          <SkeletonBlock className="h-7 w-24 rounded-lg md:h-6" />
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:flex-row sm:gap-8">
-          {[...Array(2)].map((_, idx) => (
-            <div
-              key={idx}
-              className={`${shimmer} box-style relative inline-flex w-fit items-center gap-2 overflow-hidden rounded border bg-gray-50 px-2 py-1 dark:bg-zinc-800/40`}
-            >
-              <div className="h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-600" />
-              <SkeletonBlock className="h-4 w-24" />
-              <SkeletonBlock className="h-8 w-25" />
+        <div className="flex flex-wrap justify-between gap-x-10 gap-y-5">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-5 text-base md:text-sm">
+            <div className="flex items-center gap-2">
+              <SkeletonBlock className="h-6 w-6 rounded-lg md:h-5 md:w-5" />
+              <SkeletonBlock className="h-6 w-20 md:h-5" />
             </div>
-          ))}
-
-          {/* Action Button */}
-          <div
-            className={`${shimmer} rounded- relative h-8 w-24 animate-none overflow-hidden bg-gray-200 sm:w-18 dark:animate-pulse dark:bg-zinc-700`}
-          />
+            <div className="flex items-center gap-2">
+              <SkeletonBlock className="h-6 w-6 rounded-lg md:h-5 md:w-5" />
+              <SkeletonBlock className="h-6 w-50 md:h-5" />
+            </div>
+            <div className="inline-flex w-fit items-center gap-2">
+              <SkeletonBlock className="h-6 w-6 rounded-lg md:h-5 md:w-5" />
+              <SkeletonBlock className="h-6 w-20 md:h-5" />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <SkeletonPageBlock className="h-11.5 w-25 rounded-lg md:h-10.5" />
+          </div>
         </div>
       </div>
 
-      {/* Customer Info */}
-      <div
-        className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border lg:max-w-2xl`}
-      >
-        <h2 className="box-style mb-3 border-b p-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div className="flex w-full flex-col gap-1 text-base md:text-sm">
+        <h3 className="box-style border-b pb-2 text-lg font-semibold md:text-base">
           Dati cliente
-        </h2>
-        <div className="flex flex-wrap gap-2 p-3 text-sm">
-          <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
-            <div
-              className={`h-8 w-8 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
-            />
-            <SkeletonBlock className="h-4 w-40" />
+        </h3>
+
+        <div className="box-style flex flex-col gap-1">
+          <div className="grid grid-cols-1 gap-y-1.5 border-b border-b-gray-200 py-3 sm:grid-cols-[10rem_1fr] md:grid-cols-[20rem_1fr] dark:border-b-zinc-700/40">
+            <div className="dark:text-light/60 text-neutral-500">Cliente</div>
+            <div>
+              <div className="flex items-center gap-2">
+                <SkeletonBlock className="h-8 w-8 rounded-full md:h-7 md:w-7" />
+                <SkeletonBlock className="h-5 w-20 md:h-4" />
+              </div>
+            </div>
           </div>
-          <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
-            <div
-              className={`h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
-            />
-            <SkeletonBlock className="h-4 w-40" />
+          <div className="grid grid-cols-1 gap-y-1 py-4 sm:grid-cols-[10rem_1fr] md:grid-cols-[20rem_1fr]">
+            <div className="dark:text-light/60 text-neutral-500">Email</div>
+            <div className="flex items-center gap-2">
+              <SkeletonBlock className="h-5 w-45 md:h-4" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Product Table */}
       <div className="flex w-full flex-col">
-        <h2 className="box-style bg-box rounded-t-xl border p-3 text-lg font-semibold">
+        <h3 className="pb-2 text-lg font-semibold md:text-base">
           Prodotti venduti
-        </h2>
-        <div className="overflow-x-auto rounded-b-md border border-gray-100 dark:border-zinc-800">
+        </h3>
+
+        <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-xs uppercase sm:text-sm dark:bg-zinc-800">
-                {["Nome", "Prezzo unitario", "Quantità", "Totale riga"].map(
-                  (heading) => (
-                    <th
-                      key={heading}
-                      className="px-4 py-3 text-left font-semibold text-gray-700 dark:text-gray-200"
-                    >
-                      {heading}
-                    </th>
-                  ),
-                )}
+              <tr className="border-b border-b-gray-200 text-sm dark:border-b-zinc-700/40">
+                <th className="py-2 text-left font-normal tracking-wide text-neutral-500 dark:text-neutral-400">
+                  Nome
+                </th>
+                <th className="py-2 text-left font-normal tracking-wide text-neutral-500 dark:text-neutral-400">
+                  Prezzo unitario
+                </th>
+                <th className="py-2 text-left font-normal tracking-wide text-neutral-500 dark:text-neutral-400">
+                  Quantità
+                </th>
+                <th className="py-3 text-left font-normal tracking-wide text-neutral-500 dark:text-neutral-400">
+                  Totale riga
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-zinc-800">
-              {[...Array(3)].map((_, idx) => (
-                <tr key={idx} className={`bg-white dark:bg-zinc-900`}>
-                  <td className="px-4 py-3">
-                    <SkeletonBlock className="h-4 w-20" />
+            <tbody className="divide-y divide-gray-200 dark:divide-zinc-700/40">
+              {[0, 1].map((item, idx) => (
+                <tr key={idx}>
+                  <td className="py-3">
+                    <div
+                      className={`${shimmer} relative h-4 w-20 animate-none overflow-hidden rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+                    ></div>
                   </td>
-                  <td className="px-4 py-3">
-                    <SkeletonBlock className="h-4 w-1/2" />
+                  <td className="py-3">
+                    <div
+                      className={`${shimmer} relative h-4 w-1/2 animate-none overflow-hidden rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+                    ></div>
                   </td>
-                  <td className="px-4 py-3">
-                    <SkeletonBlock className="h-4 w-1/3" />
+                  <td className="py-3">
+                    <div
+                      className={`${shimmer} relative h-4 w-1/3 animate-none overflow-hidden rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+                    ></div>
                   </td>
-                  <td className="px-4 py-3">
-                    <SkeletonBlock className="h-4 w-2/3" />
+                  <td className="py-3">
+                    <div
+                      className={`${shimmer} relative h-4 w-2/3 animate-none overflow-hidden rounded bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+                    ></div>
                   </td>
                 </tr>
               ))}
@@ -627,6 +632,106 @@ export function OrderDetailsSkeleton() {
         </div>
       </div>
     </div>
+    // <div className="flex w-full cursor-not-allowed flex-col gap-8">
+    //   {/* Order Info */}
+    //   <div
+    //     className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border border-gray-200 lg:max-w-2xl dark:border-zinc-800`}
+    //   >
+    //     <div className="box-style flex justify-between border-b p-3">
+    //       <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+    //         Dati ordine
+    //       </h2>
+    //       {/* Status Tag */}
+    //       <div
+    //         className={`${shimmer} relative h-6 w-24 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+    //       />
+    //     </div>
+
+    //     <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:flex-row sm:gap-8">
+    //       {[...Array(2)].map((_, idx) => (
+    //         <div
+    //           key={idx}
+    //           className={`${shimmer} box-style relative inline-flex w-fit items-center gap-2 overflow-hidden rounded border bg-gray-50 px-2 py-1 dark:bg-zinc-800/40`}
+    //         >
+    //           <div className="h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-600" />
+    //           <SkeletonBlock className="h-4 w-24" />
+    //           <SkeletonBlock className="h-8 w-25" />
+    //         </div>
+    //       ))}
+
+    //       {/* Action Button */}
+    //       <div
+    //         className={`${shimmer} rounded- relative h-8 w-24 animate-none overflow-hidden bg-gray-200 sm:w-18 dark:animate-pulse dark:bg-zinc-700`}
+    //       />
+    //     </div>
+    //   </div>
+
+    //   {/* Customer Info */}
+    //   <div
+    //     className={`${shimmer} bg-box box-style relative flex w-full flex-col gap-1 overflow-hidden rounded-xl border lg:max-w-2xl`}
+    //   >
+    //     <h2 className="box-style mb-3 border-b p-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
+    //       Dati cliente
+    //     </h2>
+    //     <div className="flex flex-wrap gap-2 p-3 text-sm">
+    //       <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
+    //         <div
+    //           className={`h-8 w-8 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+    //         />
+    //         <SkeletonBlock className="h-4 w-40" />
+    //       </div>
+    //       <div className="box-style bg-style inline-flex items-center gap-2 border p-1">
+    //         <div
+    //           className={`h-5 w-5 animate-none rounded-full bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+    //         />
+    //         <SkeletonBlock className="h-4 w-40" />
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   {/* Product Table */}
+    //   <div className="flex w-full flex-col">
+    //     <h2 className="box-style bg-box rounded-t-xl border p-3 text-lg font-semibold">
+    //       Prodotti venduti
+    //     </h2>
+    //     <div className="overflow-x-auto rounded-b-md border border-gray-100 dark:border-zinc-800">
+    //       <table className="min-w-full text-sm">
+    //         <thead>
+    //           <tr className="bg-gray-50 text-xs uppercase sm:text-sm dark:bg-zinc-800">
+    //             {["Nome", "Prezzo unitario", "Quantità", "Totale riga"].map(
+    //               (heading) => (
+    //                 <th
+    //                   key={heading}
+    //                   className="px-4 py-3 text-left font-semibold text-gray-700 dark:text-gray-200"
+    //                 >
+    //                   {heading}
+    //                 </th>
+    //               ),
+    //             )}
+    //           </tr>
+    //         </thead>
+    //         <tbody className="divide-y divide-gray-100 dark:divide-zinc-800">
+    //           {[...Array(3)].map((_, idx) => (
+    //             <tr key={idx} className={`bg-white dark:bg-zinc-900`}>
+    //               <td className="px-4 py-3">
+    //                 <SkeletonBlock className="h-4 w-20" />
+    //               </td>
+    //               <td className="px-4 py-3">
+    //                 <SkeletonBlock className="h-4 w-1/2" />
+    //               </td>
+    //               <td className="px-4 py-3">
+    //                 <SkeletonBlock className="h-4 w-1/3" />
+    //               </td>
+    //               <td className="px-4 py-3">
+    //                 <SkeletonBlock className="h-4 w-2/3" />
+    //               </td>
+    //             </tr>
+    //           ))}
+    //         </tbody>
+    //       </table>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

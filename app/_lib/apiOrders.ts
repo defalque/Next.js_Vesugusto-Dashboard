@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 
 import { subDays, subYears } from "date-fns";
-import { DateRange } from "./definitions";
+import { DateRange, GenericStats } from "./definitions";
 
 export async function getOrders(
   limit: number,
@@ -330,4 +330,23 @@ export async function getTopCustomer(dateRange: DateRange) {
   }
 
   return data;
+}
+
+export async function getGenericStats(): Promise<{
+  data: GenericStats[] | null;
+  error: boolean;
+}> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc("get_generic_stats");
+
+  if (error) {
+    console.error(
+      "Non è stato possibile caricare le statistiche degli ordini:",
+      error,
+    );
+    return { data: null, error: true };
+  }
+
+  return { data, error: false };
 }

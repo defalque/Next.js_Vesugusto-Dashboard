@@ -8,7 +8,7 @@ import {
   startOfMonth,
 } from "date-fns";
 import { it } from "date-fns/locale";
-import { ChartOrders } from "./definitions";
+import { ChartOrders, GenericStats, ProductStats } from "./definitions";
 
 export function formatCurrency(amount: number): string {
   return (amount / 100).toLocaleString("it-IT", {
@@ -160,4 +160,63 @@ export function prepareOrdersChartData(
   });
 
   return dailyData;
+}
+
+export function prepareProductStats(
+  statsError: boolean,
+  ordersStatsError: boolean,
+  stats: ProductStats[] | null,
+  ordersStats: GenericStats[],
+  regularPrice: number,
+) {
+  let soldQuantities,
+    revenuesGenerated,
+    revenuePercentage,
+    frequencyOrders,
+    percentageFrequencyOrders,
+    wishlistFavorites,
+    percentageWishlistFavorites;
+
+  if (statsError || ordersStatsError || !stats || !ordersStats) {
+    return {
+      soldQuantities: "Dati non disponibili",
+      revenuesGenerated: "Dati non disponibili",
+      revenuePercentage: "Riprovare più tardi",
+      frequencyOrders: "Dati non disponibili",
+      percentageFrequencyOrders: "Riprovare più tardi",
+      wishlistFavorites: "Dati non disponibili",
+      percentageWishlistFavorites: "Riprovare più tardi",
+    };
+  }
+
+  if (stats.length === 0 || ordersStats.length === 0) {
+    soldQuantities = 0;
+    revenuesGenerated = 0;
+    revenuePercentage = 0;
+    frequencyOrders = 0;
+    percentageFrequencyOrders = 0;
+    wishlistFavorites = 0;
+    percentageWishlistFavorites = 0;
+  } else {
+    soldQuantities = stats[0].sold_quantities;
+    revenuesGenerated = soldQuantities * regularPrice;
+    revenuePercentage =
+      (revenuesGenerated / ordersStats[0].totalrevenues) * 100;
+    frequencyOrders = stats[0].num_orders;
+    percentageFrequencyOrders =
+      (frequencyOrders / ordersStats[0].numorders) * 100;
+    wishlistFavorites = stats[0].num_favorites;
+    percentageWishlistFavorites =
+      (wishlistFavorites / ordersStats[0].num_users) * 100;
+  }
+
+  return {
+    soldQuantities,
+    revenuesGenerated,
+    revenuePercentage,
+    frequencyOrders,
+    percentageFrequencyOrders,
+    wishlistFavorites,
+    percentageWishlistFavorites,
+  };
 }

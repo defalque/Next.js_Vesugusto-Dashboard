@@ -1,13 +1,16 @@
 import { getProduct, getProductName } from "@/app/_lib/apiProducts";
 import { notFound } from "next/navigation";
-import ProductImage from "@/app/_components/products/ProductImage";
 import Breadcrumbs from "@/app/_components/ui/Breadcumbs";
 import ProductDetail from "@/app/_components/products/ProductDetail";
-import { formatCurrency } from "@/app/_lib/utils";
 import Link from "next/link";
 import DialogContextProvider from "@/app/_contexts/DialogContext";
 import DeleteProductButton from "@/app/_components/products/DeleteProductButton";
 import CustomDialogWrapper from "@/app/_components/ui/dialog/CustomDialogWrapper";
+import ProductStats from "@/app/_components/products/ProductStats";
+import ProductImagesHandler from "@/app/_components/products/ProductImagesHandler";
+import { Suspense } from "react";
+import { ProductStatsSkeleton } from "@/app/_components/ui/Skeletons";
+
 type Slug = {
   params: Promise<{ productId: string }>;
 };
@@ -58,100 +61,20 @@ export default async function Page({ params }: Slug) {
                 <span>Modifica</span>
               </Link>
 
-              <DialogContextProvider>
-                <DeleteProductButton id={product.id} name={product.name} />
+              <DeleteProductButton id={product.id} name={product.name} />
 
-                <CustomDialogWrapper />
-              </DialogContextProvider>
+              <CustomDialogWrapper />
             </div>
           </div>
 
           {/* Stats */}
-          <div className="dark:text-light grid grid-cols-2 justify-between gap-10 text-neutral-700 md:grid-cols-3 2xl:grid-cols-6">
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Prezzo
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                {formatCurrency(product.regularPrice)}
-              </p>
-            </div>
-
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Stock
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                {product.quantity}
-              </p>
-            </div>
-
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Quantità vendute
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                45
-              </p>
-            </div>
-
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Ricavi generati
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                {formatCurrency(55000)}
-              </p>
-              <div className="flex items-center gap-1">
-                <span
-                  className={`rounded-lg ${false ? "bg-slate-500/10 text-slate-500 dark:bg-slate-500/10 dark:text-slate-400" : "bg-lime-500/15 text-lime-700 dark:bg-lime-500/10 dark:text-lime-400"} px-2 py-1 text-xs font-semibold`}
-                >
-                  15%
-                </span>
-                <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                  dei ricavi totali
-                </span>
-              </div>
-            </div>
-
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Frequenza ordini
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                34
-              </p>
-              <div className="flex items-center gap-1">
-                <span
-                  className={`rounded-lg ${false ? "bg-slate-500/10 text-slate-500 dark:bg-slate-500/10 dark:text-slate-400" : "bg-lime-500/15 text-lime-700 dark:bg-lime-500/10 dark:text-lime-400"} px-2 py-1 text-xs font-semibold`}
-                >
-                  32%
-                </span>
-                <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                  degli ordini totali
-                </span>
-              </div>
-            </div>
-
-            <div className="dark:text-light flex flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40">
-              <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-                Wishlist utenti
-              </h5>
-              <p className="text-4xl leading-none font-medium md:text-3xl">
-                23
-              </p>
-              <div className="flex items-center gap-1">
-                <span
-                  className={`rounded-lg ${false ? "bg-slate-500/10 text-slate-500 dark:bg-slate-500/10 dark:text-slate-400" : "bg-lime-500/15 text-lime-700 dark:bg-lime-500/10 dark:text-lime-400"} px-2 py-1 text-xs font-semibold`}
-                >
-                  32%
-                </span>
-                <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                  degli utenti totali
-                </span>
-              </div>
-            </div>
-          </div>
+          <Suspense fallback={<ProductStatsSkeleton />}>
+            <ProductStats
+              productId={product.id}
+              regularPrice={product.regularPrice}
+              quantity={product.quantity}
+            />
+          </Suspense>
 
           {/* Product details */}
           <div className="mt-8 flex basis-1/2 flex-col gap-5 lg:mt-5 lg:gap-3.5">
@@ -174,7 +97,7 @@ export default async function Page({ params }: Slug) {
           </div>
 
           {/* Product images */}
-          <ProductImage product={product}></ProductImage>
+          <ProductImagesHandler product={product}></ProductImagesHandler>
         </div>
       </DialogContextProvider>
     </>

@@ -1,4 +1,5 @@
 import { createClient as createServerClient } from "@/utils/supabase/server";
+import { ProductStats } from "./definitions";
 
 export async function getProducts(
   limit: number,
@@ -138,4 +139,25 @@ export async function getBestSeller() {
   }
 
   return data;
+}
+
+export async function getProductStats(id: number): Promise<{
+  data: ProductStats[] | null;
+  error: boolean;
+}> {
+  const supabase = await createServerClient();
+
+  const { data, error } = await supabase.rpc("get_product_stats", {
+    product_id: id,
+  });
+
+  if (error) {
+    console.error(
+      "Non è stato possibile recuperare le quantità vendute: ",
+      error,
+    );
+    return { data: null, error: true };
+  }
+
+  return { data, error: false };
 }

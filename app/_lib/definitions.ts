@@ -282,3 +282,18 @@ export type DialogData = {
   itemNames?: string[];
   // status?: string;
 };
+
+// product page
+
+export type ProductStats = {
+  sold_quantities: number;
+  num_orders: number;
+  num_favorites: number;
+  product_id: number;
+};
+
+export type GenericStats = {
+  totalrevenues: number;
+  numorders: number;
+  num_users: number;
+};

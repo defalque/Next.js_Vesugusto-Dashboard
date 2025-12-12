@@ -7,7 +7,7 @@ import { useDialog } from "@/app/_contexts/DialogContext";
 import CustomDialogWrapper from "../ui/dialog/CustomDialogWrapper";
 import ImageLoader from "./ImageLoader";
 
-function ProductImage({ product }: { product: Product }) {
+function ProductImagesHandler({ product }: { product: Product }) {
   const { openDialog } = useDialog();
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [removedImages, setRemovedImages] = useState<string[]>([]);
@@ -123,4 +123,4 @@ function ProductImage({ product }: { product: Product }) {
   );
 }
 
-export default ProductImage;
+export default ProductImagesHandler;

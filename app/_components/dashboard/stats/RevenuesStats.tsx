@@ -8,6 +8,7 @@
 
 import { DateRange } from "@/app/_lib/definitions";
 import { formatCurrency } from "@/app/_lib/utils";
+import StatsPercentage from "../../ui/StatsPercentage";
 
 type RevenuesStatsProps = {
   title: string;
@@ -68,45 +69,30 @@ function RevenuesStats({
       </span>
       {/* </LazyMotion> */}
       {percentage > 0 && (
-        <RevenuesStatsPercentage
+        <StatsPercentage
           percentage={percentage}
-          dateRange={dateRange}
+          label={
+            dateRange === "last-7-days"
+              ? "nell'ultima settimana"
+              : dateRange === "last-month"
+                ? "nell'ultimo mese"
+                : "nell'ultimo anno"
+          }
         />
       )}
       {percentage === 0 && (
-        <RevenuesStatsPercentage
+        <StatsPercentage
           percentage={percentage}
           muted={true}
-          dateRange={dateRange}
+          label={
+            dateRange === "last-7-days"
+              ? "nell'ultima settimana"
+              : dateRange === "last-month"
+                ? "nell'ultimo mese"
+                : "nell'ultimo anno"
+          }
         />
       )}
-    </div>
-  );
-}
-
-function RevenuesStatsPercentage({
-  percentage,
-  muted,
-  dateRange,
-}: {
-  percentage: number;
-  muted?: boolean;
-  dateRange: "last-7-days" | "last-month" | "last-year";
-}) {
-  return (
-    <div className="flex items-center gap-1">
-      <span
-        className={`rounded-lg ${muted ? "bg-slate-500/10 text-slate-500 dark:bg-slate-500/10 dark:text-slate-400" : "bg-lime-500/15 text-lime-700 dark:bg-lime-500/10 dark:text-lime-400"} px-2 py-1 text-xs font-semibold`}
-      >
-        {percentage.toFixed(1)}%
-      </span>
-      <span className="text-xs text-neutral-500 dark:text-neutral-400">
-        {dateRange === "last-7-days"
-          ? "nell'ultima settimana"
-          : dateRange === "last-month"
-            ? "nell'ultimo mese"
-            : "nell'ultimo anno"}
-      </span>
     </div>
   );
 }

@@ -259,6 +259,40 @@ export function SkeletonPageBlock({ className }: { className: string }) {
   );
 }
 
+export function ProductStatsSkeleton() {
+  return (
+    <div className="dark:text-light grid grid-cols-2 justify-between gap-10 text-neutral-700 md:grid-cols-3 2xl:grid-cols-6">
+      <div
+        className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+      >
+        <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+          Prezzo
+        </h5>
+        <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+      </div>
+      <div
+        className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+      >
+        <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+          Stock
+        </h5>
+        <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+      </div>
+      <div
+        className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
+      >
+        <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
+          Quantità vendute
+        </h5>
+        <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
+      </div>
+      <StatSkeleton label="Ricavi generati" />
+      <StatSkeleton label="Frequenza ordini" />
+      <StatSkeleton label="Wishlist utenti" />
+    </div>
+  );
+}
+
 export function ProductDataSkeleton() {
   return (
     <div className="flex flex-col gap-8 sm:gap-5">
@@ -275,35 +309,7 @@ export function ProductDataSkeleton() {
       </div>
 
       {/* Stats */}
-      <div className="dark:text-light grid grid-cols-2 justify-between gap-10 text-neutral-700 md:grid-cols-3 2xl:grid-cols-6">
-        <div
-          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
-        >
-          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-            Prezzo
-          </h5>
-          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
-        </div>
-        <div
-          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
-        >
-          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-            Stock
-          </h5>
-          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
-        </div>
-        <div
-          className={`dark:text-light relative flex animate-pulse cursor-not-allowed flex-col gap-2 border-t border-gray-200 py-4 text-neutral-700 dark:border-zinc-700/40`}
-        >
-          <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
-            Quantità vendute
-          </h5>
-          <SkeletonBlock className="h-10 w-20 sm:h-9.5 md:h-8" />
-        </div>
-        <StatSkeleton label="Ricavi generati" />
-        <StatSkeleton label="Frequenza ordini" />
-        <StatSkeleton label="Wishlist utenti" />
-      </div>
+      <ProductStatsSkeleton />
 
       {/* Product details */}
       <div className="dark:text-light mt-8 flex basis-1/2 animate-pulse cursor-not-allowed flex-col gap-5 text-neutral-700 lg:mt-5 lg:gap-3.5">

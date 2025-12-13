@@ -10,6 +10,7 @@ import ProductStats from "@/app/_components/products/ProductStats";
 import ProductImagesHandler from "@/app/_components/products/ProductImagesHandler";
 import { Suspense } from "react";
 import { ProductStatsSkeleton } from "@/app/_components/ui/Skeletons";
+import MotionWrapper from "@/app/_components/ui/MotionWrapper";
 
 type Slug = {
   params: Promise<{ productId: string }>;
@@ -76,28 +77,30 @@ export default async function Page({ params }: Slug) {
             />
           </Suspense>
 
-          {/* Product details */}
-          <div className="mt-8 flex basis-1/2 flex-col gap-5 lg:mt-5 lg:gap-3.5">
-            <ProductDetail
-              productAttribute={product.description}
-              label="Descrizione"
-            />
-            <ProductDetail
-              productAttribute={product.details}
-              label="Dettagli"
-            />
-            <ProductDetail
-              productAttribute={product.ingredients}
-              label="Ingredienti"
-            />
-            <ProductDetail
-              productAttribute={product.info}
-              label="Informazioni nutrizionali"
-            />
-          </div>
+          <MotionWrapper>
+            {/* Product details */}
+            <div className="mt-8 flex basis-1/2 flex-col gap-5 lg:mt-5 lg:gap-3.5">
+              <ProductDetail
+                productAttribute={product.description}
+                label="Descrizione"
+              />
+              <ProductDetail
+                productAttribute={product.details}
+                label="Dettagli"
+              />
+              <ProductDetail
+                productAttribute={product.ingredients}
+                label="Ingredienti"
+              />
+              <ProductDetail
+                productAttribute={product.info}
+                label="Informazioni nutrizionali"
+              />
+            </div>
 
-          {/* Product images */}
-          <ProductImagesHandler product={product}></ProductImagesHandler>
+            {/* Product images */}
+            <ProductImagesHandler product={product}></ProductImagesHandler>
+          </MotionWrapper>
         </div>
       </DialogContextProvider>
     </>

@@ -51,7 +51,7 @@ export default async function Layout({
         </SidebarDrawer>
       </SidebarDrawerContextProvider>
 
-      <main className="min-h-screen overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-3 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 sm:pt-5 xl:px-10 xl:py-10 dark:bg-zinc-900/80">
+      <main className="relative min-h-screen overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-3 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 sm:pt-5 xl:px-10 xl:py-10 dark:bg-zinc-900/80">
         <Toaster />
 
         {children}

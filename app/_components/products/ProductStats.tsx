@@ -119,7 +119,7 @@ async function ProductStats({
             <StatsPercentage
               percentage={percentageFrequencyOrders}
               muted={false}
-              label="dei ordini totali"
+              label="deglii ordini totali"
             />
           )}
         {typeof percentageFrequencyOrders === "number" &&
@@ -127,7 +127,7 @@ async function ProductStats({
             <StatsPercentage
               percentage={percentageFrequencyOrders}
               muted={true}
-              label="dei ordini totali"
+              label="degli ordini totali"
             />
           )}
         {typeof percentageFrequencyOrders === "string" && (
@@ -149,7 +149,7 @@ async function ProductStats({
             <StatsPercentage
               percentage={percentageWishlistFavorites}
               muted={false}
-              label="dei utenti totali"
+              label="degli utenti totali"
             />
           )}
         {typeof percentageWishlistFavorites === "number" &&
@@ -157,7 +157,7 @@ async function ProductStats({
             <StatsPercentage
               percentage={percentageWishlistFavorites}
               muted={true}
-              label="dei utenti totali"
+              label="degli utenti totali"
             />
           )}
         {typeof percentageWishlistFavorites === "string" && (

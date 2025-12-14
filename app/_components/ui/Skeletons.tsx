@@ -361,7 +361,7 @@ export function ProductDataSkeleton() {
         </h5>
 
         <div className="flex animate-pulse cursor-not-allowed flex-col gap-4">
-          <div
+          {/* <div
             className={`flex min-h-40 min-w-full justify-center rounded-lg border border-dashed border-neutral-500 bg-neutral-50/50 p-5 sm:w-sm dark:border-zinc-500 dark:bg-zinc-950/20`}
           >
             <div className="text-center">
@@ -392,14 +392,48 @@ export function ProductDataSkeleton() {
                 PNG, JPG, GIF fino a 1MB
               </p>
             </div>
-          </div>
+          </div> */}
 
-          <ul className="grid animate-pulse cursor-not-allowed grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
-            {[...Array(5)].map((_, index) => (
+          <ul className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {[...Array(3)].map((_, index) => (
               <li key={index} className="relative">
                 <div className="relative aspect-2/3 w-full overflow-hidden rounded-2xl bg-gray-200 dark:bg-zinc-700"></div>
               </li>
             ))}
+            <li key="image-loader" className="relative">
+              <div className="relative flex aspect-2/3 w-full items-center justify-center overflow-hidden rounded-2xl border border-dashed border-neutral-400 bg-neutral-50/50 p-5 dark:border-zinc-500 dark:bg-zinc-950/20">
+                <div className="my-auto text-center">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    data-slot="icon"
+                    aria-hidden="true"
+                    className="mx-auto size-12 text-neutral-700/40 dark:text-zinc-500/60"
+                  >
+                    <path
+                      d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <div className="mt-4 flex flex-wrap justify-center text-center text-[15px] text-neutral-700/60 sm:text-sm/6 dark:text-zinc-500/80">
+                    <div
+                      className={`touch-hitbox relative rounded-md bg-transparent text-[0.7rem] font-semibold text-neutral-500 sm:text-xs dark:text-zinc-400`}
+                    >
+                      <span className="underline">
+                        Carica una o più immagini
+                      </span>
+                    </div>
+                    <p className="pl-1 text-[0.7rem] sm:text-xs pointer-coarse:hidden pointer-fine:block">
+                      o trascinale e rilasciale
+                    </p>
+                  </div>
+                  <p className="mt-1 text-[0.7rem] text-neutral-700/60 sm:text-xs/5 dark:text-zinc-500/80">
+                    PNG, JPG, GIF fino a 1MB
+                  </p>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>

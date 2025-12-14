@@ -3,6 +3,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import * as m from "motion/react-m";
+import ProductImagesControls from "./ProductImagesControls";
 
 function ImageLoader({
   imagesToAdd,
@@ -77,7 +78,7 @@ function ImageLoader({
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className={`flex min-h-40 min-w-full justify-center rounded-lg border border-dashed border-neutral-400 bg-neutral-50/50 p-5 sm:w-sm dark:border-zinc-500 dark:bg-zinc-950/20 ${isSubmitting || (imagesToRemove && imagesToRemove.length > 0) ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`flex aspect-2/3 w-full justify-center rounded-2xl border border-dashed border-neutral-400 bg-neutral-50/50 p-5 dark:border-zinc-500 dark:bg-zinc-950/20 ${isSubmitting || (imagesToRemove && imagesToRemove.length > 0) ? "cursor-not-allowed opacity-50" : ""}`}
       >
         <AnimatePresence mode="wait" initial={false}>
           {imagesToAdd.length === 0 && (
@@ -86,7 +87,7 @@ function ImageLoader({
               initial={{ opacity: 0, scale: 0.9, filter: "blur(4px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, scale: 0.9, filter: "blur(4px)" }}
-              className="text-center"
+              className="my-auto text-center"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -104,15 +105,15 @@ function ImageLoader({
               <div className="mt-4 flex flex-wrap justify-center text-center text-[15px] text-neutral-700/60 sm:text-sm/6 dark:text-zinc-500/80">
                 <label
                   htmlFor="file-upload"
-                  className={`touch-hitbox relative rounded-md bg-transparent font-semibold text-neutral-500 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-neutral-500 dark:text-zinc-400 dark:focus-within:outline-zinc-400 ${
+                  className={`touch-hitbox relative rounded-md bg-transparent text-[0.7rem] font-semibold text-neutral-500 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-neutral-500 sm:text-xs dark:text-zinc-400 dark:focus-within:outline-zinc-400 ${
                     imagesToAdd.length > 0 ||
                     isSubmitting ||
                     (imagesToRemove && imagesToRemove.length > 0)
                       ? "cursor-not-allowed opacity-50"
-                      : "cursor-pointer hover:text-neutral-500 dark:hover:text-zinc-300"
+                      : "cursor-pointer hover:text-neutral-600 dark:hover:text-zinc-300"
                   }`}
                 >
-                  <span>Carica una o più immagini</span>
+                  <span className="underline">Carica una o più immagini</span>
                   <input
                     id="file-upload"
                     onChange={(e) => {
@@ -130,11 +131,11 @@ function ImageLoader({
                     }
                   />
                 </label>
-                <p className="pl-1 pointer-coarse:hidden pointer-fine:block">
+                <p className="pl-1 text-[0.7rem] sm:text-xs pointer-coarse:hidden pointer-fine:block">
                   o trascinale e rilasciale
                 </p>
               </div>
-              <p className="mt-1 text-sm text-neutral-700/60 sm:mt-0 sm:text-xs/5 dark:text-zinc-500/80">
+              <p className="mt-1 text-[0.7rem] text-neutral-700/60 sm:text-xs/5 dark:text-zinc-500/80">
                 PNG, JPG, GIF fino a 1MB
               </p>
             </m.div>
@@ -157,7 +158,7 @@ function ImageLoader({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className={`flex items-center justify-center gap-1 rounded-lg border border-neutral-200 py-0.5 pr-2 pl-1 text-neutral-700/80 hover:bg-neutral-100/50 dark:border-zinc-700/40 dark:text-zinc-400/80 dark:hover:bg-zinc-950/60 ${isSubmitting ? "cursor-not-allowed opacity-50" : ""}`}
+                      className={`flex items-center justify-center gap-1 rounded-lg border border-neutral-300 py-0.5 pr-2 pl-1 text-neutral-700/80 hover:bg-neutral-100/50 dark:border-zinc-700/90 dark:text-zinc-400/86 dark:hover:bg-zinc-950/60 ${isSubmitting ? "cursor-not-allowed opacity-50" : ""}`}
                     >
                       <button
                         type="button"
@@ -173,33 +174,24 @@ function ImageLoader({
                       >
                         <XMarkIcon className="size-4.5" />
                       </button>
-                      <span className="text-sm font-semibold">
+                      <span className="text-xs font-semibold">
                         {image.name}
                       </span>
                     </m.li>
                   ))}
                 </AnimatePresence>
               </ul>
-
-              <div className="flex gap-3">
-                <button
-                  type="submit"
-                  className="touch-hitbox flex cursor-pointer items-center justify-center rounded-lg border border-inherit bg-neutral-500 px-3 py-2 text-sm font-semibold text-white inset-shadow-2xs transition-colors duration-200 hover:bg-neutral-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700/40 dark:bg-zinc-700 dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-zinc-600"
-                  disabled={isSubmitting}
-                >
-                  Salva immagini
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setImagesToAdd([])}
-                  className="touch-hitbox _dark:border-zinc-700/40 flex cursor-pointer items-center justify-center rounded-lg border border-neutral-100 bg-neutral-100 px-3 py-2 text-sm font-semibold text-neutral-500 inset-shadow-2xs transition-colors duration-200 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-950/50 dark:bg-zinc-950/50 dark:text-zinc-500 dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-zinc-950"
-                  disabled={isSubmitting}
-                >
-                  Cancella tutto
-                </button>
-              </div>
             </m.div>
           )}
+          <AnimatePresence mode="wait" initial={false}>
+            {imagesToAdd.length > 0 && !isSubmitting && (
+              <ProductImagesControls
+                type="add"
+                disabled={isSubmitting}
+                onCancel={() => setImagesToAdd([])}
+              />
+            )}
+          </AnimatePresence>
         </AnimatePresence>
       </div>
     </form>

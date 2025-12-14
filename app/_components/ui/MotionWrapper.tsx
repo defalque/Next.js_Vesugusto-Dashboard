@@ -8,7 +8,7 @@ const loadFeatures = () =>
 function MotionWrapper({ children }: { children: React.ReactNode }) {
   return (
     <LazyMotion features={loadFeatures}>
-      <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.3 }}>
+      <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.25 }}>
         {children}
       </MotionConfig>
     </LazyMotion>

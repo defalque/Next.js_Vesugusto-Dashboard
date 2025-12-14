@@ -79,7 +79,7 @@ export default async function Page({ params }: Slug) {
 
           <MotionWrapper>
             {/* Product details */}
-            <div className="mt-8 flex basis-1/2 flex-col gap-5 lg:mt-5 lg:gap-3.5">
+            <div className="_gap-5 _lg:gap-3.5 mt-8 flex basis-1/2 flex-col lg:mt-5">
               <ProductDetail
                 productAttribute={product.description}
                 label="Descrizione"

@@ -10,6 +10,7 @@ export function Toaster() {
     <SonnerToaster
       theme={resolvedTheme as ToasterProps["theme"]}
       duration={10000}
+      position="bottom-right"
       closeButton
       richColors
     />

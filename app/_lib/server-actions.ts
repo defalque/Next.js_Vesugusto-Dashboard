@@ -264,7 +264,10 @@ export async function updateCurrentUser({
 }
 
 // PRODUCT
-export async function createProduct(data: UpdateProductFormInputs) {
+export async function createProduct(
+  data: UpdateProductFormInputs,
+  imagesToAdd: File[],
+) {
   // Estrai i dati dal FormData
   const productData = {
     name: data.name.slice(0, 1000),
@@ -277,24 +280,15 @@ export async function createProduct(data: UpdateProductFormInputs) {
     info: data.info.slice(0, 1000),
     details: data.details.slice(0, 1000),
   };
-
-  // Gestisci le immagini
-  const imageFiles = data.image ? Array.from(data.image) : [];
-
-  const validImageFiles = imageFiles.filter(
-    (file) => file instanceof File && file.size > 0,
-  );
-
-  // Converti i prezzi in centesimi
+  // Conversione dei prezzi in centesimi
   const extractedData = {
     ...productData,
     regularPrice: Math.round(productData.regularPrice * 100),
     discount: Math.round(productData.discount * 100),
+    image: [] as string[],
   };
-
-  // // Valida i dati del prodotto
+  // Validazione dei dati del prodotto
   const validatedFields = updateProductSchema.safeParse(extractedData);
-
   if (!validatedFields.success) {
     console.error("Validation failed:", validatedFields.error.issues);
     throw new Error(
@@ -304,7 +298,6 @@ export async function createProduct(data: UpdateProductFormInputs) {
   }
 
   const supabase = await createClient();
-
   // 1. Inserisci il prodotto nel database
   const { data: product, error: insertError } = await supabase
     .from("products")
@@ -317,17 +310,25 @@ export async function createProduct(data: UpdateProductFormInputs) {
     throw new Error("Impossibile creare il prodotto: " + insertError.message);
   }
 
-  // 2. Upload delle immagini se presenti
-  const uploadedImages: string[] = [];
+  // Gestione delle immagini
+  const imageFiles = imagesToAdd ? Array.from(imagesToAdd) : [];
 
+  const validImageFiles = imageFiles.filter(
+    (file) => file instanceof File && file.size <= 1024 * 1024, // 1MB
+  );
+  // 2. Upload delle immagini se presenti
+  // Array dove metteremo gli URL appena caricati
+  const uploadedImages: string[] = [];
+  // Array dove metteremo i nomi delle immagini che non sono state caricate per mostrare all'utente
+  const notUploadedImages: string[] = [];
   if (validImageFiles.length > 0) {
     for (let i = 0; i < validImageFiles.length; i++) {
       const file = validImageFiles[i];
 
       // Genera un nome file unico
       const fileExtension = file.name.split(".").pop();
-      const fileName = `product-${product.id}-${i}-${Date.now()}.${fileExtension}`;
-      // const filePath = `products/${fileName}`;
+      const uniqueId = crypto.randomUUID().slice(0, 8);
+      const fileName = `product-${i}-${Date.now()}-${uniqueId}.${fileExtension}`;
 
       // Upload del file
       const { error: uploadError } = await supabase.storage
@@ -336,12 +337,12 @@ export async function createProduct(data: UpdateProductFormInputs) {
           cacheControl: "3600",
           upsert: false,
         });
-
       if (uploadError) {
         console.error(
           `Errore nel caricamento dell'immagine ${i}:`,
           uploadError,
         );
+        notUploadedImages.push(file.name);
         continue; // Salta questa immagine ma continua con le altre
       }
 
@@ -353,31 +354,31 @@ export async function createProduct(data: UpdateProductFormInputs) {
       uploadedImages.push(publicUrl);
     }
 
+    if (uploadedImages.length === 0) {
+      throw new Error("Nessuna immagine è stata caricata correttamente.");
+    }
+
     // 3. Aggiorna il prodotto con gli URL delle immagini
     const { error: updateError } = await supabase
       .from("products")
       .update({ image: uploadedImages })
       .eq("id", product.id);
-
     if (updateError) {
       console.error(
         "Errore nell'aggiornare le immagini del prodotto:",
         updateError,
       );
-      // Non fallire completamente, ma logga l'errore
     }
   }
 
   revalidatePath("/dashboard/products");
   revalidatePath("/dashboard/products/create");
-  // redirect("/dashboard/products");
-  // revalidatePath(`/dashboard/products/${product.id}`);
 
-  return { success: true, productId: product.id };
+  return { success: true, productId: product.id, notUploadedImages };
 }
 
 export async function updateProduct(id: string, data: UpdateProductFormInputs) {
-  // Estrai i dati dal FormData
+  // Estrazione dei dati del prodotto
   const productData = {
     name: data.name.slice(0, 1000),
     regularPrice: data.regularPrice,
@@ -389,17 +390,13 @@ export async function updateProduct(id: string, data: UpdateProductFormInputs) {
     info: data.info,
     details: data.details,
   };
-
-  // Converti i prezzi in centesimi
+  // Conversione dei prezzi in centesimi
   const extractedData = {
     ...productData,
     regularPrice: Math.round(productData.regularPrice * 100),
     discount: Math.round(productData.discount * 100),
   };
-
-  // console.log(extractedData);
-
-  // Valida i dati del prodotto
+  // Validazione dei dati del prodotto
   const validatedFields = updateProductSchema.safeParse(extractedData);
 
   if (!validatedFields.success) {
@@ -418,8 +415,10 @@ export async function updateProduct(id: string, data: UpdateProductFormInputs) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
-    throw new Error("Product could not be updated");
+    console.error("Errore nell'aggiornare il prodotto:", error);
+    throw new Error(
+      "Non è stato possibile aggiornare il prodotto. Riprova più tardi.",
+    );
   }
 
   revalidatePath("/dashboard/products");
@@ -610,7 +609,7 @@ export async function addProductImages(id: number, formData: FormData) {
     // Genera nome file unico
     const fileExtension = file.name.split(".").pop();
     const uniqueId = crypto.randomUUID().slice(0, 8);
-    const fileName = `product-${id}-${i}-${Date.now()}-${uniqueId}.${fileExtension}`;
+    const fileName = `product-${i}-${Date.now()}-${uniqueId}.${fileExtension}`;
 
     // Carica file su Supabase Storage
     const { error: uploadError } = await supabase.storage
@@ -634,7 +633,6 @@ export async function addProductImages(id: number, formData: FormData) {
   }
 
   if (uploadedImages.length === 0) {
-    console.log("Nessuna immagine è stata caricata correttamente.");
     throw new Error(
       "Nessuna immagine è stata caricata correttamente. Riprova più tardi.",
     );

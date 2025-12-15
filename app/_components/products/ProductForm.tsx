@@ -2,10 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
-import toast from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import FileInput from "../ui/FileInput";
 import FormRow from "../ui/form/FormRow";
 import FormError from "../ui/form/FormError";
 import SelectInput from "../ui/form/SelectInput";
@@ -13,12 +11,14 @@ import TextAreaField from "../ui/form/TextAreaField";
 import HeadingFormHidden from "../ui/form/HeadingFormHidden";
 import { Product, UpdateProductFormInputs } from "@/app/_lib/definitions";
 import { createProduct, updateProduct } from "@/app/_lib/server-actions";
-import { toastStyle } from "@/constants/const";
 import FormButtons from "../ui/form/FormButtons";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import ImageLoaderInput from "../ui/form/ImageLoaderInput";
+import { toast } from "sonner";
 
 function ProductForm({ product }: { product?: Product }) {
   const router = useRouter();
+  const [imagesToAdd, setImagesToAdd] = useState<File[]>([]);
 
   const defaultValues = useMemo<UpdateProductFormInputs>(() => {
     if (product) {
@@ -68,36 +68,30 @@ function ProductForm({ product }: { product?: Product }) {
   }, [reset, defaultValues]);
 
   const onSubmit: SubmitHandler<UpdateProductFormInputs> = async (data) => {
-    try {
-      if (product) {
-        await toast.promise(
-          updateProduct(String(product.id), data),
-          {
-            loading: "Modifica in corso...",
-            success: "Prodotto modificato con successo!",
-            error: (err) => `Errore: ${err.message}`,
-          },
-          {
-            style: toastStyle,
-          },
-        );
-        reset(data);
-      } else {
-        await toast.promise(
-          createProduct(data),
-          {
-            loading: "Creazione in corso...",
-            success: "Prodotto creato con successo!",
-            error: (err) => `Errore: ${err.message}`,
-          },
-          {
-            style: toastStyle,
-          },
-        );
-        router.push("/dashboard/products");
-      }
-    } catch (err) {
-      console.error("Operation failed:", err);
+    if (isSubmitting) return;
+    if (product) {
+      toast.promise(updateProduct(String(product.id), data), {
+        loading: "Modifica in corso...",
+        success: "Prodotto modificato con successo!",
+        error: (err) => `Errore: ${err.message}`,
+      });
+      reset(data);
+    } else {
+      toast.promise(createProduct(data, imagesToAdd), {
+        loading: "Creazione in corso...",
+        success: (data) => {
+          if (data.notUploadedImages.length === 0) {
+            return "Prodotto creato con successo!";
+          } else {
+            return `Prodotto creato con successo, ma alcune immagini non sono state caricate: ${data.notUploadedImages.join(", ")}`;
+          }
+        },
+        error: (err) => `Errore: ${err.message}`,
+        finally: () => {
+          setImagesToAdd([]);
+          router.push("/dashboard/products");
+        },
+      });
     }
   };
 
@@ -105,7 +99,7 @@ function ProductForm({ product }: { product?: Product }) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       aria-labelledby="title"
-      className="dark:text-light bg-box box-style space-y-5 rounded border px-3 py-5 text-neutral-700 sm:px-6"
+      className="dark:text-light space-y-5 rounded py-3 text-neutral-700"
       encType="multipart/form-data" // Importante per l'upload dei file
     >
       <HeadingFormHidden id="title" className="sr-only">
@@ -237,20 +231,16 @@ function ProductForm({ product }: { product?: Product }) {
       <FormError message={errors.details?.message} />
 
       {!product && (
-        <>
-          <FileInput
-            type="file"
-            accept="image/*"
-            label="Inserisci immagini del prodotto"
-            multiple
-            {...register("image", {
-              required: !product ? "L'immagine è obbligatoria." : false,
-            })}
-            aria-invalid={errors.image ? "true" : "false"}
-            disabled={isSubmitting}
+        <div className="flex flex-col gap-2">
+          <span className="text-[15px] font-semibold sm:text-sm">
+            Immagini del prodotto
+          </span>
+          <ImageLoaderInput
+            imagesToAdd={imagesToAdd}
+            setImagesToAdd={setImagesToAdd}
+            isSubmitting={isSubmitting}
           />
-          <FormError message={errors.image?.message} />
-        </>
+        </div>
       )}
 
       <FormButtons

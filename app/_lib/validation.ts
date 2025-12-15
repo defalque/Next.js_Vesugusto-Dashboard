@@ -39,7 +39,7 @@ export const updateProductSchema = z
     ingredients: z.string().min(1, "Gli ingredienti sono obbligatori"),
     info: z.string().min(1, "Le informazioni nutrizionali sono obbligatorie"),
     details: z.string().min(1, "I dettagli sono obbligatori"),
-    // image: z.array(z.string()).default([]),
+    image: z.array(z.string()).default([]),
   })
   .refine(
     (data) => {

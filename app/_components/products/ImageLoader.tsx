@@ -74,7 +74,7 @@ function ImageLoader({
   };
 
   return (
-    <form onSubmit={handleAddProductImages}>
+    <form onSubmit={handleAddProductImages} encType="multipart/form-data">
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}

@@ -80,7 +80,7 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
             {pathname === "notifications" && (
               <m.div
                 layoutId="link"
-                className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-black/50"
+                className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-white"
               ></m.div>
             )}
           </li>
@@ -112,7 +112,7 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
             {pathname === "support" && (
               <m.div
                 layoutId="link"
-                className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-black/50"
+                className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-white"
               ></m.div>
             )}
           </li>

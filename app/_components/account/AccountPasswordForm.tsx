@@ -35,20 +35,15 @@ function AccountPasswordForm() {
   // ❌ Disabilita i bottoni se entrambi sono vuoti
   const areInputsEmpty = !newPassword && !newPasswordConfirm;
 
-  const onSubmit: SubmitHandler<PasswordFormInputs> = async ({
-    newPassword,
-  }) => {
-    try {
-      toast.promise(updateCurrentUser({ newPassword }), {
-        loading: "Modifica in corso...",
-        success: "Password modificata con successo!",
-        error: (err) => `Errore: ${err.message}`,
-      });
-
-      reset();
-    } catch (error) {
-      console.error("Error updating user:", error);
-    }
+  const onSubmit: SubmitHandler<PasswordFormInputs> = ({ newPassword }) => {
+    toast.promise(updateCurrentUser({ newPassword }), {
+      loading: "Modifica in corso...",
+      success: "Password modificata con successo!",
+      error: (err) => `Errore: ${err.message}`,
+      finally: () => {
+        reset();
+      },
+    });
   };
 
   return (

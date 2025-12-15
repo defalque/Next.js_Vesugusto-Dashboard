@@ -11,10 +11,9 @@ import { useDialog } from "@/app/_contexts/DialogContext";
 import { Dialog, DialogBackdrop } from "@headlessui/react";
 import CustomPanel from "./CustomPanel";
 
-import { toastStyle } from "@/constants/const";
-
 import FileInput from "../FileInput";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function CustomDialog({
   afterAction,
@@ -27,6 +26,8 @@ export default function CustomDialog({
 }) {
   const { isOpen, dialogData, closeDialog } = useDialog();
   const { type, name, itemId, itemName, itemNames } = dialogData;
+
+  const router = useRouter();
 
   const handleConfirmDeliver = () => {
     toast.promise(confirmOrder(String(itemId), "delivered"), {
@@ -52,6 +53,7 @@ export default function CustomDialog({
       success: "Prodotto eliminato con successo!",
       error: (err) => `Errore: ${err.message}`,
     });
+    router.push("/dashboard/products");
     closeDialog();
   };
 
@@ -82,7 +84,7 @@ export default function CustomDialog({
       .filter((file) => file instanceof File && file.size > 0);
 
     if (images.length === 0) {
-      toast.error("Nessuna immagine selezionata.", { style: toastStyle });
+      toast.error("Nessuna immagine selezionata.");
       return;
     }
 

@@ -63,7 +63,11 @@ function AccountInfoForm({
   }
 
   return (
-    <form className="flex flex-col gap-5 py-3 md:gap-3" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col gap-5 py-3 md:gap-3"
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+    >
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <div className="flex w-full flex-col gap-3">
           <FormRow

@@ -745,7 +745,7 @@ function FormRow({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="h-4 w-20 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700"></div>
+      <div className="h-6 w-20 animate-pulse rounded-md bg-gray-200 sm:h-5 dark:bg-zinc-700"></div>
       <div
         className={`animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700 ${className}`}
         style={{ width, height }}
@@ -756,9 +756,9 @@ function FormRow({
 
 function FormButtons() {
   return (
-    <div className="mt-8 flex justify-end gap-2">
-      <div className="h-9 w-32 rounded-md bg-gray-300 dark:bg-zinc-700" />
-      <div className="h-9 w-40 rounded-md bg-gray-300 dark:bg-zinc-700" />
+    <div className="mt-2 flex justify-end gap-2">
+      <div className="h-11.5 w-32 rounded-md bg-gray-200 sm:h-10.5 dark:bg-zinc-700" />
+      <div className="h-11.5 w-40 rounded-md bg-gray-200 sm:h-10.5 dark:bg-zinc-700" />
     </div>
   );
 }
@@ -807,23 +807,48 @@ export function UpdateProductFormSkeleton({ title = true }) {
 export function AccountInfoFormSkeleton() {
   return (
     <div
-      className={`${shimmer} bg-box box-style dark:text-light relative flex flex-col gap-3 overflow-hidden rounded border text-neutral-700`}
+      className={`dark:text-light flex cursor-not-allowed flex-col gap-3 text-neutral-700`}
     >
-      <h5 className="box-style border-b p-3 text-xl font-semibold">
-        Modifica le tue informazioni
+      <h5 className="box-style border-b py-3 text-xl font-semibold">
+        Modifica il tuo profilo
       </h5>
-      <form className="flex animate-pulse flex-col gap-5 p-3 md:gap-3">
-        <div className="space-y-5">
-          <FormRow height="2rem" />
-          <FormRow height="2rem" />
-        </div>
+      <form className="flex animate-pulse flex-col gap-5 py-3 md:gap-3">
+        <div className="flex flex-col gap-5 md:flex-row">
+          <div className="flex w-full flex-col gap-3">
+            <FormRow height="2.4rem" />
+            <FormRow height="2.4rem" />
+          </div>
 
-        {/* File input skeleton */}
-        <div className="mt-3 flex flex-col justify-baseline gap-3 md:flex-row">
-          <div className="h-4 w-56 rounded bg-gray-200 dark:bg-zinc-700" />
-          <div className="flex items-center gap-2">
-            <div className="h-10 w-28 rounded bg-gray-200 dark:bg-zinc-700" />
-            <div className="h-4 w-24 rounded-md bg-gray-200 dark:bg-zinc-700" />
+          {/* File input skeleton */}
+          <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg border border-dashed border-neutral-400 bg-neutral-50/50 p-5 dark:border-zinc-500 dark:bg-zinc-950/20">
+            <div className="my-auto text-center">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                data-slot="icon"
+                aria-hidden="true"
+                className="mx-auto size-12 text-neutral-700/40 dark:text-zinc-500/60"
+              >
+                <path
+                  d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <div className="mt-4 flex flex-wrap justify-center text-center text-[15px] text-neutral-700/60 sm:text-sm/6 dark:text-zinc-500/80">
+                <div
+                  className={`touch-hitbox relative rounded-md bg-transparent text-sm font-semibold text-neutral-500 sm:text-xs dark:text-zinc-400`}
+                >
+                  <span className="underline">Carica un&apos;immagine</span>
+                </div>
+                <p className="pl-1 text-sm sm:text-xs pointer-coarse:hidden pointer-fine:block">
+                  o trascinala e rilasciala
+                </p>
+              </div>
+              <p className="mt-1 text-sm text-neutral-700/60 sm:text-xs/5 dark:text-zinc-500/80">
+                PNG, JPG, GIF fino a 1MB
+              </p>
+            </div>
           </div>
         </div>
 
@@ -836,18 +861,16 @@ export function AccountInfoFormSkeleton() {
 
 export function AccountPasswordFormSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative -mt-3 flex h-full flex-col gap-8 overflow-hidden bg-gray-50 p-3 dark:bg-zinc-800/60`}
-    >
-      <form className="flex animate-pulse flex-col gap-5 md:gap-3">
+    <div className={`flex h-full animate-pulse flex-col gap-8 py-3`}>
+      <div className="flex animate-pulse flex-col gap-5 md:gap-3">
         <div className="space-y-5">
-          <FormRow height="2rem" />
-          <FormRow height="2rem" />
+          <FormRow height="2.4rem" />
+          <FormRow height="2.4rem" />
         </div>
 
         {/* Buttons */}
         <FormButtons />
-      </form>
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ function OrdersList({ orders }: { orders: OrdersInfo[] }) {
       {orders.map((order) => (
         <tr
           key={order.id}
-          className="w-full hover:bg-gray-100/60 dark:hover:bg-zinc-700/20"
+          className="w-full hover:bg-gray-100/20 dark:hover:bg-zinc-700/5"
         >
           <td className="px-4 py-4 whitespace-nowrap">{order.id}</td>
 

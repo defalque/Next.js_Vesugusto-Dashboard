@@ -18,14 +18,14 @@ function ProductsList({ products }: { products: Product[] }) {
       {products.map((product) => {
         const isLowStock = product.quantity <= 10 && product.quantity > 0;
         const isOutOfStock = product.quantity === 0;
-        const baseClass = "hover:bg-gray-100/60 dark:hover:bg-zinc-700/20";
+        const baseClass = "hover:bg-gray-100/20 dark:hover:bg-zinc-700/5";
         let higlightClass;
         if (isOutOfStock) {
           higlightClass =
-            "_font-semibold _bg-red-600/10 _dark:bg-red-600/5 hover:bg-gray-100/60 dark:hover:bg-zinc-700/20";
+            "_font-semibold _bg-red-600/10 _dark:bg-red-600/5 hover:bg-gray-100/20 dark:hover:bg-zinc-700/5";
         } else if (isLowStock) {
           higlightClass =
-            "_font-semibold _bg-yellow-400/10 _dark:bg-yellow-500/5 hover:bg-gray-100/60 dark:hover:bg-zinc-700/20";
+            "_font-semibold _bg-yellow-400/10 _dark:bg-yellow-500/5 hover:bg-gray-100/20 dark:hover:bg-zinc-700/5";
         }
 
         return (

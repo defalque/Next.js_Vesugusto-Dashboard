@@ -1,12 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import FileInput from "../ui/FileInput";
 import FormRow from "../ui/form/FormRow";
-import toast from "react-hot-toast";
-import { toastStyle } from "@/constants/const";
 import { updateCurrentUser } from "@/app/_lib/server-actions";
 import FormButtons from "../ui/form/FormButtons";
+import AvatarImageLoader from "./AvatarImageLoader";
+import { toast } from "sonner";
 
 function AccountInfoForm({
   userInfo,
@@ -28,47 +27,33 @@ function AccountInfoForm({
     e.preventDefault();
 
     if (!name.trim()) {
-      toast("Il nome è obbligatorio", {
-        icon: "❌",
-        style: toastStyle,
-      });
+      toast.error("Il nome è obbligatorio");
       return;
     }
 
     if (!hasChanged()) {
-      toast("Nessuna modifica da salvare", {
-        icon: "❌",
-        style: toastStyle,
-      });
+      toast.error("Nessuna modifica da salvare");
       return;
     }
 
     // Validate file size (e.g., max 5MB)
-    if (avatar && avatar.size > 5 * 1024 * 1024) {
-      toast("L'immagine deve essere inferiore a 5MB", {
-        icon: "❌",
-        style: toastStyle,
-      });
+    if (avatar && avatar.size > 1 * 1024 * 1024) {
+      toast.error("L'immagine deve essere inferiore a 1MB");
+      setAvatar(null);
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      await toast.promise(
+      toast.promise(
         updateCurrentUser({ name: name.trim(), avatar: avatar || undefined }),
         {
-          loading: "Modifica in corso...",
-          success: "Informazioni modificate con successo!",
-          error: (err) => `Errore: ${err.message}`,
-        },
-        {
-          style: toastStyle,
+          loading: "Modifica del profilo in corso...",
+          success: "Profilo modificato con successo!",
+          error: (err) => `${err.message}`,
         },
       );
-
-      // Reset avatar state after successful upload
-      // setAvatar(null);
     } catch (error) {
       console.error("Error updating user:", error);
     } finally {
@@ -78,37 +63,34 @@ function AccountInfoForm({
   }
 
   return (
-    <form className="flex flex-col gap-5 p-3 md:gap-3" onSubmit={handleSubmit}>
-      <FormRow
-        type="text"
-        id="email"
-        label="Email"
-        value={userInfo.email}
-        disabled
-        nonInteractive
-      />
+    <form className="flex flex-col gap-5 py-3 md:gap-3" onSubmit={handleSubmit}>
+      <div className="flex w-full flex-col gap-5 md:flex-row">
+        <div className="flex w-full flex-col gap-3">
+          <FormRow
+            type="text"
+            id="email"
+            label="Email"
+            value={userInfo.email}
+            disabled
+            nonInteractive
+          />
+          <FormRow
+            type="text"
+            id="nome"
+            label="Nome"
+            value={name}
+            required
+            onChange={(e) => setName(e.target.value)}
+            disabled={isSubmitting}
+          />
+        </div>
 
-      <FormRow
-        type="text"
-        id="nome"
-        label="Nome"
-        value={name}
-        required
-        onChange={(e) => setName(e.target.value)}
-        disabled={isSubmitting}
-      />
-
-      <FileInput
-        type="file"
-        accept="image/*"
-        label="Scegli nuova immagine del profilo"
-        disabled={isSubmitting}
-        onChange={(e) => {
-          if (e.target.files && e.target.files[0]) {
-            setAvatar(e.target.files[0]);
-          }
-        }}
-      />
+        <AvatarImageLoader
+          avatar={avatar}
+          setAvatar={setAvatar}
+          isSubmitting={isSubmitting}
+        />
+      </div>
 
       <FormButtons
         isSubmitting={isSubmitting}

@@ -15,7 +15,7 @@ async function UserAvatar() {
         height={32}
         src={avatar || "/default-user.jpg"}
         alt={`Avatar of ${fullName}`}
-        className="block aspect-square w-9 rounded-full object-cover outline-2 dark:bg-zinc-800"
+        className="block aspect-square w-9 rounded-full object-cover outline-2"
       />
       <div className="hidden flex-col items-start xl:flex">
         <span className="text-sm font-semibold">

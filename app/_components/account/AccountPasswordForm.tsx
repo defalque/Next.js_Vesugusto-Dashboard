@@ -3,10 +3,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormRow from "../ui/form/FormRow";
 import FormError from "../ui/form/FormError";
-import toast from "react-hot-toast";
 import { updateCurrentUser } from "@/app/_lib/server-actions";
-import { toastStyle } from "@/constants/const";
-import Button from "../ui/Button";
+import { toast } from "sonner";
 
 export type PasswordFormInputs = {
   password: string;
@@ -41,17 +39,11 @@ function AccountPasswordForm() {
     newPassword,
   }) => {
     try {
-      await toast.promise(
-        updateCurrentUser({ newPassword }),
-        {
-          loading: "Modifica in corso...",
-          success: "Password modificata con successo!",
-          error: (err) => `Errore: ${err.message}`,
-        },
-        {
-          style: toastStyle,
-        },
-      );
+      toast.promise(updateCurrentUser({ newPassword }), {
+        loading: "Modifica in corso...",
+        success: "Password modificata con successo!",
+        error: (err) => `Errore: ${err.message}`,
+      });
 
       reset();
     } catch (error) {
@@ -61,7 +53,7 @@ function AccountPasswordForm() {
 
   return (
     <form
-      className="flex flex-col gap-5 p-3 md:gap-3"
+      className="flex flex-col gap-5 py-3 md:gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormRow
@@ -105,23 +97,23 @@ function AccountPasswordForm() {
       />
       <FormError message={errors.newPasswordConfirm?.message} />
 
-      <div className="mt-8 flex justify-end gap-2">
+      <div className="mt-2 flex justify-end gap-2">
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-transparent disabled:hover:bg-transparent dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
+          className="touch-hitbox inline-flex cursor-pointer items-center justify-center rounded-lg border border-gray-50 bg-gray-50 px-4 py-2.5 text-base font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-transparent disabled:opacity-50 disabled:hover:bg-transparent sm:text-[15px] md:text-sm dark:border-zinc-950/0 dark:bg-zinc-950/25 dark:text-gray-200 dark:hover:bg-zinc-950/50"
           onClick={() => reset()}
           disabled={isSubmitting || areInputsEmpty}
         >
           Cancella modifiche
         </button>
 
-        <Button
+        <button
           type="submit"
-          className="px-4"
+          className="bg-brand-950 hover:bg-brand-900 touch-hitbox border-brand-950 disabled:hover:bg-brand-950 flex cursor-pointer items-center rounded-lg border px-3 py-2.5 text-base font-semibold text-white shadow-sm inset-shadow-2xs transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 disabled:inset-shadow-none sm:text-[15px] md:text-sm dark:border-zinc-700/40 dark:bg-zinc-700/80 dark:inset-shadow-white/20 dark:hover:bg-zinc-600/90 disabled:hover:dark:bg-zinc-700/80"
           disabled={isSubmitting || areInputsEmpty}
         >
           {isSubmitting ? "Modifica in corso..." : "Modifica password"}
-        </Button>
+        </button>
       </div>
     </form>
   );

@@ -499,14 +499,15 @@ export async function deleteProductImage(name: string, img: string[]) {
       fetchError,
     );
     throw new Error(
-      "Errore imprevisto durante l'eliminazione dell'immagine. Riprova più tardi.",
+      "Errore imprevisto durante l'eliminazione. Riprova più tardi.",
     );
   }
 
-  // 2. Remove the images from the array
-  const updatedImages = product.image.filter((i: string) => !img.includes(i));
+  // 2. Remove the images from the array (with null check)
+  const currentImages = product.image ?? [];
+  const updatedImages = currentImages.filter((i: string) => !img.includes(i));
 
-  // 3. Update the product's image array in the DB
+  // 3. Update the product's image array in the DB FIRST
   const { error: updateError } = await supabase
     .from("products")
     .update({ image: updatedImages })
@@ -518,14 +519,20 @@ export async function deleteProductImage(name: string, img: string[]) {
       updateError,
     );
     throw new Error(
-      "Errore imprevisto durante l'aggiornamento delle immagini del prodotto. Riprova più tardi.",
+      "Errore imprevisto durante l'eliminazione. Riprova più tardi.",
     );
   }
 
-  // 4. Extract the relative file path from the URL
-  const relativePath = img.map((i) => getFileNameFromUrl(i)).filter(Boolean);
+  // 4. Extract the relative file paths from the URLs
+  const relativePaths = img.map((i) => getFileNameFromUrl(i)).filter(Boolean);
 
-  if (relativePath.length === 0) {
+  if (relativePaths.length === 0) {
+    // Rollback: restore original images in DB
+    await supabase
+      .from("products")
+      .update({ image: currentImages })
+      .eq("name", name);
+
     console.warn(
       "Errore nel recuperare il percorso relativo dell'immagine:",
       img,
@@ -533,81 +540,33 @@ export async function deleteProductImage(name: string, img: string[]) {
     throw new Error("URL immagine non valido");
   }
 
-  // 5. Delete the file from Supabase storage
+  // 5. Delete the files from Supabase storage bucket
   const { error: storageError } = await supabase.storage
     .from("product-images")
-    .remove(relativePath);
+    .remove(relativePaths);
 
   if (storageError) {
+    // Rollback: restore original images in DB
+    await supabase
+      .from("products")
+      .update({ image: currentImages })
+      .eq("name", name);
+
     console.error(
-      "Errore nell'eliminare l'immagine dallo storage:",
+      `Errore nell'eliminare "${relativePaths}" dallo storage:`,
       storageError,
     );
     throw new Error(
-      "Errore imprevisto durante l'eliminazione dell'immagine dallo storage. Riprova più tardi.",
+      "Errore imprevisto durante l'eliminazione. Riprova più tardi.",
     );
   }
 
-  // 5. Revalidate product listing
+  // Implement a cron job in Supabase to delete non linked images from bucket
+
+  // 6. Revalidate product listing
   revalidatePath(`/dashboard/products/${product.id}`);
   return { success: true };
 }
-// export async function deleteProductImage(name: string, img: string) {
-//   const supabase = await createClient();
-
-//   // 1. Get the product by name
-//   const { data: product, error: fetchError } = await supabase
-//     .from("products")
-//     .select("id, image")
-//     .eq("name", name)
-//     .single();
-
-//   if (fetchError || !product) {
-//     console.error(
-//       "Errore nel recuperare il prodotto per l'eliminazione dell'immagine:",
-//       fetchError,
-//     );
-//     throw new Error(
-//       "Errore imprevisto durante l'eliminazione dell'immagine. Riprova più tardi.",
-//     );
-//   }
-
-//   // 2. Remove the image from the array
-//   const updatedImages = product.image.filter((i: string) => i !== img);
-
-//   // 3. Update the product's image array in the DB
-//   const { error: updateError } = await supabase
-//     .from("products")
-//     .update({ image: updatedImages })
-//     .eq("name", name);
-
-//   if (updateError) {
-//     console.error("Failed to update product images:", updateError);
-//     throw new Error("Could not update product images.");
-//   }
-
-//   // 4. Extract the relative file path from the URL
-//   const relativePath = getFileNameFromUrl(img);
-//   // console.log(relativePath);
-
-//   if (!relativePath) {
-//     console.warn("Could not extract relative path from image URL:", img);
-//     return { success: false, message: "Invalid image URL" };
-//   }
-
-//   // 5. Delete the file from Supabase storage
-//   const { error: storageError } = await supabase.storage
-//     .from("product-images")
-//     .remove([relativePath]);
-
-//   if (storageError) {
-//     console.error("Error deleting image from storage:", storageError);
-//     // Optional: continue without throwing
-//   }
-
-//   // 5. Revalidate product listing
-//   revalidatePath(`/dashboard/products/${product.id}`);
-// }
 
 export async function addProductImages(id: number, formData: FormData) {
   const supabase = await createClient();

@@ -65,7 +65,7 @@ export default function CustomDialog({
     toast.promise(deleteProductImage(name!, itemNames!), {
       loading: "Eliminazione in corso...",
       success: successMessage,
-      error: (err) => `Errore: ${err.message}`,
+      error: (err) => `${err.message}`,
       finally: () => {
         setIsPending?.(false);
         afterAction?.();

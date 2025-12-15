@@ -52,8 +52,8 @@ export async function login(
 
   // console.log(user);
 
-  revalidatePath("/dashboard", "layout");
-  redirect("/dashboard");
+  revalidatePath("/dashboard/overview", "layout");
+  redirect("/dashboard/overview");
 }
 
 // The function has some issues and could be improved for clarity and correctness.
@@ -123,8 +123,8 @@ export async function signup(
   }
 
   // If registration is successful, revalidate and redirect
-  revalidatePath("/dashboard", "layout");
-  redirect("/dashboard");
+  revalidatePath("/dashboard/overview", "layout");
+  redirect("/dashboard/overview");
 }
 
 export async function logout() {

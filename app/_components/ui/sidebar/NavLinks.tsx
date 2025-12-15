@@ -26,11 +26,11 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
             <Link
               href={link.href}
               className={`focus-visible:outline-brand-950 outline-brand-dark-100 mx-4 flex items-center justify-start rounded-lg font-semibold transition-colors duration-300 focus-visible:outline-2 ${
-                pathname === link.href
+                pathname.startsWith(link.href)
                   ? "text-brand-950 dark:text-light"
                   : "dark:text-light text-neutral-700"
               }`}
-              aria-current={pathname === link.href ? "page" : undefined}
+              aria-current={pathname.startsWith(link.href) ? "page" : undefined}
               onNavigate={() => {
                 if (isMobile) {
                   closeDialog();
@@ -42,7 +42,7 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
                 {link.name}
               </span>
             </Link>
-            {pathname === link.href && (
+            {pathname.startsWith(link.href) && (
               <m.div
                 layoutId="link"
                 className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-white"

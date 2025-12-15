@@ -13,7 +13,7 @@ import { Toaster } from "../_components/ui/Toaster";
 const links = [
   {
     name: "Dashboard",
-    href: "/dashboard",
+    href: "/dashboard/overview",
     icon: (
       <HomeModernIcon className="size-7 fill-current md:size-5" aria-hidden />
     ),

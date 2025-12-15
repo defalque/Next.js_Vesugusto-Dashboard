@@ -43,7 +43,7 @@ function ProductImagesControls({
           type="button"
           onClick={onCancel}
           disabled={disabled}
-          className="flex h-full w-1/2 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-lg bg-gray-50 text-zinc-500 transition-colors duration-200 hover:bg-gray-100 hover:text-zinc-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-zinc-500 disabled:opacity-50 dark:bg-zinc-900/50 dark:hover:bg-zinc-900/80 dark:hover:text-zinc-300 dark:disabled:bg-zinc-900/50 dark:disabled:text-zinc-500"
+          className="flex h-full w-1/2 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-lg bg-gray-50 text-zinc-500 transition-colors duration-200 hover:bg-gray-100 hover:text-zinc-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-zinc-500 disabled:opacity-50 dark:bg-zinc-900/50 dark:text-zinc-400 dark:hover:bg-zinc-900/80 dark:hover:text-white dark:disabled:bg-zinc-900/50 dark:disabled:text-zinc-500"
         >
           <ArrowUturnLeftIcon aria-hidden="true" className="size-4" />
           Annulla
@@ -53,7 +53,7 @@ function ProductImagesControls({
           type={type === "add" ? "submit" : "button"}
           {...(type === "remove" && { onClick: onConfirm })}
           disabled={disabled}
-          className={`flex h-full w-1/2 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-lg bg-gray-50 text-zinc-500 transition-colors duration-200 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-zinc-500 disabled:opacity-50 dark:bg-zinc-900/50 dark:text-zinc-500 dark:disabled:bg-zinc-900/50 dark:disabled:text-zinc-400 ${type === "add" ? "hover:bg-green-50 hover:text-green-500 dark:bg-green-900/50 dark:hover:bg-green-900/30 dark:hover:text-green-400 dark:disabled:bg-green-900/50 dark:disabled:text-green-500" : "hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/30 dark:hover:text-red-500"}`}
+          className={`flex h-full w-1/2 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-lg bg-gray-50 text-zinc-500 transition-colors duration-200 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-zinc-500 disabled:opacity-50 dark:bg-zinc-900/50 dark:text-zinc-400 dark:disabled:bg-zinc-900/50 dark:disabled:text-zinc-400 ${type === "add" ? "hover:bg-green-50 hover:text-green-500 dark:bg-green-900/50 dark:hover:bg-green-900/30 dark:hover:text-green-400 dark:disabled:bg-green-900/50 dark:disabled:text-green-500" : "hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/30 dark:hover:text-red-500"}`}
         >
           {type === "add" ? (
             <ArchiveBoxArrowDownIcon aria-hidden="true" className="size-4" />

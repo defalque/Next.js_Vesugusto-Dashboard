@@ -20,7 +20,7 @@ export default function Page() {
         </div>
 
         <Link
-          href="/dashboard"
+          href="/dashboard/overview"
           className="bg-brand-950 hover:bg-brand-900 active:bg-brand-900 self-center rounded-md px-4 py-2 text-base font-semibold text-white shadow-sm transition-all duration-300 text-shadow-2xs active:scale-97 sm:py-1.5 dark:bg-white dark:text-black dark:text-shadow-none dark:hover:bg-white/80 dark:active:bg-gray-100"
         >
           Accedi

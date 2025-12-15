@@ -25,11 +25,6 @@ export function LoginFormSkeleton({ isAuthForm }: { isAuthForm?: true }) {
     <div
       className={`bg-box box-style ${isAuthForm && "border"} _animate-pulse w-full gap-3 rounded-md sm:w-110`}
     >
-      {/* {isAuthForm && (
-        <div className="box-style border-b p-3 text-center text-2xl/9 font-bold tracking-tight">
-          Accedi alla dashboard
-        </div>
-      )} */}
       <div className="dark:text-light _mt-5 flex w-full flex-col gap-3.5 px-5 pt-5 text-sm text-neutral-700 sm:px-10">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
@@ -171,7 +166,6 @@ export function NavbarSkeleton() {
 
 // -------------------------------------------------------------
 // PRODUCT
-
 export function ControlsSkeleton() {
   return (
     <>
@@ -198,32 +192,36 @@ function ProductSkeleton({ value }: { value: number }) {
       className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
     >
       {/* Product Name */}
-      <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-4 w-22 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3.5 whitespace-nowrap">
+        <div className="h-4.5 w-20.5 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Regular Price */}
-      <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3.5 whitespace-nowrap">
+        <div className="h-4.5 w-[3.215rem] rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Discount */}
-      <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-4 w-10 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3.5 whitespace-nowrap">
+        <div className="h-4.5 w-9 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
 
       {/* Type */}
-      <td className="px-4 py-3 whitespace-nowrap capitalize">
-        <div className="h-4 w-12 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3.5 whitespace-nowrap capitalize">
+        <div
+          className={`h-4.5 ${value % 2 === 0 ? "w-12" : "w-15"} rounded bg-gray-200 dark:bg-zinc-700`}
+        ></div>
       </td>
 
       {/* Quantity */}
-      <td className="px-4 py-3 text-center whitespace-nowrap">
-        <div className="mx-auto h-4 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
+      <td className="px-4 py-3.5 text-center whitespace-nowrap">
+        <div
+          className={`mx-auto h-4.5 ${value % 2 === 0 ? "w-6" : "w-23"} rounded bg-gray-200 dark:bg-zinc-700`}
+        ></div>
       </td>
 
       {/* Dropdown */}
-      <td className="px-4 py-3 text-center whitespace-nowrap">
+      <td className="px-4 py-3.5 text-center whitespace-nowrap">
         <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
       </td>
     </tr>
@@ -361,39 +359,6 @@ export function ProductDataSkeleton() {
         </h5>
 
         <div className="flex animate-pulse cursor-not-allowed flex-col gap-4">
-          {/* <div
-            className={`flex min-h-40 min-w-full justify-center rounded-lg border border-dashed border-neutral-500 bg-neutral-50/50 p-5 sm:w-sm dark:border-zinc-500 dark:bg-zinc-950/20`}
-          >
-            <div className="text-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                data-slot="icon"
-                aria-hidden="true"
-                className="mx-auto size-12 text-neutral-700/40 dark:text-zinc-500/60"
-              >
-                <path
-                  d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z"
-                  clipRule="evenodd"
-                  fillRule="evenodd"
-                />
-              </svg>
-              <div className="mt-4 flex flex-wrap justify-center text-center text-[15px] text-neutral-700/60 sm:text-sm/6 dark:text-zinc-500/80">
-                <div
-                  className={`touch-hitbox dark:focus-within:outline-zinc-400} relative rounded-md bg-transparent font-semibold text-neutral-600 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-neutral-600 dark:text-zinc-400`}
-                >
-                  <span>Carica una o più immagini</span>
-                </div>
-                <p className="pl-1 pointer-coarse:hidden pointer-fine:block">
-                  o trascinale e rilasciale
-                </p>
-              </div>
-              <p className="mt-1 text-sm text-neutral-700/60 sm:mt-0 sm:text-xs/5 dark:text-zinc-500/80">
-                PNG, JPG, GIF fino a 1MB
-              </p>
-            </div>
-          </div> */}
-
           <ul className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {[...Array(3)].map((_, index) => (
               <li key={index} className="relative">
@@ -489,7 +454,7 @@ function OrderSkeleton({ value }: { value: number }) {
           <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-zinc-700"></div>
           <div className="space-y-1 truncate">
             <div className="h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700"></div>
-            <div className="h-4 w-52 rounded bg-gray-200 dark:bg-zinc-700"></div>
+            <div className="h-4 w-68 rounded bg-gray-200 dark:bg-zinc-700"></div>
           </div>
         </div>
       </td>

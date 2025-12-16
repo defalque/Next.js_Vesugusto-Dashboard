@@ -189,49 +189,57 @@ function ProductSkeleton({ value }: { value: number }) {
   return (
     <tr
       key={value}
-      className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
+      className="_animate-none animate-pulse hover:bg-gray-50/60 dark:hover:bg-zinc-800/25"
     >
       {/* Product Name */}
       <td className="px-4 py-3.5 whitespace-nowrap">
-        <div className="h-4.5 w-20.5 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-4.5 w-20.5 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Regular Price */}
       <td className="px-4 py-3.5 whitespace-nowrap">
-        <div className="h-4.5 w-[3.215rem] rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-4.5 w-[3.215rem] rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Discount */}
       <td className="px-4 py-3.5 whitespace-nowrap">
-        <div className="h-4.5 w-9 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-4.5 w-9 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Type */}
       <td className="px-4 py-3.5 whitespace-nowrap capitalize">
         <div
-          className={`h-4.5 ${value % 2 === 0 ? "w-12" : "w-15"} rounded bg-gray-200 dark:bg-zinc-700`}
+          className={`h-4.5 ${value % 2 === 0 ? "w-12" : "w-15"} rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
         ></div>
       </td>
 
       {/* Quantity */}
       <td className="px-4 py-3.5 text-center whitespace-nowrap">
         <div
-          className={`mx-auto h-4.5 ${value % 2 === 0 ? "w-6" : "w-23"} rounded bg-gray-200 dark:bg-zinc-700`}
+          className={`mx-auto h-4.5 ${value % 2 === 0 ? "w-6" : "w-23"} rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
         ></div>
       </td>
 
       {/* Dropdown */}
       <td className="px-4 py-3.5 text-center whitespace-nowrap">
-        <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
     </tr>
   );
 }
-
+// ${shimmer} relative overflow-hidden
 export function ProductsListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative h-full divide-y divide-gray-200/80 overflow-hidden text-gray-800/70 dark:divide-zinc-700/20 dark:text-gray-50/80`}
+      className={`h-full divide-y divide-gray-200/80 text-gray-800/70 dark:divide-zinc-700/20 dark:text-gray-50/80`}
     >
       {Array.from({ length: LIMIT }, (_, i) => (
         <ProductSkeleton key={i} value={i + 1} />
@@ -441,44 +449,58 @@ function OrderSkeleton({ value }: { value: number }) {
   return (
     <tr
       key={value}
-      className="animate-none hover:bg-gray-50/60 dark:animate-pulse dark:hover:bg-zinc-800/25"
+      className="animate-pulse hover:bg-gray-50/60 dark:hover:bg-zinc-800/25"
     >
       {/* Order ID */}
       <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-6 w-6 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-6 w-6 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Customer Name */}
       <td className="px-4 py-3 whitespace-nowrap">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-zinc-700"></div>
+          <div
+            className={`h-10 w-10 rounded-full bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+          ></div>
           <div className="space-y-1 truncate">
-            <div className="h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700"></div>
-            <div className="h-4 w-68 rounded bg-gray-200 dark:bg-zinc-700"></div>
+            <div
+              className={`h-4 w-28 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+            ></div>
+            <div
+              className={`h-4 w-68 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+            ></div>
           </div>
         </div>
       </td>
 
       {/* Order Date */}
       <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-5 w-22 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-5 w-22 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Status */}
       <td className="px-4 py-3 text-center whitespace-nowrap">
         <div
-          className={`${value % 2 === 0 ? "w-18" : "w-26"} mx-auto h-4 rounded bg-gray-200 dark:bg-zinc-700`}
+          className={`${value % 2 === 0 ? "w-18" : "w-26"} mx-auto h-4 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
         ></div>
       </td>
 
       {/* Total */}
       <td className="px-4 py-3 whitespace-nowrap">
-        <div className="h-5 w-14 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`h-5 w-14 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
 
       {/* Dropdown menu */}
       <td className="px-4 py-3 text-center whitespace-nowrap">
-        <div className="mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700"></div>
+        <div
+          className={`mx-auto h-7 w-8 rounded bg-gray-200 dark:bg-zinc-700 ${shimmer} relative overflow-hidden`}
+        ></div>
       </td>
     </tr>
   );
@@ -487,7 +509,7 @@ function OrderSkeleton({ value }: { value: number }) {
 export function OrdersListBodySkeleton() {
   return (
     <tbody
-      className={`${shimmer} relative cursor-not-allowed divide-y divide-gray-200/80 overflow-hidden text-sm text-gray-800/70 dark:divide-zinc-700/20 dark:text-gray-50/80`}
+      className={`cursor-not-allowed divide-y divide-gray-200/80 dark:divide-zinc-700/20`}
     >
       {Array.from({ length: ORDERS_LIMIT }, (_, i) => (
         <OrderSkeleton key={i} value={i + 1} />
@@ -734,21 +756,12 @@ export function OrderDetailsSkeleton() {
 
 // -------------------------------------------------------------
 // FORMS
-function FormRow({
-  width = "100%",
-  height = "1rem",
-  className = "",
-}: {
-  width?: string;
-  height?: string;
-  className?: string;
-}) {
+function FormRow({ className = "" }: { className?: string }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="h-6 w-20 animate-pulse rounded-md bg-gray-200 sm:h-5 dark:bg-zinc-700"></div>
       <div
-        className={`animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700 ${className}`}
-        style={{ width, height }}
+        className={`w-full animate-pulse rounded-md bg-gray-200 dark:bg-zinc-700 ${className}`}
       />
     </div>
   );
@@ -766,40 +779,42 @@ function FormButtons() {
 function PageTitleSkeleton({ breadcumbs }: { breadcumbs?: boolean }) {
   return (
     <div
-      className={`${shimmer} relative ${breadcumbs ? "hidden h-6 animate-pulse cursor-not-allowed sm:block" : "block h-6.5 md:h-7"} mb-4 w-30 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
+      className={`${shimmer} relative ${breadcumbs ? "hidden h-6 animate-pulse cursor-not-allowed sm:flex" : "block h-6.5 md:h-7"} mb-4 w-30 animate-none overflow-hidden rounded-md bg-gray-200 dark:animate-pulse dark:bg-zinc-700`}
     />
   );
 }
 
-export function UpdateProductFormSkeleton({ title = true }) {
+export function UpdateProductFormSkeleton() {
   return (
     <>
-      {title && <PageTitleSkeleton />}
-      <form
+      <div
         aria-labelledby="title"
-        className={`${shimmer} dark:text-light relative h-full space-y-5 overflow-hidden rounded bg-gray-50 px-3 py-5 sm:px-6 dark:bg-zinc-800/60`}
+        className={`h-full cursor-not-allowed rounded pb-5`}
       >
         {/* Heading (hidden for accessibility) */}
         <h2 id="title" className="sr-only">
           Caricamento Modulo Prodotto...
         </h2>
 
+        <div className="mb-7">
+          <PageTitleSkeleton breadcumbs />
+        </div>
         {/* Form Rows (Inputs) */}
         <div className="space-y-5">
-          <FormRow height="2rem" /> {/* Nome */}
-          <FormRow height="2rem" /> {/* Prezzo */}
-          <FormRow height="2rem" /> {/* Sconto */}
-          <FormRow height="2rem" /> {/* Quantità */}
-          <FormRow height="2rem" /> {/* Select - Tipo */}
-          <FormRow height="6rem" /> {/* Descrizione */}
-          <FormRow height="6rem" /> {/* Ingredienti */}
-          <FormRow height="6rem" /> {/* Info nutrizionali */}
-          <FormRow height="6rem" /> {/* Dettagli */}
+          <FormRow className="h-8.5" /> {/* Nome */}
+          <FormRow className="h-8.5" /> {/* Prezzo */}
+          <FormRow className="h-8.5" /> {/* Sconto */}
+          <FormRow className="h-8.5" /> {/* Quantità */}
+          <FormRow className="h-8.5" /> {/* Select - Tipo */}
+          <FormRow className="h-24" /> {/* Descrizione */}
+          <FormRow className="h-24" /> {/* Ingredienti */}
+          <FormRow className="h-24" /> {/* Info nutrizionali */}
+          <FormRow className="h-24" /> {/* Dettagli */}
         </div>
 
         {/* Buttons */}
         <FormButtons />
-      </form>
+      </div>
     </>
   );
 }
@@ -815,8 +830,8 @@ export function AccountInfoFormSkeleton() {
       <form className="flex animate-pulse flex-col gap-5 py-3 md:gap-3">
         <div className="flex flex-col gap-5 md:flex-row">
           <div className="flex w-full flex-col gap-3">
-            <FormRow height="2.4rem" />
-            <FormRow height="2.4rem" />
+            <FormRow className="h-10" />
+            <FormRow className="h-10" />
           </div>
 
           {/* File input skeleton */}
@@ -864,8 +879,8 @@ export function AccountPasswordFormSkeleton() {
     <div className={`flex h-full animate-pulse flex-col gap-8 py-3`}>
       <div className="flex animate-pulse flex-col gap-5 md:gap-3">
         <div className="space-y-5">
-          <FormRow height="2.4rem" />
-          <FormRow height="2.4rem" />
+          <FormRow className="h-10" />
+          <FormRow className="h-10" />
         </div>
 
         {/* Buttons */}

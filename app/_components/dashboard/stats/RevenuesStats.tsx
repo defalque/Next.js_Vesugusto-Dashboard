@@ -62,12 +62,10 @@ function RevenuesStats({
       <h5 className="mb-2 self-baseline text-base font-semibold tracking-wide uppercase sm:text-sm md:text-xs">
         {title}
       </h5>
-      {/* <LazyMotion features={loadFeatures}> */}
       <span className="text-4xl leading-none font-medium md:text-3xl">
         {/* {countDisplay} */}
         {formatCurrency(value)}
       </span>
-      {/* </LazyMotion> */}
       {percentage > 0 && (
         <StatsPercentage
           percentage={percentage}

@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { UpdateProductFormSkeleton } from "../ui/Skeletons";
 const ProductForm = dynamic(() => import("./ProductForm"), {
   ssr: false,
-  loading: () => <UpdateProductFormSkeleton title={false} />,
+  loading: () => <UpdateProductFormSkeleton />,
 });
 
 function ProductFormClient({ product }: { product?: Product }) {

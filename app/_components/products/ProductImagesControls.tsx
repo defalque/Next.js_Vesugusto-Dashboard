@@ -35,7 +35,7 @@ function ProductImagesControls({
         y: 50,
       }}
       transition={{ duration: 0.2, type: "spring", bounce: 0 }}
-      className="fixed inset-x-4 bottom-4 z-10 mx-auto h-15 max-w-56 overflow-hidden rounded-xl border border-gray-200 bg-white outline-none md:mx-auto md:w-full dark:border-zinc-800/90 dark:bg-zinc-950 dark:shadow-2xs dark:inset-shadow-xs dark:shadow-zinc-600/10 dark:inset-shadow-zinc-600/20"
+      className="fixed inset-x-4 bottom-4 z-10 mx-auto h-15 max-w-56 overflow-hidden rounded-xl border border-gray-300 bg-white outline-none md:mx-auto md:w-full dark:border-zinc-800/90 dark:bg-zinc-950 dark:shadow-2xs dark:inset-shadow-xs dark:shadow-zinc-600/10 dark:inset-shadow-zinc-600/20"
     >
       <div className="flex h-full w-full gap-2 p-1.5 text-sm sm:text-xs">
         <m.button

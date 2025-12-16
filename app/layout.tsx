@@ -4,6 +4,7 @@ import { inter } from "./_lib/fonts";
 import "./globals.css";
 import { ReactNode } from "react";
 import { ThemeProvider } from "./_contexts/ThemeProvider";
+import MotionWrapper from "./_components/ui/MotionWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -21,7 +22,7 @@ export default async function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-style mx-auto h-full max-w-380 antialiased`}
+        className={`${inter.className} bg-style mx-auto h-full max-w-full antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -29,7 +30,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <MotionWrapper>{children}</MotionWrapper>
         </ThemeProvider>
       </body>
     </html>

@@ -23,13 +23,13 @@ export default function SidebarDrawer({
 
   return (
     <div className="md:bg-light sticky top-0 z-50 flex items-center justify-between border-gray-200 bg-white px-1 py-1 md:h-screen md:flex-col md:border-r md:border-b md:py-4 xl:hidden dark:border-zinc-700/40 dark:bg-zinc-900 md:dark:bg-zinc-800/40">
-      <div className="px-2 py-1 md:p-2">
+      <div className="py-1">
         <button
           aria-label="Apri sidebar menu"
           onClick={() => {
             setIsOpen(true);
           }}
-          className="focus hover:bg-brand-950/10 flex cursor-pointer items-center rounded-md p-1 text-sm dark:hover:bg-zinc-950"
+          className="focus touch-hitbox flex cursor-pointer items-center rounded-md p-1 text-sm"
         >
           <Bars3Icon
             aria-hidden

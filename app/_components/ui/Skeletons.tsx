@@ -568,8 +568,9 @@ export function OrderDetailsSkeleton() {
               <SkeletonBlock className="h-6 w-20 md:h-5" />
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <SkeletonPageBlock className="h-11.5 w-25 rounded-lg md:h-10.5" />
+          <div className="flex h-10.5 w-full items-center justify-end gap-2 sm:w-fit sm:justify-start">
+            <SkeletonPageBlock className="h-11.5 w-23.5 rounded-lg md:h-10.5" />
+            <SkeletonPageBlock className="h-11.5 w-22 rounded-lg md:h-10.5" />
           </div>
         </div>
       </div>

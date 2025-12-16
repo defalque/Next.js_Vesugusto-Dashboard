@@ -59,7 +59,7 @@ async function OrderPage({ params }: { params: Promise<{ orderId: string }> }) {
                 <span>{formatDate(order.orderDate)}</span>
               </div>
             </div>
-            <div className="flex h-10.5 items-center gap-2">
+            <div className="flex h-10.5 w-full items-center justify-end gap-2 sm:w-fit sm:justify-start">
               <DialogContextProvider>
                 {order.status !== "delivered" && (
                   <OrdersActionButton
@@ -69,6 +69,12 @@ async function OrderPage({ params }: { params: Promise<{ orderId: string }> }) {
                 )}
                 <CustomDialogWrapper />
               </DialogContextProvider>
+              <button
+                className="touch-hitbox flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-base font-semibold text-black inset-shadow-2xs transition-colors duration-300 hover:bg-gray-100/80 sm:text-[15px] md:text-sm dark:border-zinc-700/40 dark:bg-zinc-700/80 dark:text-white dark:shadow-sm dark:inset-shadow-white/20 dark:hover:bg-zinc-600/90"
+                type="button"
+              >
+                Rimborsa
+              </button>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import Logo from "./_components/ui/Logo";
 
 export default function Page() {
   return (
-    <main className="grid min-h-screen place-content-center">
+    <main className="grid min-h-svh place-content-center">
       <div className="flex flex-col gap-12">
         <div className="flex items-center gap-4 self-center">
           <Logo size="5xl" />

@@ -9,7 +9,7 @@ import UserAvatarButton from "./UserAvatarButton";
 
 function Sidebar({ links }: { links: NavLink[] }) {
   return (
-    <aside className="text-sidebar bg-box _overflow-y-auto sticky top-0 row-span-full row-start-1 hidden h-screen items-center space-y-1 divide-y divide-gray-200 border-r border-gray-200 xl:flex xl:flex-col dark:divide-zinc-700/40 dark:border-zinc-700/40">
+    <aside className="text-sidebar bg-box fixed inset-y-0 left-0 z-50 row-span-full row-start-1 hidden h-screen w-60 items-center space-y-1 divide-y divide-gray-200 border-r border-gray-200 xl:flex xl:flex-col dark:divide-zinc-700/40 dark:border-zinc-700/40">
       <div className="self-stretch py-4 text-center">
         <Logo />
       </div>

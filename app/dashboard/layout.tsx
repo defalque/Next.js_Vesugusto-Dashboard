@@ -43,7 +43,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="text-dark bg-style grid grid-cols-1 grid-rows-[auto_1fr] text-sm md:grid-cols-[auto_1fr] md:grid-rows-[1fr] md:gap-y-4 xl:grid-cols-[var(--spacing-sidebar)_1fr] dark:text-gray-100">
+    <div className="text-dark bg-style relative flex w-full flex-col text-sm md:flex-row dark:text-gray-100">
       <SidebarDrawerContextProvider>
         <Sidebar links={links} />
         <SidebarDrawer links={links}>
@@ -51,10 +51,12 @@ export default async function Layout({
         </SidebarDrawer>
       </SidebarDrawerContextProvider>
 
-      <main className="relative min-h-screen overflow-visible overflow-y-auto border-gray-200 bg-white px-(--page-padding-x) pt-3 pb-12 [--page-padding-x:--spacing(3)] sm:px-4 sm:pt-5 xl:px-10 xl:py-10 dark:bg-zinc-900/80">
-        <Toaster />
+      <main className="relative min-h-svh w-full overflow-visible overflow-y-auto border-gray-200 bg-white pt-3 pb-12 [--page-padding-x:--spacing(3)] md:pl-18 xl:pl-60 dark:bg-zinc-900/80">
+        <div className="px-(--page-padding-x) sm:px-4 sm:pt-5 xl:px-10 xl:py-10">
+          <Toaster />
 
-        {children}
+          {children}
+        </div>
       </main>
     </div>
   );

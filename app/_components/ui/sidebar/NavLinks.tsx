@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavLink } from "@/app/_lib/definitions";
 
-// import * as m from "motion/react-m";
+import * as m from "motion/react-m";
 import { useSidebarDrawer } from "@/app/_contexts/SidebarDrawerContext";
 import {
   BellAlertIcon,
@@ -23,7 +23,7 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
             href={link.href}
             className={`focus-visible:outline-brand-950 outline-brand-dark-100 mx-4 flex items-center justify-start rounded-lg font-semibold transition-colors duration-300 focus-visible:outline-2 ${
               pathname.startsWith(link.href)
-                ? "_text-brand-950 dark:text-light bg-brand-950/10 text-neutral-700 dark:bg-black/50"
+                ? "text-brand-950 dark:text-light bg-brand-950/10 _text-neutral-700 dark:bg-black/50"
                 : "dark:text-light hover:bg-brand-950/10 text-neutral-700 dark:hover:bg-black/50"
             }`}
             aria-current={pathname.startsWith(link.href) ? "page" : undefined}
@@ -38,13 +38,13 @@ function NavLinks({ isMobile, links }: { isMobile?: true; links: NavLink[] }) {
               {link.name}
             </span>
           </Link>
-          {/* {pathname.startsWith(link.href) && (
+          {pathname.startsWith(link.href) && (
             <m.div
-              layoutId="sidebar-link"
+              layoutId="sidebarLink"
               className="bg-brand-950 absolute top-0 left-0 h-full w-[2px] dark:bg-white"
               style={{ originX: "0px" }}
-            ></m.div>
-          )} */}
+            />
+          )}
         </li>
       ))}
 

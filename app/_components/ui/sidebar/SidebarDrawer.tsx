@@ -22,7 +22,7 @@ export default function SidebarDrawer({
   const { isOpen, setIsOpen } = useSidebarDrawer();
 
   return (
-    <div className="md:bg-light sticky top-0 z-50 flex items-center justify-between border-gray-200 bg-white px-1 py-1 md:h-screen md:flex-col md:border-r md:border-b md:py-4 xl:hidden dark:border-zinc-700/40 dark:bg-zinc-900 md:dark:bg-zinc-800/40">
+    <div className="md:bg-light flex w-full items-center justify-between border-gray-200 bg-white px-1 py-1 md:fixed md:inset-y-0 md:left-0 md:z-50 md:h-screen md:w-18 md:flex-col md:border-r md:border-b md:py-4 xl:hidden dark:border-zinc-700/40 dark:bg-zinc-900 md:dark:bg-zinc-800/40">
       <div className="py-1">
         <button
           aria-label="Apri sidebar menu"

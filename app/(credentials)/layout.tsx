@@ -7,7 +7,7 @@ type layoutProps = {
 
 function layout({ children }: layoutProps) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-svh flex-col">
       <main className="text-dark my-auto flex flex-col items-center justify-center gap-8 p-4 dark:text-gray-100">
         <Logo size="4xl" />
         {children}

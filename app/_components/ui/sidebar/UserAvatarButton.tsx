@@ -26,7 +26,7 @@ function UserAvatarButton({ children }: { children?: ReactNode }) {
     <div className="py-1 md:p-2 xl:p-4">
       <Menu>
         <MenuButton
-          className={`xl:data-hover:bg-brand-950/10 data-focus:outline-brand-950 xl:data-active:bg-brand-950/10 rounded-lg focus:not-data-focus:outline-none data-focus:outline-2 xl:dark:data-active:bg-zinc-950 xl:dark:data-hover:bg-zinc-950 ${pathname === "/dashboard/account" ? "bg-brand-950/10 dark:text-light text-neutral-700 dark:bg-zinc-950" : "dark:text-light text-neutral-700"}`}
+          className={`xl:data-hover:bg-brand-950/10 data-focus:outline-brand-950 xl:data-active:bg-brand-950/10 rounded-lg focus:not-data-focus:outline-none data-focus:outline-2 xl:dark:data-active:bg-zinc-950 xl:dark:data-hover:bg-zinc-950 ${pathname === "/dashboard/account" ? "xl:bg-brand-950/10 dark:text-light text-neutral-700 xl:dark:bg-zinc-950" : "dark:text-light text-neutral-700"}`}
         >
           <div
             className={`group flex cursor-pointer items-center gap-5 rounded-xl px-1 py-1`}
